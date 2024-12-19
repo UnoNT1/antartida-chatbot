@@ -10,6 +10,9 @@ const flowSecundario = async () => {
         //este for actualiza las ordenes a su estado actual
         for(const orden of ordenes){
             try {
+                if(!orden.r00_cl12){
+                    return
+                }    
                 ordenRevisada = await postRevisarOrden(orden.reg_cl12, 0)
                 console.log(ordenRevisada, 'ord rev flow')
                 if(orden.r00_cl12 !== ordenRevisada[0].r00_cl12){
