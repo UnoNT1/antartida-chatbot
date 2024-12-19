@@ -14,7 +14,7 @@ const flowSecundario = async () => {
                     return
                 }    
                 ordenRevisada = await postRevisarOrden(orden.reg_cl12, 0)
-                console.log(ordenRevisada, 'ord rev flow')
+                //console.log(ordenRevisada, 'ord rev flow')
                 if(orden.r00_cl12 !== ordenRevisada[0].r00_cl12){
                     orden.r00_cl12 = ordenRevisada[0].r00_cl12
                 }
