@@ -1,0 +1,11 @@
+POST https://www.unont.com.ar/yavoy/sistemas/dato5/android/w_sms.php
+//POST http://localhost/backendChatBotAntartida/sms.php
+Content-Type: application/json
+
+{
+    "nrollamada": "3543650722",
+    "lugar": "986",
+    "mensaje": "Prueba unoNT",
+    "empresa": "Antartida",
+    "accion": "1" 
+}
