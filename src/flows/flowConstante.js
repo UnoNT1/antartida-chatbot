@@ -11,7 +11,7 @@ const flowSecundario = async () => {
         //este for actualiza las ordenes a su estado actual y revsa las ordenes
         for(const orden of ordenes){
             try {
-                if(!orden.r00_cl12){
+                if(orden.r00_cl12 === undefined || orden.r00_cl12 === null || orden.r00_cl12 === ''){
                     return
                 }    
                 ordenRevisada = await postRevisarOrden(orden.reg_cl12, 0)
