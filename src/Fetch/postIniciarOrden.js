@@ -33,7 +33,7 @@ async function postIniciarOrden(objeto) {
         url = armarURL(text, numOrden)//arma la url para enviar en el mensaje
         
         numTecnicos = separarNumTecnicos(text);//toma los numeros de los tecnicos
-        console.log('Numeros orden:', numOrden);
+        console.log('Iniciar Orden --- Numeros orden:', numOrden, 'Url: ', url);
 
         return numTecnicos
     } catch (error) {

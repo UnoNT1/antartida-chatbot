@@ -1,23 +1,12 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import fs from 'fs'
 import { getUrl, postIniciarOrden } from '../Fetch/postIniciarOrden.js';
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js';
 import validarMensaje from '../funciones/validarMensaje.js';
-import { debounce } from "../Utils/debounce.js"
+import nombreEmpresa from '../Utils/nombreEmpresa.js';
+import { getOrdenes } from '../funciones/guardarOrdenes.js';
+import { fechaActual, horaActual } from '../Utils/fechaHoraActual.js';
 
-let debouncedEnviarMensaje;
-let ultimoMensajeEnviado = false;//variable para el debounce
-let nombreEmpresa = await new Promise((resolve, reject) => {
-    //lee el nombre de la empresa guardado en un archivo txt dentro de la carpeta Utils
-    fs.readFile('./src/Utils/empresa.txt', 'utf8', (err, data)=> {
-        if(err){
-            reject(err)
-            console.error('error al leer archivo', err)
-            return
-        } 
-        resolve(data);
-    })
-})
+let nombreEmp = await nombreEmpresa()
 
 const flowPrincipal = addKeyword(EVENTS.WELCOME)
     .addAction(
@@ -28,45 +17,49 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
             let mensaje = ctx.body
             let nroTecnicos
 
-            let mensajesUsuario = validarMensaje(numero, mensaje)
+            const mensajesUsuario = validarMensaje(numero, mensaje)
+            const ordenesExistentes = getOrdenes()
+            const fechaHoy = fechaActual()
             
-            
-            const reclamo = {
-                nrollamada: numero,
-                mensaje: mensaje,
-                empresa: nombreEmpresa,
-                accion: '1',
-                lugar: '0'
-            }
-            
-            nroTecnicos = await postIniciarOrden(reclamo)
-            enviarMensaje(nroTecnicos, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
-            
-            const url = await getUrl();
-            
-            if(!debouncedEnviarMensaje){
-                debouncedEnviarMensaje = debounce(
-                    await flowDynamic([
-                        {
-                            body:`Muchas gracias por comunicarse con Ascensores Antartida. Haga Click en ${url}`,
-                            delay: 2000
-                        }
-                    ]), 2000)   
-            }
+            const thisOrden = ordenesExistentes.slice().reverse().find(orden => orden.tre_cl12 === numero)
 
-            if(ultimoMensajeEnviado){
-                //comprueba si es false o true para activar el debounce y enviar un mensaje diferente
-                mensajesUsuario[numero]
-                await enviarMensaje(nroTecnicos, `Mas detalles sobre el reclamo: "${mensajesUsuario[numero].mensaje}"`, '')
+            if(thisOrden && thisOrden.fec_cl12 === fechaHoy && horaActual(thisOrden.hor_cl12)){
+                const msjUser = mensajesUsuario[numero]
+
+                console.log('Reclamo ya realizado: ', thisOrden)
+                await enviarMensaje(nroTecnicos, `Mas detalles sobre el reclamo: "${msjUser.mensaje}"`, '')
                 await flowDynamic([
                     {
-                        body:`Continue el reclamo a travez del formulario 👇 http://www.unont.com.ar/yavoy/formato.php?r=80070142&n36698&t=10`,
+                        body:`Continue el reclamo a travez del formulario`,
                         delay: 2000
                     }
                 ])
                 return
             }
-            ultimoMensajeEnviado = true  //variable para activar el debounce       
+            
+            const reclamo = {
+                nrollamada: numero,
+                mensaje: mensaje,
+                empresa: nombreEmp,
+                accion: '1',
+                lugar: '0'
+            }
+            
+            nroTecnicos = await postIniciarOrden(reclamo)
+            if(nroTecnicos){
+                console.log('Reclamo iniciado: ', nroTecnicos)
+
+                await enviarMensaje(nroTecnicos, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
+                
+                const url = await getUrl();
+                
+                await flowDynamic([
+                    {
+                        body:`Muchas gracias por comunicarse con Ascensores Antartida. Haga Click en ${url}`,
+                        delay: 2000
+                    }
+                ])    
+            }
         }
     )
 

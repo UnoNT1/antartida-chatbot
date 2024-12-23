@@ -1,8 +1,12 @@
+import { fechaActual } from "../Utils/fechaHoraActual.js"
+
 const msjRecibidos = []
 //valida el mensaje para comprobarlo dentro del debounce
 const validarMensaje = (numero, mensaje) => {
+
     let msjNuevo = {
-        mensaje: mensaje
+        mensaje: mensaje,
+        fechaActual: fechaActual()
     }
     
     if(!msjRecibidos[numero]){

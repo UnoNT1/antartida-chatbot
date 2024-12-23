@@ -7,12 +7,12 @@ const flowSecundario = async () => {
         const ordenes = getOrdenes()
         let ordenRevisada
 
-        //este for actualiza las ordenes a su estado actual
+        console.log('Ordenes en flow secundario: ', ordenes)
+        //este for actualiza las ordenes a su estado actual y revsa las ordenes
         for(const orden of ordenes){
             try {
                 ordenRevisada = await postRevisarOrden(orden.reg_cl12, 0)
-                console.log(ordenRevisada, 'ord rev flow')
-                if(orden.r00_cl12 !== ordenRevisada[0].r00_cl12){
+                if(orden.r00_cl12 !== ordenRevisada[0].r00_cl12){//actualiza el estado en la orden dentro del array de guardar ordenes
                     orden.r00_cl12 = ordenRevisada[0].r00_cl12
                 }
             } catch (err) {

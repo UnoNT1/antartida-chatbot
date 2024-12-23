@@ -3,7 +3,7 @@ async function postRevisarOrden(numOrden, estado){
     const objOrden = { 'nroOrden': numOrden, 'estado': estado}
 
     try {
-        const response = await fetch('http://localhost/backendChatBotAntartida/devolverOrden.php', {
+        const response = await fetch('http://localhost/backendChatBotAntartida/devolverOrden_w.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ async function postRevisarOrden(numOrden, estado){
             body: JSON.stringify(objOrden)
         });
         const resJson = await response.json()
-        console.log('respuesta orden: ', resJson)
+        console.log('Post Revisar Orden: ', resJson)
 
         return resJson
     } catch (err) {

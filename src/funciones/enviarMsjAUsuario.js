@@ -13,7 +13,7 @@ async function enviarMsjAUsuario(){
 
             const ordenRevisada = await postRevisarOrden(orden.reg_cl12, orden.r00_cl12)
 
-            console.log(ordenRevisada.status, 'aca orden revisada',  orden.r00_cl12)
+            console.log(ordenRevisada, '----orden a estado 2----',  orden.r00_cl12)
             if(ordenRevisada.status === 'success'){
                 enviarMensaje([], 'Un Tecnico a tomado tu reclamo', orden.tre_cl12)
             }
@@ -21,7 +21,7 @@ async function enviarMsjAUsuario(){
 
             const ordenRevisada = await postRevisarOrden(orden.reg_cl12, orden.r00_cl12)
             
-            console.log(ordenRevisada, 'en estado 3')
+            console.log(ordenRevisada, '-----orden a estado 3----',  orden.r00_cl12)
             if(ordenRevisada.status === 'success'){
                 enviarMensaje([], 'El Tecnico a solucionado tu reclamo', orden.tre_cl12)
             }
