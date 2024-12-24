@@ -1,6 +1,5 @@
 import separarNumOrden from "../funciones/separarNumOrden.js";
 import separarNumTecnicos from "../funciones/separarNumTecnicos.js";
-import { guardarOrdenes } from "../funciones/guardarOrdenes.js";
 import armarURL from "../funciones/armarNumURL.js";
 
 //hace un post con los datos del mensaje y devuelve los numero de los tecnicos
@@ -28,8 +27,6 @@ async function postIniciarOrden(objeto) {
         const text = await response.text();
         
         numOrden = separarNumOrden(text)//toma el numero de orden
-        await guardarOrdenes(numOrden)//guarda las ordenes en un array
-        
         url = armarURL(text, numOrden)//arma la url para enviar en el mensaje
         
         numTecnicos = separarNumTecnicos(text);//toma los numeros de los tecnicos

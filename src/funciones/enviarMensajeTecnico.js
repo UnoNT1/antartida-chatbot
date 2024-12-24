@@ -3,15 +3,14 @@ import estandarizar from "./accionesNumero.js"
 const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
     try {
         if(nroUser !== ''){
-            console.log(nroUser, mensaje)
             fetchMensaje(nroUser, mensaje)
         }else{
             nroTecnicos.map(num => {
                 num = estandarizar(num)
-                //fetchMensaje(num, 'Mensaje de prueba de UnoNt')
+                fetchMensaje(num, `ingreso un reclamo con el siguiente mensaje: ${mensaje}`)
                 console.log('Telefono: ', num, ' estandarizado')
             })
-        } 
+        }
     } catch (err) {
         console.error('1º error al intentar enviar mensaje')
     }

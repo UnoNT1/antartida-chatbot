@@ -1,4 +1,4 @@
-//Este metodo se llama en guardarOrdenes()
+//Este metodo se llama en enviarMsjAUsuario() en el backend ejecutando un post para cambiar el estado de la orden en la base de datos
 async function postRevisarOrden(numOrden, estado){
     const objOrden = { 'nroOrden': numOrden, 'estado': estado}
 

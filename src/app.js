@@ -4,6 +4,7 @@ import { MemoryDB as Database } from '@builderbot/bot'
 import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
 
 import flowPrincipal from './flows/flowPrincipal.js'
+//import flowSecundario from './flows/flowSecundario.js'
 import flowConstante from './flows/flowConstante.js'
 
 const PORT = process.env.PORT ?? 3008
@@ -21,6 +22,7 @@ const main = async () => {
         database: adapterDB,
     })
 
+    //flowSecundario()
     flowConstante()
     httpServer(+PORT)
 
