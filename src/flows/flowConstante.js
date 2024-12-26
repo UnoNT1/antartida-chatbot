@@ -1,4 +1,4 @@
-import { getOrdenes, guardarOrdenes } from "../funciones/guardarOrdenes.js";
+import { guardarOrdenes } from "../funciones/guardarOrdenes.js";
 import enviarMsjAUsuario from "../funciones/enviarMsjAUsuario.js";
 
 const flowConstante = async () => {

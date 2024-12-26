@@ -7,7 +7,7 @@ const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
         }else{
             nroTecnicos.map(num => {
                 num = estandarizar(num)
-                fetchMensaje(num, `ingreso un reclamo con el siguiente mensaje: ${mensaje}`)
+                //fetchMensaje(num, `ingreso un reclamo con el siguiente mensaje: ${mensaje}`)
                 console.log('Telefono: ', num, ' estandarizado')
             })
         }
