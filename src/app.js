@@ -7,12 +7,13 @@ import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
 import flowPrincipal from './flows/flowPrincipal.js'
 //import flowSecundario from './flows/flowSecundario.js'
 import flowConstante from './flows/flowConstante.js'
+import flowTest from './flows/flowTest.js'
 
 const PORT = process.env.PORT ?? 3008
 
 
 const main = async () => {
-    const adapterFlow = createFlow([flowPrincipal])
+    const adapterFlow = createFlow([flowPrincipal, flowTest])
     
     const adapterProvider = createProvider(Provider)
     const adapterDB = new Database()

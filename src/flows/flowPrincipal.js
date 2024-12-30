@@ -3,8 +3,6 @@ import { getUrl, postIniciarOrden } from '../Fetch/postIniciarOrden.js';
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js';
 import validarMensaje from '../funciones/validarMensaje.js';
 import nombreEmpresa from '../Utils/nombreEmpresa.js';
-import { getOrdenes } from '../funciones/guardarOrdenes.js';
-import { fechaActual, horaActual } from '../Utils/fechaHoraActual.js';
 
 let nombreEmp = await nombreEmpresa()
 
@@ -14,15 +12,14 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
         async (ctx, { flowDynamic }) => {
             let numero = ctx.from
             //let nombre = ctx.name
-            let mensaje = ctx.body
+            let mensaje = ctx.body.toLowerCase()
             let respuestaOrden
 
             const mensajesUsuario = validarMensaje(numero, mensaje)
-            //const ordenesExistentes = getOrdenes()
-            //const fechaHoy = fechaActual()
-            
-            const thisOrden = ordenesExistentes.slice().reverse().find(orden => orden.tre_cl12 === numero)
-
+            if(mensaje === 'test'){
+                //va al flow test
+                return
+            }
             
             const reclamo = {
                 nrollamada: numero,
@@ -32,11 +29,26 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
                 lugar: '0'
             }
             
-            nroTecnicos = await postIniciarOrden(reclamo)
-            if(nroTecnicos){
-                console.log('Reclamo iniciado: ', nroTecnicos)
+            respuestaOrden = await postIniciarOrden(reclamo)//devuelve un array con los numeros de los tecnicos
+            if(respuestaOrden){
 
-                await enviarMensaje(nroTecnicos, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
+                if(respuestaOrden.lenght === 0){
+                    const msjUser = mensajesUsuario[numero]
+
+                    console.log('Reclamo existente: ', respuestaOrden)
+                    await enviarMensaje(respuestaOrden, `Mas detalles sobre el reclamo: "${msjUser.mensaje}"`, '')
+                    await flowDynamic([
+                        {
+                            body:`Continue el reclamo a travez del formulario`,
+                            delay: 2000
+                        }
+                    ])
+                    return
+                }
+
+                console.log('Reclamo iniciado: ', respuestaOrden)
+
+                await enviarMensaje(respuestaOrden, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
                 
                 const url = await getUrl();
                 

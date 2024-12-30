@@ -23,7 +23,7 @@ async function postIniciarOrden(objeto) {
         }
 
         //esta es la respuesta que obtengo del backend   === response.text()  
-        //{"status":"success","message":"Datos recibidos correctamente"}  response aca  [["37095*80070204*#03516674325#03515394961#0351-155214053#03516646898#03516646896#"]] 
+        //{"status":"success","message":"Datos: "} [["37095*80070204*#03516674325#03515394961#0351-155214053#03516646898#03516646896#"]] 
 
         const text = await response.text();
         
