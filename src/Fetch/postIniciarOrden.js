@@ -8,6 +8,7 @@ let url
 
 async function postIniciarOrden(objeto) {
     let numTecnicos
+    console.log(objeto, 'objeto en postIniciarOrden')
     try {
         const response = await fetch('https://www.unont.com.ar/yavoy/sistemas/dato5/android/w_sms.php', {
             method: 'POST',
