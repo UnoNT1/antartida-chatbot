@@ -13,7 +13,7 @@ const flowTest = addKeyword('test')
             
             await flowDynamic([
                 {
-                    body:`Muchas gracias por comunicarse con Ascensores Antartida. Esto es un Test`,
+                    body:`Testeado... el chat esta en funcionamiento`,
                     delay: 2000
                 }
             ])    
