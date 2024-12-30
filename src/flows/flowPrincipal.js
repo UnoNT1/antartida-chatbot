@@ -15,27 +15,14 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
             let numero = ctx.from
             //let nombre = ctx.name
             let mensaje = ctx.body
-            let nroTecnicos
+            let respuestaOrden
 
             const mensajesUsuario = validarMensaje(numero, mensaje)
-            const ordenesExistentes = getOrdenes()
-            const fechaHoy = fechaActual()
+            //const ordenesExistentes = getOrdenes()
+            //const fechaHoy = fechaActual()
             
-            const thisOrden = ordenesExistentes.slice().find(orden => orden.tre_cl12 === numero)
+            const thisOrden = ordenesExistentes.slice().reverse().find(orden => orden.tre_cl12 === numero)
 
-            if(thisOrden && thisOrden.fec_cl12 === fechaHoy && horaActual(thisOrden.hor_cl12)){
-                const msjUser = mensajesUsuario[numero]
-
-                console.log('Reclamo ya realizado: ', thisOrden)
-                await enviarMensaje(nroTecnicos, `Mas detalles sobre el reclamo: "${msjUser.mensaje}"`, '')
-                await flowDynamic([
-                    {
-                        body:`Continue el reclamo a travez del formulario`,
-                        delay: 2000
-                    }
-                ])
-                return
-            }
             
             const reclamo = {
                 nrollamada: numero,
@@ -45,13 +32,11 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
                 lugar: '0'
             }
             
-            response = await postIniciarOrden(reclamo)
-            if(response){
+            nroTecnicos = await postIniciarOrden(reclamo)
+            if(nroTecnicos){
+                console.log('Reclamo iniciado: ', nroTecnicos)
 
-
-                console.log('Reclamo iniciado: ', response)
-
-                await enviarMensaje(response, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
+                await enviarMensaje(nroTecnicos, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
                 
                 const url = await getUrl();
                 

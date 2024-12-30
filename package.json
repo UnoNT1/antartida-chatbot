@@ -1,7 +1,7 @@
 {
   "name": "base-bailey-json",
   "version": "1.0.0",
-  "description": "",
+  "description": "chatbot-antartida",
   "main": "src/app.js",
   "type": "module",
   "scripts": {
@@ -21,6 +21,10 @@
     "eslint-plugin-builderbot": "latest",
     "nodemon": "^3.1.0"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "UnoNT",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "unont-chatbot"
+  }
 }

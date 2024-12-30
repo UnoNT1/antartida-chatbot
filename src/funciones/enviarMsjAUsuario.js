@@ -3,14 +3,15 @@ import enviarMensaje from './enviarMensajeTecnico.js';
 
 async function enviarMsjAUsuario(ordenes){
     //recibe el numero de orden y comienza a ejecutar la funcion
-    ordenes.map(async orden => {
+    for(const orden of ordenes) {
         if(orden.r00_cl12 === 0){
             return
         }else if(orden.r00_cl12 === 1){
 
             const ordenRevisada = await postRevisarOrden(orden.reg_cl12, orden.r00_cl12)
-
-            console.log(ordenRevisada, ordenRevisada.status, '----orden a estado 2----', orden.r00_cl12, '--num Orden: ',  orden.reg_cl12)
+            
+            console.log('----orden a estado 2----', orden.r00_cl12, '--num Orden: ',  orden.reg_cl12, '/n')
+            console.log(ordenRevisada.status === 'success','--estado Orden: ',  ordenRevisada)
             if(ordenRevisada.status === 'success'){
                 enviarMensaje([], 'Un Tecnico a tomado tu reclamo', orden.tre_cl12)
             }
