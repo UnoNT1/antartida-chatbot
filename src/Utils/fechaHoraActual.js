@@ -11,7 +11,7 @@ function fechaActual(){
          mes = '0' + mes; 
     } 
         
-    return `${anio}-${mes}-${dia}`;
+    return `${anio}-${mes}-${dia}T03:00:00.000Z`;
 }
 
 function horaActual(hora){

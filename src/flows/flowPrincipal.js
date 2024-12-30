@@ -21,7 +21,7 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
             const ordenesExistentes = getOrdenes()
             const fechaHoy = fechaActual()
             
-            const thisOrden = ordenesExistentes.slice().reverse().find(orden => orden.tre_cl12 === numero)
+            const thisOrden = ordenesExistentes.slice().find(orden => orden.tre_cl12 === numero)
 
             if(thisOrden && thisOrden.fec_cl12 === fechaHoy && horaActual(thisOrden.hor_cl12)){
                 const msjUser = mensajesUsuario[numero]
@@ -45,11 +45,13 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
                 lugar: '0'
             }
             
-            nroTecnicos = await postIniciarOrden(reclamo)
-            if(nroTecnicos){
-                console.log('Reclamo iniciado: ', nroTecnicos)
+            response = await postIniciarOrden(reclamo)
+            if(response){
 
-                await enviarMensaje(nroTecnicos, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
+
+                console.log('Reclamo iniciado: ', response)
+
+                await enviarMensaje(response, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
                 
                 const url = await getUrl();
                 

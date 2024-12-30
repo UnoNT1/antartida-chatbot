@@ -5,11 +5,11 @@ const flowConstante = async () => {
     setInterval(async () => {
         try {  
             const ordenes = await guardarOrdenes()
-            
-            //console.log(ordenes, ' ordenes de mysql ')
+
+            console.log(ordenes, ' ordenes de mysql ')
             enviarMsjAUsuario(ordenes)
         } catch (err) {
-            console.error('Error al actualizar ordenes en flow constante: ', err)
+            console.error('Error al obtener ordenes en flow constante: ', err)
         }
     }, 30000)
 }
