@@ -4,16 +4,17 @@ import { createBot, createProvider, createFlow } from '@builderbot/bot'
 import { MemoryDB as Database } from '@builderbot/bot'
 import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
 
-import flowPrincipal from './flows/flowPrincipal.js'
+import { flowPrincipal } from './flows/flowPrincipal.js'
 //import flowSecundario from './flows/flowSecundario.js'
 import flowConstante from './flows/flowConstante.js'
 import flowTest from './flows/flowTest.js'
+import flowDireccion from './flows/flowDireccion.js'
 
 const PORT = process.env.PORT ?? 3008
 
 
 const main = async () => {
-    const adapterFlow = createFlow([flowPrincipal, flowTest])
+    const adapterFlow = createFlow([flowPrincipal, flowTest, flowDireccion])
     
     const adapterProvider = createProvider(Provider)
     const adapterDB = new Database()

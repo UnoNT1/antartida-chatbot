@@ -5,7 +5,7 @@ const flowConstante = async () => {
     setInterval(async () => {
         try {  
             const ordenes = await guardarOrdenes()
-
+            //console.log('hay ordenes')
             console.log(ordenes, ' ordenes de mysql ')
             enviarMsjAUsuario(ordenes)
         } catch (err) {

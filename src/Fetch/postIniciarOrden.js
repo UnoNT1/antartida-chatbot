@@ -43,5 +43,9 @@ async function postIniciarOrden(objeto) {
 const getUrl = () => {
     return url
 }
+const getNroOrden = () => {
+    console.log(numOrden)
+    return numOrden
+}
 
-export { postIniciarOrden, getUrl };
+export { postIniciarOrden, getUrl, getNroOrden };

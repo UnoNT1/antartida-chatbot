@@ -1,19 +1,20 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import { getUrl, postIniciarOrden } from '../Fetch/postIniciarOrden.js';
+import { postIniciarOrden } from '../Fetch/postIniciarOrden.js';
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js';
 import validarMensaje from '../funciones/validarMensaje.js';
 import nombreEmpresa from '../Utils/nombreEmpresa.js';
+import flowDireccion from './flowDireccion.js'
 
 let nombreEmp = await nombreEmpresa()
+let respuestaOrden
 
 const flowPrincipal = addKeyword(EVENTS.WELCOME)
     .addAction(
         null,
-        async (ctx, { flowDynamic }) => {
+        async (ctx, { flowDynamic, gotoFlow }) => {
             let numero = ctx.from
-            //let nombre = ctx.name
             let mensaje = ctx.body.toLowerCase()
-            let respuestaOrden
+            //let respuestaOrden
 
             const mensajesUsuario = validarMensaje(numero, mensaje)
             if(mensaje === 'test'){
@@ -28,38 +29,31 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
                 accion: '1',
                 lugar: '0'
             }
-            
+                
             respuestaOrden = await postIniciarOrden(reclamo)//devuelve un array con los numeros de los tecnicos
-            if(respuestaOrden){
+            //await enviarMensaje(respuestaOrden, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
 
-                if(respuestaOrden.lenght === 0){
-                    const msjUser = mensajesUsuario[numero]
-
-                    console.log('Reclamo existente: ', respuestaOrden)
-                    await enviarMensaje(respuestaOrden, `Mas detalles sobre el reclamo: "${msjUser.mensaje}"`, '')
-                    await flowDynamic([
-                        {
-                            body:`Continue el reclamo a travez del formulario`,
-                            delay: 2000
-                        }
-                    ])
-                    return
-                }
-
-                console.log('Reclamo iniciado: ', respuestaOrden)
-
-                await enviarMensaje(respuestaOrden, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
-                
-                const url = await getUrl();
-                
+            if(respuestaOrden.length < 1){
                 await flowDynamic([
                     {
-                        body:`Muchas gracias por comunicarse con Ascensores Antartida. Haga Click en ${url}`,
+                        body: 'Aguarde la respuesta del tecnico por favor',
                         delay: 2000
                     }
-                ])    
+                ])
             }
+
+            await flowDynamic([
+                {
+                    body:`Muchas gracias por comunicarse con Ascensores Latorre.`,
+                    delay: 2000
+                }
+            ]) 
+            gotoFlow(flowDireccion) 
         }
     )
 
-export default flowPrincipal
+    const getNrosTecnicos = () => {
+        return respuestaOrden
+    }
+
+export { flowPrincipal, getNrosTecnicos }

@@ -1,5 +1,4 @@
 import { addKeyword } from "@builderbot/bot";
-import { getUrl, postIniciarOrden } from '../Fetch/postIniciarOrden.js';
 
 
 const flowTest = addKeyword('test')
@@ -7,9 +6,6 @@ const flowTest = addKeyword('test')
         null,
         async (ctx, { flowDynamic }) => {
             console.log('Test flow')
-            //await postIniciarOrden(reclamo)
-            
-            //const url = await getUrl();
             
             await flowDynamic([
                 {
