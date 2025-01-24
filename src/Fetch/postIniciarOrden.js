@@ -44,7 +44,6 @@ const getUrl = () => {
     return url
 }
 const getNroOrden = () => {
-    console.log(numOrden)
     return numOrden
 }
 

@@ -1,6 +1,7 @@
 import estandarizar from "./accionesNumero.js"
 //envia mensaje a los tecnicos y a los usuarios, nroTecnicos es un array y nroUser un string
 const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
+    
     try {
         if(nroUser !== ''){
             fetchMensaje(nroUser, mensaje)
@@ -23,8 +24,8 @@ async function fetchMensaje(numero, mensaje){
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-            number: numero,
-            message: mensaje,
+                number: numero,
+                message: mensaje,
             }),
         })
         .then((response) => {

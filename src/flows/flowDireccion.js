@@ -2,6 +2,7 @@ import { addKeyword, EVENTS } from "@builderbot/bot";
 import conn from "../conexion.js";
 import { getUrl, getNroOrden } from "../Fetch/postIniciarOrden.js";
 import { getNrosTecnicos } from './flowPrincipal.js'
+import consultaMySql from "../Utils/consultaMySql.js";
 
 const flowDireccion = addKeyword(EVENTS.ACTION)
     .addAction(null, async (_, { flowDynamic }) => {
@@ -12,7 +13,7 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
             }
         ])
     })
-    .addAction({ capture: true }, async (ctx, { fallBack }) => {
+    .addAction({ capture: true }, async (ctx, { gotoFlow, fallBack }) => {
         console.log(`\nNumero ascensor: |${ctx.body}|`);
         const numAscensor = parseInt(ctx.body, 10)
         const nrosTecnicos = getNrosTecnicos()
@@ -23,16 +24,9 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
             fallBack(`Este ultimo mensaje sera enviado a los tecnicos, para poder continuar necesito solamente el numero del ascensor`)
         } else{
             try {
-                const direccion = await new Promise((resolve, reject) => {
-                    conn.query(`SELECT reg_as00, tit_as00, dir_as00, cta_as00, equ_as00 FROM lpb_as00 WHERE reg_as00 = ?`, [numAscensor], (err, results) => {
-                        if (err) {
-                            return reject(err);
-                        }
-                        resolve(results);
-                    });
-                });
-        
-                /*[
+                const query = `SELECT reg_as00, tit_as00, dir_as00, cta_as00, equ_as00 FROM lpb_as00 WHERE reg_as00 = ?`
+                const direccion = await consultaMySql(query, [numAscensor])
+                /*[ respuesta direccion
                     {
                     reg_as00: 960,
                     tit_as00: 'Aires de General Paz',
@@ -40,24 +34,16 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
                     cta_as00: 1433,
                     equ_as00: '0002-ASC1'
                     }
-                    ]*/
-                   if (direccion.length > 0) {
-                       const direccionInfo = direccion[0];
-                       const nroOrden = getNroOrden()
-                       
-                           console.log('Direccion:', direccionInfo);
-                            const query = 'UPDATE lpb_cl12 SET cta_cl12 = ?, usu_cl12 = ? tit_cl12 = ?, dom_cl12 = ? WHERE reg_cl12 = ?'
-                            const values = [direccionInfo.cta_as00, direccionInfo.equ_as00, direccionInfo.tit_as00, direccionInfo.dir_as00, nroOrden]
-                            
-                            const orden = await new Promise((resolve, reject) => {
-                                conn.query(query, values, (err, results) => {
-                                    if (err) {
-                                        return reject(err);
-                                    }
-                                    resolve(results);
-                                });
-                            });
-                            console.log(orden)
+                ]*/
+                if (direccion.length > 0) {
+                    const direccionInfo = direccion[0];
+                    const nroOrden = getNroOrden()
+                    
+                    const query = 'UPDATE lpb_cl12 SET cta_cl12 = ?, tit_cl12 = ?, dom_cl12 = ?, c01_cl12 = ? WHERE reg_cl12 = ?'
+                    const values = [direccionInfo.cta_as00, direccionInfo.tit_as00, direccionInfo.dir_as00, direccionInfo.equ_as00, nroOrden]
+                    
+                    const orden = await consultaMySql(query, values)
+                    console.log(orden)
                 } else {
                     fallBack(gotoFlow(flowDireccion));
                 }
