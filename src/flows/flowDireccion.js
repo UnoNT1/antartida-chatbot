@@ -8,7 +8,7 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
     .addAction(null, async (_, { flowDynamic }) => {
         await flowDynamic([
             {
-                body: `Por favor, ubique el numero de ascensor en el mismo cartel donde obtuvo este numero de telefono y conteste este mensaje solo con ese numero del ascensor.`, 
+                body: `Por favor, ubique el numero de ascensor en el mismo cartel donde obtuvo este numero de telefono y conteste este mensaje solo con ese numero del ascensor.`,
                 delay: 2000,
             }
         ])
@@ -18,11 +18,11 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
         const numAscensor = parseInt(ctx.body, 10)
         const nrosTecnicos = getNrosTecnicos()
 
-        if(isNaN(numAscensor)){
+        if (isNaN(numAscensor)) {
             //await enviarMensaje(nrosTecnicos, `Mas detalles sobre el reclamo: "${msjUser.mensaje}"`, '')
 
             fallBack(`Este ultimo mensaje sera enviado a los tecnicos, para poder continuar necesito solamente el numero del ascensor`)
-        } else{
+        } else {
             try {
                 const query = `SELECT reg_as00, tit_as00, dir_as00, cta_as00, equ_as00 FROM lpb_as00 WHERE reg_as00 = ?`
                 const direccion = await consultaMySql(query, [numAscensor])
@@ -38,10 +38,10 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
                 if (direccion.length > 0) {
                     const direccionInfo = direccion[0];
                     const nroOrden = getNroOrden()
-                    
+
                     const query = 'UPDATE lpb_cl12 SET cta_cl12 = ?, tit_cl12 = ?, dom_cl12 = ?, c01_cl12 = ? WHERE reg_cl12 = ?'
                     const values = [direccionInfo.cta_as00, direccionInfo.tit_as00, direccionInfo.dir_as00, direccionInfo.equ_as00, nroOrden]
-                    
+
                     const orden = await consultaMySql(query, values)
                     console.log(orden)
                 } else {
@@ -56,7 +56,7 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
     .addAction(null, async (_, { flowDynamic }) => {
         await flowDynamic([
             {
-                body: `Gracias, con ese numero podremos ubicar la direccion del edificio desde donde genera el reclamo.`, 
+                body: `Gracias, con ese numero podremos ubicar la direccion del edificio desde donde genera el reclamo.`,
                 delay: 2000,
             }
         ])
@@ -71,4 +71,4 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
         ])
     })
 
-    export default flowDireccion
+export default flowDireccion

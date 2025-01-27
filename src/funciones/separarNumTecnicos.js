@@ -1,5 +1,5 @@
 //recibe como texto la respuesta del postAlBackend al enviar un mensaje y separa los numeros de los tecnicos en un array
-function separarNumTecnicos(data) { 
+function separarNumTecnicos(data) {
     console.log(data)
 
     const jsonStart = data.indexOf('[');

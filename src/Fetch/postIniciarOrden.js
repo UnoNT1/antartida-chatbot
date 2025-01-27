@@ -26,10 +26,10 @@ async function postIniciarOrden(objeto) {
         //{"status":"success","message":"Datos: "} [["37095*80070204*#03516674325#03515394961#0351-155214053#03516646898#03516646896#"]] 
 
         const text = await response.text();
-        
+
         numOrden = separarNumOrden(text)//toma el numero de orden
         url = armarURL(text, numOrden)//arma la url para enviar en el mensaje
-        
+
         numTecnicos = separarNumTecnicos(text);//toma los numeros de los tecnicos
         console.log('Iniciar Orden --- Numeros orden:', numOrden, 'Url: ', url);
 

@@ -2,17 +2,17 @@ import postRevisarOrden from '../Fetch/postRevisarOrden.js';
 import enviarMensaje from './enviarMensajeTecnico.js';
 import consultaMySql from '../Utils/consultaMySql.js';
 
-async function enviarMsjAUsuario(ordenes){
+async function enviarMsjAUsuario(ordenes) {
     //recibe el numero de orden y comienza a ejecutar la funcion
     ordenes.map(async (orden) => {
-        if(orden.r00_cl12 === 0){
+        if (orden.r00_cl12 === 0) {
             return
-        }else if(orden.r00_cl12 === 1){
+        } else if (orden.r00_cl12 === 1) {
 
             const ordenRevisada = await postRevisarOrden(orden.reg_cl12, orden.r00_cl12)
-            
-            console.log('----orden a estado 2----', orden.r00_cl12, '--num Orden: ',  orden.reg_cl12, '/n')
-            if(ordenRevisada.status === 'success'){
+
+            console.log('----orden a estado 2----', orden.r00_cl12, '--num Orden: ', orden.reg_cl12, '/n')
+            if (ordenRevisada.status === 'success') {
                 //busca el nombre del tecnico que tomo el pedido y la demora
                 const queryTecnico = 'SELECT usu_cl12, dem_cl12 FROM lpb_cl12 WHERE reg_cl12 = ?'
                 const valueNroRegistro = [orden.reg_cl12]
@@ -27,12 +27,12 @@ async function enviarMsjAUsuario(ordenes){
 
                 enviarMensaje([], `Un Tecnico a tomado tu reclamo, su demora es de ${tecnicos[0].dem_cl12}. Aca podes ver la ficha del tecnico: ${url}`, orden.tre_cl12)
             }
-        }else if(orden.r00_cl12 === 3){
+        } else if (orden.r00_cl12 === 3) {
 
-            const ordenRevisada = await postRevisarOrden(orden.reg_cl12, orden.r00_cl12, '--num Orden: ',  orden.reg_cl12)
-            
-            console.log(ordenRevisada, '-----orden a estado 3----',  orden.r00_cl12)
-            if(ordenRevisada.status === 'success'){
+            const ordenRevisada = await postRevisarOrden(orden.reg_cl12, orden.r00_cl12, '--num Orden: ', orden.reg_cl12)
+
+            console.log(ordenRevisada, '-----orden a estado 3----', orden.r00_cl12)
+            if (ordenRevisada.status === 'success') {
                 enviarMensaje([], 'El Tecnico a solucionado tu reclamo', orden.tre_cl12)
             }
         }

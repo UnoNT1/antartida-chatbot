@@ -1,11 +1,11 @@
 import estandarizar from "./accionesNumero.js"
 //envia mensaje a los tecnicos y a los usuarios, nroTecnicos es un array y nroUser un string
 const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
-    
+
     try {
-        if(nroUser !== ''){
+        if (nroUser !== '') {
             fetchMensaje(nroUser, mensaje)
-        }else{
+        } else {
             nroTecnicos.map(num => {
                 num = estandarizar(num)
                 fetchMensaje(num, `ingreso un reclamo con el siguiente mensaje: ${mensaje}`)
@@ -18,7 +18,7 @@ const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
 }
 
 //hace una solicitud post al proovedor de builderBot que se encarga de enviar los mensajes
-async function fetchMensaje(numero, mensaje){
+async function fetchMensaje(numero, mensaje) {
     try {
         await fetch("http://localhost:3008/v1/messages", {
             method: "POST",
@@ -28,17 +28,17 @@ async function fetchMensaje(numero, mensaje){
                 message: mensaje,
             }),
         })
-        .then((response) => {
-            if (!response.ok) throw new Error("3° Error al intentar enviar mensaje");
-            return response.text();
-        })
-        .then((data) => {
-            console.log(`Celular: ${numero} - Mensaje: ${mensaje}`, data);
-        })
-        .catch((error) => {
-            console.error("4° Error  al intentar enviar mensaje: ", error);
-        });
-    
+            .then((response) => {
+                if (!response.ok) throw new Error("3° Error al intentar enviar mensaje");
+                return response.text();
+            })
+            .then((data) => {
+                console.log(`Celular: ${numero} - Mensaje: ${mensaje}`, data);
+            })
+            .catch((error) => {
+                console.error("4° Error  al intentar enviar mensaje: ", error);
+            });
+
     } catch (error) {
         console.error(error)
     }

@@ -6,16 +6,16 @@ const flowTest = addKeyword('test')
         null,
         async (ctx, { flowDynamic }) => {
             console.log('Test flow')
-            
+
             await flowDynamic([
                 {
-                    body:`Testeado... el chat esta en funcionamiento`,
+                    body: `Testeado... el chat esta en funcionamiento`,
                     delay: 2000
                 }
-            ])    
+            ])
         }
-        
+
     )
 
 
-    export default flowTest
+export default flowTest

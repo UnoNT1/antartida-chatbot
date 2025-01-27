@@ -17,11 +17,11 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
             //let respuestaOrden
 
             const mensajesUsuario = validarMensaje(numero, mensaje)
-            if(mensaje === 'test'){
+            if (mensaje === 'test') {
                 //va al flow test
                 return
             }
-            
+
             const reclamo = {
                 nrollamada: numero,
                 mensaje: mensaje,
@@ -29,11 +29,11 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
                 accion: '1',
                 lugar: '0'
             }
-                
+
             respuestaOrden = await postIniciarOrden(reclamo)//devuelve un array con los numeros de los tecnicos
             //await enviarMensaje(respuestaOrden, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
 
-            if(respuestaOrden.length < 1){
+            if (respuestaOrden.length < 1) {
                 await flowDynamic([
                     {
                         body: 'Aguarde la respuesta del tecnico por favor',
@@ -44,16 +44,16 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
 
             await flowDynamic([
                 {
-                    body:`Muchas gracias por comunicarse con Ascensores Latorre.`,
+                    body: `Muchas gracias por comunicarse con Ascensores Latorre.`,
                     delay: 2000
                 }
-            ]) 
-            gotoFlow(flowDireccion) 
+            ])
+            gotoFlow(flowDireccion)
         }
     )
 
-    const getNrosTecnicos = () => {
-        return respuestaOrden
-    }
+const getNrosTecnicos = () => {
+    return respuestaOrden
+}
 
 export { flowPrincipal, getNrosTecnicos }

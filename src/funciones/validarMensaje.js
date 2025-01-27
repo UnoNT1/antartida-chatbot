@@ -8,13 +8,13 @@ const validarMensaje = (numero, mensaje) => {
         mensaje: mensaje,
         fechaActual: fechaActual()
     }
-    
-    if(!msjRecibidos[numero]){
+
+    if (!msjRecibidos[numero]) {
         msjRecibidos[numero] = msjNuevo
-    }else{
+    } else {
         msjRecibidos[numero].mensaje = msjRecibidos[numero].mensaje.concat(`, ${msjNuevo.mensaje}`)
     }
-    
+
     console.log(msjRecibidos, 'msjR')
     return msjRecibidos
 }

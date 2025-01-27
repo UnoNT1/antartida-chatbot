@@ -1,6 +1,6 @@
 import conn from "../conexion.js"
 
-async function consultaMySql(query, values){
+async function consultaMySql(query, values) {
     const response = await new Promise((resolve, reject) => {
         conn.query(query, values, (err, results) => {
             if (err) {
