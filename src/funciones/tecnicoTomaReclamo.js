@@ -9,7 +9,7 @@ async function tecnicoTomaReclamo(ordenes){
         if(orden.r00_cl12 === 2){
             try {
                 const direccion = orden.dom_cl12
-                const queryServices = 'SELECT fec_cl12, ser_cl12 FROM lpb_cl12 WHERE dom_cl12 = ? ORDER BY fec_cl12 DESC LIMIT 10'
+                const queryServices = 'SELECT fec_cl12, ser_cl12, usu_cl12 FROM lpb_cl12 WHERE dom_cl12 = ? ORDER BY fec_cl12 DESC LIMIT 10'
                 const services = await consultaMySql(queryServices, [direccion])
                 
                 //busca el nombre del tecnico que tomo el pedido
@@ -25,9 +25,14 @@ async function tecnicoTomaReclamo(ordenes){
                 let mensaje = `Este es el historial tecnico del ascensor: `
                 
                 const fecha = formatearFecha(tecnicos[0].fec_cl12)
-                services.map(ser => {
+                services.forEach(ser => {
+                    if (ser.ser_cl12 === '-') {
+                        return
+                    }
+                    const nombreTecnico = ser.usu_cl12.split(' ') ? ser.usu_cl12.split(' ') : ser.usu_cl12
+
                     mensaje += `
-                    ->${fecha} - ${tecnico},  
+                    ->${fecha} - ${nombreTecnico},  
                     ${ser.ser_cl12}`
                 })
                 
