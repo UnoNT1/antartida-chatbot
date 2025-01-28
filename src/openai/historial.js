@@ -32,7 +32,7 @@ async function cargarContexto() {
     }
 }
 
-async function mensajeChatGPT(body, instrucciones) {
+async function mensajeChatGPT(body, prompt) {
     try {
         // Cargar el contexto actual
         const contexto = await cargarContexto();
@@ -42,7 +42,7 @@ async function mensajeChatGPT(body, instrucciones) {
         const completion = await openAI.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
-                { role: "system", content: instrucciones },
+                { role: "system", content: prompt },
                 ...contexto
             ],
             max_tokens: 200,
