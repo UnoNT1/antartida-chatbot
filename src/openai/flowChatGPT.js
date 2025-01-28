@@ -37,3 +37,5 @@ const flowChatGPT = addKeyword(EVENTS.ACTION)
                 return ('Fin conversación')
             }
         })
+
+// reg_as00 - dir_as00 - equ_as00 - lug_as00 - fan_as00
