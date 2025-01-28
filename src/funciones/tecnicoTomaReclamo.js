@@ -1,6 +1,6 @@
 import enviarMensaje from './enviarMensajeTecnico.js';
 import consultaMySql from '../Utils/consultaMySql.js';
-import formatearFecha from './farmatearFecha.js';
+import formatearFecha from './formatearFecha.js';
 
 let enviado = false
 async function tecnicoTomaReclamo(ordenes){
@@ -27,9 +27,8 @@ async function tecnicoTomaReclamo(ordenes){
                 const fecha = formatearFecha(tecnicos[0].fec_cl12)
                 services.map(ser => {
                     mensaje += `
-                    ->Tecnico: ${tecnico}, 
-                    fecha: ${fecha}, 
-                    servicio: ${ser.ser_cl12}`
+                    ->${fecha} - ${tecnico},  
+                    ${ser.ser_cl12}`
                 })
                 
                 if(telTecnico === ''){
