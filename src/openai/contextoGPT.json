@@ -1,18 +1,1 @@
-[
-  {
-    "role": "user",
-    "content": "Buenas tardes, podrian venir al CONSTITUCIÓN 840? Uno de ellos esta haciendo un ruido horrible tanto al subir como al bajar"
-  },
-  {
-    "role": "system",
-    "content": "Claro, necesito verificar en la lista de ascensores si hay algún registro relacionado con el edificio \"CONSTITUCIÓN 840\" para generar el reclamo correspondiente. Solo un momento, por favor.\n\n---\n\nHe encontrado un registro relacionado con el edificio \"CONSTITUCIÓN 840\" en la lista de ascensores:\n\n- Número de ascensor: 1273\n- Dirección: CONSTITUCIÓN 840\n- Equipo: 11-A2_EM_PM\n- Ubicación física: -\n- Nombre del edificio (Fantasía): -\n\nPor favor, confirme si este es el ascensor del que necesita el mantenimiento debido al ruido."
-  },
-  {
-    "role": "user",
-    "content": "Si"
-  },
-  {
-    "role": "system",
-    "content": "Perfecto, el reclamo ha sido registrado para el ascensor número 1273 ubicado en CONSTITUCIÓN 840. Un técnico será enviado para solucionar el problema de ruido tanto al subir como al bajar. ¿Hay algo más en lo que pueda ayudarte?"
-  }
-]
+[]
