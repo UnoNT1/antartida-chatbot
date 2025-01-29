@@ -8,7 +8,7 @@ dotenv.config()
 const openAI = new OpenAI({ apiKey: process.env.API_KEY_ASCENSORES })
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const archivoContexto = path.resolve(__dirname, 'contextoGPT.json');
+const archivoContexto = path.resolve(__dirname, './contextoGPT.json');
 
 async function guardarContexto(contexto) {
     try {
@@ -35,6 +35,7 @@ async function cargarContexto() {
 async function mensajeChatGPT(body, prompt) {
     try {
         // Cargar el contexto actual
+        // console.log(archivoContexto, 'contexto')
         const contexto = await cargarContexto();
         // Agregar el nuevo mensaje del usuario al contexto
         contexto.push({ role: "user", content: body });

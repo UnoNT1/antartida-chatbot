@@ -4,6 +4,7 @@ import enviarMensaje from '../funciones/enviarMensajeTecnico.js';
 import validarMensaje from '../funciones/validarMensaje.js';
 import nombreEmpresa from '../Utils/nombreEmpresa.js';
 import flowDireccion from './flowDireccion.js'
+import flowChatGPT from '../openai/flowChatGPT.js'
 
 let nombreEmp = await nombreEmpresa()
 let respuestaOrden
@@ -15,8 +16,9 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
             let numero = ctx.from
             let mensaje = ctx.body.toLowerCase()
             //let respuestaOrden
-
-            const mensajesUsuario = validarMensaje(numero, mensaje)
+            
+            gotoFlow(flowChatGPT)
+            /*const mensajesUsuario = validarMensaje(numero, mensaje)
             if (mensaje === 'test') {
                 //va al flow test
                 return
@@ -31,7 +33,7 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
             }
 
             respuestaOrden = await postIniciarOrden(reclamo)//devuelve un array con los numeros de los tecnicos
-            //await enviarMensaje(respuestaOrden, `Entro un reclamo con el siguiente mensaje "${mensaje}"`, '')
+            //await enviarMensaje(respuestaOrden, `Entro un reclamo con el siguiente mensaje "${mensaje}" desde este numero "${numero}"`, '')
 
             if (respuestaOrden.length < 1) {
                 await flowDynamic([
@@ -48,7 +50,7 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
                     delay: 2000
                 }
             ])
-            gotoFlow(flowDireccion)
+            gotoFlow(flowDireccion)*/
         }
     )
 

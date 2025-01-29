@@ -1,5 +1,5 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import { mensajeChatGPT, finalizarConversacion } from './historial'
+import { mensajeChatGPT, finalizarConversacion } from './historial.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -19,17 +19,17 @@ const flowChatGPT = addKeyword(EVENTS.ACTION)
     .addAction(
         null,
         async (_, { flowDynamic }) => {
-            await flowDynamic([{ body: 'Recolectando información del ascensor...', delay: 1000 }])
+            await flowDynamic([{ body: 'Escribe el reclamo', delay: 1000 }])
         }
     )
     .addAction(
-        null,
+        { capture: true },
         async (ctx, { flowDynamic, fallBack }) => {
             const convGPT = await mensajeChatGPT(
-                'Información del ascensor disponible: Ascensor nro 1435', prompt)
+                ctx.body, prompt)
             //await console.log(convGPT)
             await flowDynamic([{ body: convGPT }])
-            if (!convGPT.includes("Resuelto")) {
+            if (!convGPT.includes("asdzxc")) {
                 await fallBack('');
             } else {
                 await finalizarConversacion();
@@ -39,3 +39,5 @@ const flowChatGPT = addKeyword(EVENTS.ACTION)
         })
 
 // reg_as00 - dir_as00 - equ_as00 - lug_as00 - fan_as00
+
+export default flowChatGPT;

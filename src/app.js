@@ -9,12 +9,13 @@ import { flowPrincipal } from './flows/flowPrincipal.js'
 import flowConstante from './flows/flowConstante.js'
 import flowTest from './flows/flowTest.js'
 import flowDireccion from './flows/flowDireccion.js'
+import flowChatGPT from './openai/flowChatGPT.js'
 
 const PORT = process.env.PORT ?? 3008
 
 
 const main = async () => {
-    const adapterFlow = createFlow([flowPrincipal, flowTest, flowDireccion])
+    const adapterFlow = createFlow([flowPrincipal, flowTest, flowDireccion, flowChatGPT])
 
     const adapterProvider = createProvider(Provider)
     const adapterDB = new Database()
