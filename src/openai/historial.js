@@ -8,19 +8,23 @@ dotenv.config()
 const openAI = new OpenAI({ apiKey: process.env.API_KEY_ASCENSORES })
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const archivoContexto = path.resolve(__dirname, './contextoGPT.json');
+const archivoContexto = (number) => path.resolve(__dirname, `./contextoGPT${number}.json`);
 
-async function guardarContexto(contexto) {
+async function guardarContexto(contexto, number) {
     try {
-        await fs.writeFile(archivoContexto, JSON.stringify(contexto, null, 2));
+        //busca el contexto
+        const archContexto = archivoContexto(number)
+        await fs.writeFile(archContexto, JSON.stringify(contexto, null, 2));
     } catch (error) {
         console.error('Error al guardar el contexto:', error);
     }
 }
 
-async function cargarContexto() {
+async function cargarContexto(number) {
     try {
-        const data = await fs.readFile(archivoContexto, 'utf8');
+        //busca el contexto
+        const contexto = archivoContexto(number)
+        const data = await fs.readFile(contexto, 'utf8');
         return JSON.parse(data);
     } catch (error) {
         if (error.code === 'ENOENT') {
@@ -32,11 +36,10 @@ async function cargarContexto() {
     }
 }
 
-async function mensajeChatGPT(body, prompt) {
+async function mensajeChatGPT(body, prompt, number) {
     try {
         // Cargar el contexto actual
-        // console.log(archivoContexto, 'contexto')
-        const contexto = await cargarContexto();
+        const contexto = await cargarContexto(number);
         // Agregar el nuevo mensaje del usuario al contexto
         contexto.push({ role: "user", content: body });
 
@@ -56,7 +59,7 @@ async function mensajeChatGPT(body, prompt) {
         contexto.push({ role: "system", content: respuestaGPT });
 
         // Guardar el contexto actualizado
-        await guardarContexto(contexto);
+        await guardarContexto(contexto, number);
         //console.log("historial.js -> guardarContexto(contexto)", contexto)
 
         return respuestaGPT;
@@ -65,9 +68,18 @@ async function mensajeChatGPT(body, prompt) {
     }
 }
 
-async function finalizarConversacion() {
+async function finalizarConversacion(number) {
     try {
-        await fs.writeFile(archivoContexto, JSON.stringify([], null));
+        const contexto = archivoContexto(number)
+        await fs.writeFile(contexto, JSON.stringify([], null));
+        await fs.unlink(contexto, (err) => {
+            if (err) {
+              console.error('Error al borrar el archivo:', err);
+              return;
+            }
+            console.log('Archivo borrado exitosamente');
+          });
+
         console.log('La conversación se ha reiniciado.');
     } catch (error) {
         console.error('Error al reiniciar la conversación:', error);

@@ -28,22 +28,23 @@ const flowChatGPT = addKeyword(EVENTS.WELCOME)
         { capture: true },
         async (ctx, { flowDynamic, fallBack }) => {
             const convGPT = await mensajeChatGPT(
-                ctx.body, prompt)
+                ctx.body, prompt, ctx.from)
             //await console.log(convGPT)
             await flowDynamic([{ body: convGPT }])
             if(ctx.body === "si") {
                 //busco en el contesto el mensaje 'Direccion:....'
                 // { role: 'system', content: 'Dirección: TUCUMAN 1331' }
-                const contexto = await cargarContexto();
+                const contexto = await cargarContexto(ctx.from);
 
                 contexto.forEach(element => {
                     if(element.content.includes('Direccion:')) {
                         direccion = element.content
                     }
                 })
+                console.log(direccion, 'direccion')
                 direccion = direccion.split(': ')[1]
-
-                await finalizarConversacion();
+                //direccion obtenida proseguir desde aca
+                await finalizarConversacion(ctx.from);
                 await flowDynamic([{ body: 'Fin chat con IA' }])
                 return ('Fin conversación')
             }else if (!convGPT.includes("asdzxc")) {
