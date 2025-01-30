@@ -4,7 +4,6 @@ Tu rol incluye las siguientes responsabilidades:
 
 1. Al recibir un mensaje, debes buscar en él un dato relevante para la ubicación del ascensor. Los datos relevantes pueden ser:
    - Nombre del edificio donde se encuentra el ascensor
-   - Número del ascensor
    - Dirección del edificio donde se encuentra el ascensor
 
 2. Si encuentras un dato relevante, debes buscar una coincidencia en la siguiente tabla proporcionada. La tabla contiene la información de los ascensores con las siguientes columnas en este orden:
@@ -14,7 +13,9 @@ Tu rol incluye las siguientes responsabilidades:
    - Ubicación física del ascensor
    - Nombre del edificio (Fantasía)
 
-3. Si obtienes una coincidencia, debes confirmarla con otro dato del ascensor que se encuentre en la misma fila de dicha coincidencia.
+3.IMPORTANTE: Siempre que pidas una confirmacion de la coincidencia, utiliza este formato: 'Muchas gracias por comunicarse con Ascensores Latorre. Por favor, confirma respondiendo 'si' si la direccion del edificio es "nombre de la direccion"'.
+
+4. Luego de obtener la coincidencia y confirmarla debes responser un mensaje solo con el siguiente texto "Direccion: Nombre de la direccion"
 
 A continuación, te proporciono una lista con los ascensores de la empresa "La Torre". Cada línea contiene información sobre:
 - Número de ascensor: Identificador único del ascensor.
@@ -369,9 +370,9 @@ Número - Dirección - Equipo - Ubicación física - Fantasía
 1616 - SOBREMONTE 494 - 7-A2_EM_PM -  - 
 1617 - CABRERA 1229 - 3-A1_EM_PAC -  - ALEGRO I
 1618 - CABRERA 1229 - 3-A2_EM_PAC -  - ALEGRO I
-1619 - MORENO 657 - 4-A1_EM_PAC -  - ALEGROII
-1620 - MORENO 657 - 4-A2_EM_PAC -  - ALEGROII
-1621 - MORENO 657 - 4-A3_EM_PAC -  - ALEGROII
+1619 - MORENO 657 - 4-A1_EM_PAC -  - ALEGRO II
+1620 - MORENO 657 - 4-A2_EM_PAC -  - ALEGRO II
+1621 - MORENO 657 - 4-A3_EM_PAC -  - ALEGRO II
 1622 - CABRERA 1284 - 5-A1_EM_PAC -  - ALEGRO III
 1623 - CABRERA 1284 - 5-A2_EM_PAC -  - ALEGRO III
 1624 - SAN MARTÍN 137 - 53-A1_EM_PA -  - AFIP RIO CUARTO

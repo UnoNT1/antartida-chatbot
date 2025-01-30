@@ -74,4 +74,4 @@ async function finalizarConversacion() {
     }
 }
 
-export { mensajeChatGPT, finalizarConversacion }
+export { mensajeChatGPT, finalizarConversacion, cargarContexto }

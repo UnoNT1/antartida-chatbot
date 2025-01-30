@@ -9,7 +9,7 @@ import flowChatGPT from '../openai/flowChatGPT.js'
 let nombreEmp = await nombreEmpresa()
 let respuestaOrden
 
-const flowPrincipal = addKeyword(EVENTS.WELCOME)
+const flowPrincipal = addKeyword(EVENTS.ACTION)
     .addAction(
         null,
         async (ctx, { flowDynamic, gotoFlow }) => {
