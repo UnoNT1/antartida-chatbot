@@ -1,32 +1,10 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import { getUrl, getNroOrden } from '../Fetch/postIniciarOrden.js';
+import { getUrl } from '../Fetch/postIniciarOrden.js';
 import flowFin from './flowFin.js';
 
 const flowPrincipal = addKeyword(EVENTS.ACTION)
-.addAction(
-    null,
-    async (_, { flowDynamic }) => {
-        const numOrden = await getNroOrden()
-
-        if(numOrden === null){  
-            await flowDynamic([
-                {
-                    body: `Aguarde unos minutos y su orden sera confirmada`,
-                    delay: 2000,
-                }
-            ])
-            return
-        }
-
-        await flowDynamic([
-            {
-                body: `El reclamo a sido generado con exito. Su numero de reclamo es ${numOrden}`,
-                delay: 2000,
-            }
-        ])
-    })
     .addAction(
-        { capture: false},
+        null,
         async (_, { flowDynamic, gotoFlow }) => {
             const url = await getUrl()
    
@@ -42,7 +20,7 @@ const flowPrincipal = addKeyword(EVENTS.ACTION)
 
             await flowDynamic([
                 {
-                    body: `A continuacion ingrese a esta url para continuar el reclamo ${url} . Uno de nuestros tecnicos se contactara con usted.`,
+                    body: `A continuacion ingrese a esta link para continuar el reclamo ${url} . Uno de nuestros tecnicos se contactara con usted.`,
                     delay: 2000,
                 }
             ])
