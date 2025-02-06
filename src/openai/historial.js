@@ -41,6 +41,7 @@ async function mensajeChatGPT(body, prompt, number) {
         // Cargar el contexto actual
         const contexto = await cargarContexto(number);
         // Agregar el nuevo mensaje del usuario al contexto
+        // console.log(contexto, 'contexto')
         contexto.push({ role: "user", content: body });
 
         const completion = await openAI.chat.completions.create({
@@ -74,16 +75,15 @@ async function finalizarConversacion(number) {
         await fs.writeFile(contexto, JSON.stringify([], null));
         await fs.unlink(contexto, (err) => {
             if (err) {
-              console.error('Error al borrar el archivo:', err);
-              return;
+                console.error('Error al borrar el archivo:', err);
+                return;
             }
             console.log('Archivo borrado exitosamente');
-          });
-
+        });
         console.log('La conversación se ha reiniciado.');
     } catch (error) {
         console.error('Error al reiniciar la conversación:', error);
     }
 }
 
-export { mensajeChatGPT, finalizarConversacion, cargarContexto }
+export { mensajeChatGPT, finalizarConversacion, cargarContexto, guardarContexto }

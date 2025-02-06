@@ -3,6 +3,11 @@
 //{"status":"success","message":"Datos: "} '[["37390*80070258*#03516674325#03515394961#0351-155214053#03516646898#03516646896#"]]'
 
 function armarURL(data, numOrden) {
+
+    if(data.includes('[{"logstatus"') || data.includes('[["1*Se agrego el mensaje al reclamo')){
+        return null
+    }
+
     const dataStart = data.indexOf('[');
     const dataEnd = data.lastIndexOf(']') + 1;
     const dataString = data.slice(dataStart, dataEnd);
@@ -14,8 +19,7 @@ function armarURL(data, numOrden) {
     const numEnd = resultado[0].lastIndexOf('*')
     const numUrl = resultado[0].slice(numStart, numEnd)
 
-
-    let url = `http://www.unont.com.ar/yavoy/formato.php?r=${numUrl}&n=${numOrden}&t=10`
+    let url = `http://sd-1810521-h00001.ferozo.net/formato.php?r=${numUrl}&n=${numOrden}&t=10`
 
     return url
 }

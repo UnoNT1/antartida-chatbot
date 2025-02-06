@@ -14,7 +14,6 @@ async function guardarOrdenes() {
                         ORDER BY reg_cl12 DESC LIMIT 15`
 
         const rows = await consultaMySql(query, [nombreEmp])
-
         if (Array.isArray(rows)) {
             ordenes = rows
         } else {

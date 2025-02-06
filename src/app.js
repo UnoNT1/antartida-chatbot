@@ -4,19 +4,18 @@ import { createBot, createProvider, createFlow } from '@builderbot/bot'
 import { MemoryDB as Database } from '@builderbot/bot'
 import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
 
-import { flowPrincipal } from './flows/flowPrincipal.js'
-//import flowSecundario from './flows/flowSecundario.js'
+import flowPrincipal from './flows/flowPrincipal.js'
 import flowConstante from './flows/flowConstante.js'
 import flowTest from './flows/flowTest.js'
 import flowDireccion from './flows/flowDireccion.js'
-import flowChatGPT from './openai/flowChatGPT.js'
+import flowFin from './flows/flowFin.js'
+import { flowChatGPT } from './openai/flowChatGPT.js'
 
-const PORT = process.env.PORT ?? 3008
+const PORT = process.env.PORT ?? 3005
 
 
 const main = async () => {
-    const adapterFlow = createFlow([flowPrincipal, flowTest, flowDireccion, flowChatGPT])
-
+    const adapterFlow = createFlow([ flowChatGPT , flowPrincipal, flowTest, flowDireccion, flowFin ])
     const adapterProvider = createProvider(Provider)
     const adapterDB = new Database()
 

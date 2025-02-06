@@ -26,6 +26,9 @@ importers:
       optional:
         specifier: ^0.1.4
         version: 0.1.4
+      pnpm:
+        specifier: ^9.15.5
+        version: 9.15.5
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -1298,6 +1301,11 @@ packages:
 
   pino@7.11.0:
     resolution: {integrity: sha512-dMACeu63HtRLmCG8VKdy4cShCPKaYDR4youZqoSWLxl5Gu99HUw8bw75thbPv9Nip+H+QYX8o3ZJbTdVZZ2TVg==}
+    hasBin: true
+
+  pnpm@9.15.5:
+    resolution: {integrity: sha512-hFGWAmqrHMPwmKBHS2TfurKv56G06R3YaJXY5Koyp6bQMEni0K13C75N4COnEi+2jBodbg0DPHB2CF+dXUgA1A==}
+    engines: {node: '>=18.12'}
     hasBin: true
 
   polka@0.5.2:
@@ -2902,6 +2910,8 @@ snapshots:
       safe-stable-stringify: 2.5.0
       sonic-boom: 2.8.0
       thread-stream: 0.15.2
+
+  pnpm@9.15.5: {}
 
   polka@0.5.2:
     dependencies:
