@@ -10,6 +10,23 @@ let url
 [{"logstatus":"0*0"}]
 [["1*Se agrego el mensaje al reclamo Nro 22384 *#"]]
 [["22384*3789637*#351-2846597#351-3603694#"]]
+
+[
+  'El motivo detallado del reclamo es "se me cayeron las llaves al pozo",',
+  'Dean Funes 1132.'
+] aca el mensaje con la direccion en generarReclamo
+{
+  nrollamada: '5493516008817',
+  mensaje: 'El motivo detallado del reclamo es "se me cayeron las llaves al pozo",',
+  empresa: 'Incast',
+  accion: '1',
+  lugar: '0'
+} objeto en postIniciarOrden
+{"status":"success","message":"Datos recibidos correctamente"}  response aca  [{"logstatus":"0*0"}] respuesta orden creada en postIniciarOrden
+{"status":"success","message":"Datos recibidos correctamente"}  response aca  [{"logstatus":"0*0"}]
+Iniciar Orden --- Numeros orden: null Url:  null
+null orden en subirNombreEdificio DEAN FUNES 1132. direccion en subirNombreEdificio --------- []
+
 */
 
 async function postIniciarOrden(objeto) {
