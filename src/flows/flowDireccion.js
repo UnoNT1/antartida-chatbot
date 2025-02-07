@@ -4,7 +4,6 @@ import nombreEmpresa from "../Utils/nombreEmpresa.js";
 import consultaMySql from "../Utils/consultaMySql.js";
 import { generarReclamo } from "../funciones/generarReclamo.js";
 import { getPrimerMsj } from "./flowChatGPT.js";
-import enviarMensaje from "../funciones/enviarMensajeTecnico.js";
 import subirNombreEdificio from "../funciones/subirNombreEdificio.js";
 
 let reclamo
@@ -56,7 +55,6 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
                // console.error('Error al obtener la dirección:', error);
                 fallBack(`Hubo un error al obtener la dirección. Por favor, inténtelo de nuevo.`);
             }
-        
     })
 
 export default flowDireccion
