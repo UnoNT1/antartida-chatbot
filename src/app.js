@@ -9,7 +9,7 @@ import flowConstante from './flows/flowConstante.js'
 import flowTest from './flows/flowTest.js'
 import flowDireccion from './flows/flowDireccion.js'
 import flowFin from './flows/flowFin.js'
-import { flowChatGPT } from './openai/flowChatGPT.js'
+import { flowChatGPT } from './flows/flowChatGPT.js'
 
 const PORT = process.env.PORT ?? 3005
 

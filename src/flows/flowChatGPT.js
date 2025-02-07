@@ -1,24 +1,27 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import { mensajeChatGPT, finalizarConversacion, cargarContexto, guardarContexto } from './historial.js'
+import { mensajeChatGPT, finalizarConversacion, cargarContexto, guardarContexto } from '../openai/historial.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import flowDireccion from '../flows/flowDireccion.js'
-import flowPrincipal from '../flows/flowPrincipal.js'
+import flowDireccion from './flowDireccion.js'
+import flowPrincipal from './flowPrincipal.js'
 import { generarReclamo } from '../funciones/generarReclamo.js'
 import subirNombreEdificio from '../funciones/subirNombreEdificio.js'
 import nombreEmpresa from '../Utils/nombreEmpresa.js'
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dirPrompts = path.resolve(__dirname, 'promptIncast.txt')
+const dirPrompts = (nombreEmp) => path.resolve(__dirname, `../openai/prompt${nombreEmp}.txt`)
 console.log(dirPrompts, 'flowChatGPT')
 let reclamo
 let primerMensaje
 
-async function getPrompt() {
+async function getPrompt(empresa) {
+    const dirPrompt = dirPrompts(empresa)
+    console.log(dirPrompt, 'getPrompt')
+    
     return new Promise((resolve, reject) => {
-        fs.readFile(dirPrompts, 'utf-8', (err, prompt) => {
+        fs.readFile(dirPrompt, 'utf-8', (err, prompt) => {
             if (err) reject(err);
             resolve(prompt);
         });
@@ -33,9 +36,10 @@ const flowChatGPT = addKeyword(EVENTS.WELCOME)
             primerMensaje = ctx.body
             await flowDynamic([{ body: `Muchas gracias por comunicarse con Ascensores ${nombreEmp}.`, delay: 1000 }])
             //
+            console.log('primer action')
             let numero = ctx.from
             let mensaje = ctx.body.toLowerCase()
-            const prompt = await getPrompt();
+            const prompt = await getPrompt(nombreEmp);
             const convGPT = await mensajeChatGPT(mensaje, prompt, numero)
             await flowDynamic([{ body: convGPT }])
         })
@@ -44,8 +48,10 @@ const flowChatGPT = addKeyword(EVENTS.WELCOME)
             async (ctx, { flowDynamic, gotoFlow, fallBack }) => {  
                 let numero = ctx.from
                 let mensaje = ctx.body.toLowerCase()
+                const nombreEmp = await nombreEmpresa()
                 //
-                const prompt = await getPrompt();
+            console.log('segundo action')
+                const prompt = await getPrompt(nombreEmp);
                 const convGPT = await mensajeChatGPT(mensaje, prompt, numero)  
                 await flowDynamic([{ body: convGPT }])
                 //

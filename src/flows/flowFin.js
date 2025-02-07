@@ -3,7 +3,7 @@ import { addKeyword, EVENTS } from '@builderbot/bot'
 const flowFin = addKeyword(EVENTS.ACTION) 
     .addAction(
         { capture: true},
-        async (__dirname, { flowDynamic }) => {
+        async (ctx, { flowDynamic }) => {
             await flowDynamic([
                 {
                     body: `Aguarde la respuesta de un Tecnico.`,

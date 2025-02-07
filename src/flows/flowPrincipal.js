@@ -11,7 +11,7 @@ const flowPrincipal = addKeyword(EVENTS.ACTION)
             if(url === null){  
                 await flowDynamic([
                     {
-                        body: `Luego le pasaremos una url para que pueda continuar con el reclamo`,
+                        body: `Su reclamo ya a sido cargado`,
                         delay: 2000,
                     }
                 ])

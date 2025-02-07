@@ -3,7 +3,7 @@ import flowPrincipal from './flowPrincipal.js'
 import nombreEmpresa from "../Utils/nombreEmpresa.js";
 import consultaMySql from "../Utils/consultaMySql.js";
 import { generarReclamo } from "../funciones/generarReclamo.js";
-import { getPrimerMsj } from "../openai/flowChatGPT.js";
+import { getPrimerMsj } from "./flowChatGPT.js";
 import enviarMensaje from "../funciones/enviarMensajeTecnico.js";
 import subirNombreEdificio from "../funciones/subirNombreEdificio.js";
 
