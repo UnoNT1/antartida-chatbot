@@ -1,4 +1,4 @@
-import nombreEmpresa from "../Utils/nombreEmpresa";
+import nombreEmpresa from "../Utils/nombreEmpresa.js";
 
 //estandariza los numeros de los tecnicos para usarlos en enviarMensajeTecnicos
 async function estandarizar(numero) {

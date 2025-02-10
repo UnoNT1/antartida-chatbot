@@ -11,7 +11,7 @@ import flowDireccion from './flows/flowDireccion.js'
 import flowFin from './flows/flowFin.js'
 import { flowChatGPT } from './flows/flowChatGPT.js'
 
-const PORT = process.env.PORT ?? 3005
+const PORT = process.env.PORT ?? 3010
 
 
 const main = async () => {

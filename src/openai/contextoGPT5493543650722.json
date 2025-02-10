@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "holaaa"
+  },
+  {
+    "role": "system",
+    "content": "¡Hola! ¿En qué puedo ayudarte hoy? Recuerda que necesito información detallada sobre el reclamo del ascensor para poder generar la orden de mantenimiento."
+  },
+  {
+    "role": "user",
+    "content": "holaaa"
+  },
+  {
+    "role": "system",
+    "content": "¡Hola! Para poder ayudarte con el reclamo del ascensor, necesito que me brindes más detalles. ¿Podrías indicarme cuál es el problema que estás experimentando con el ascensor?"
+  }
+]
