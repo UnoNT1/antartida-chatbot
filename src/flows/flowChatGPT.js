@@ -18,7 +18,6 @@ let primerMensaje
 
 async function getPrompt(empresa) {
     const dirPrompt = dirPrompts(empresa)
-    console.log(dirPrompt, 'getPrompt')
     
     return new Promise((resolve, reject) => {
         fs.readFile(dirPrompt, 'utf-8', (err, prompt) => {
