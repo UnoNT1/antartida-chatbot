@@ -41,7 +41,6 @@ async function mensajeChatGPT(body, prompt, number) {
         // Cargar el contexto actual
         const contexto = await cargarContexto(number);
         // Agregar el nuevo mensaje del usuario al contexto
-        // console.log(contexto, 'contexto')
         contexto.push({ role: "user", content: body });
 
         const completion = await openAI.chat.completions.create({
@@ -51,11 +50,11 @@ async function mensajeChatGPT(body, prompt, number) {
                 ...contexto
             ],
             max_tokens: 200,
-            temperature: 0.5,
+            temperature: 0.7,
         });
 
         const respuestaGPT = completion.choices[0].message.content;
-
+        
         // Agregar la respuesta de GPT al contexto
         contexto.push({ role: "system", content: respuestaGPT });
 

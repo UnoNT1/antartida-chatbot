@@ -7,7 +7,7 @@ const flowConstante = async () => {
         try {
             const ordenes = await guardarOrdenes()
             //console.log('hay ordenes')
-            console.log(ordenes, ' ordenes de mysql ')
+            console.log(ordenes[0], ' ordenes de mysql ')
             enviarMsjAUsuario(ordenes)
             tecnicoTomaReclamo(ordenes)
         } catch (err) {

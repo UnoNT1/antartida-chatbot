@@ -3,7 +3,7 @@ import { mensajeChatGPT, finalizarConversacion, cargarContexto, guardarContexto 
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import flowDireccion from './flowDireccion.js'
+import { flowDireccion } from './flowDireccion.js'
 import flowPrincipal from './flowPrincipal.js'
 import { generarReclamo } from '../funciones/generarReclamo.js'
 import subirNombreEdificio from '../funciones/subirNombreEdificio.js'
@@ -12,9 +12,9 @@ import enviarMensaje from '../funciones/enviarMensajeTecnico.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dirPrompts = (nombreEmp) => path.resolve(__dirname, `../openai/prompt${nombreEmp}.txt`)
-console.log(dirPrompts, 'flowChatGPT')
 let reclamo
 let primerMensaje
+
 
 async function getPrompt(empresa) {
     const dirPrompt = dirPrompts(empresa)
@@ -61,25 +61,29 @@ const flowChatGPT = addKeyword(EVENTS.WELCOME)
 
                     if (convGPT.includes('Dirección:')) {
                         reclamo = convGPT.split(' Dirección: ') 
+                    }else{
+                        reclamo = [mensaje, 'No se pudo tomar la direccion' ]
                     }
 
                     const numTecnicos = await generarReclamo(numero, reclamo)
                     await subirNombreEdificio(reclamo[1])
-                    //await enviarMensaje(numTecnicos, `Entro un reclamo. Motivo: "${reclamo[0]}". Desde este numero: "${numero}". En la dirección: "${reclamo[1]}"`, '')
+                    await enviarMensaje(numTecnicos, `Entro un reclamo. "${reclamo[0]}". Desde este numero: "${numero}". En la dirección: "${reclamo[1]}"`, '')
 
                     await finalizarConversacion(numero);
-                    gotoFlow(flowPrincipal)
-                    return ('Fin conversación')
+                    return gotoFlow(flowPrincipal)
                 } else if (mensaje === 'no') {
                     await finalizarConversacion(numero);
-                    gotoFlow(flowDireccion)
+                    return gotoFlow(flowDireccion)
                 }
                 fallBack('')
         })
 
 function getPrimerMsj(){
     return primerMensaje
+}  
+function getReclamoGTP(){
+    return reclamo
 }        
 // reg_as00 - dir_as00 - equ_as00 - lug_as00 - fan_as00
 
-export { flowChatGPT, getPrimerMsj };
+export { flowChatGPT, getPrimerMsj, getReclamoGTP };

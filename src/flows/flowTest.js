@@ -1,4 +1,5 @@
 import { addKeyword } from "@builderbot/bot";
+import nombreEmpresa from "../Utils/nombreEmpresa.js"
 
 
 const flowTest = addKeyword('test')
@@ -6,15 +7,15 @@ const flowTest = addKeyword('test')
         null,
         async (ctx, { flowDynamic }) => {
             console.log('Test flow')
+            const nombreEmp = await nombreEmpresa()
 
             await flowDynamic([
                 {
-                    body: `Testeado... el chat esta en funcionamiento`,
+                    body: `Testeado... el chat esta en funcionamiento. ${nombreEmp}`,
                     delay: 2000
                 }
             ])
         }
-
     )
 
 

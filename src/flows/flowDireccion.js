@@ -7,6 +7,7 @@ import { getPrimerMsj } from "./flowChatGPT.js";
 import subirNombreEdificio from "../funciones/subirNombreEdificio.js";
 
 let reclamo
+let numTecnicos
 //este flow deviene del la respuesta 'no' del usuario a la direccion buscada por la I.A.
 const flowDireccion = addKeyword(EVENTS.ACTION)
     .addAction(null, async (_, { flowDynamic }) => {
@@ -44,8 +45,8 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
                     direccion[0].dir_as00 || mensajeDir
                 ]
                 console.log(reclamo, 'reclamo en flow direccion')
-                const numTecnicos = await generarReclamo(ctx.from, reclamo)
-                //await enviarMensaje(numTecnicos, `Entro un reclamo. Motivo: "${reclamo[0]}". Desde este numero: "${numero}". En la dirección: "${reclamo[1]}"`, '')
+                numTecnicos = await generarReclamo(ctx.from, reclamo)
+                await enviarMensaje(numTecnicos, `Entro un reclamo. Motivo: "${reclamo[0]}". Desde este numero: "${numero}". En la dirección: "${reclamo[1]}"`, '')
 
                 if(direccion[0].dir_as00){
                     await subirNombreEdificio(reclamo[1])
@@ -53,8 +54,15 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
                 gotoFlow(flowPrincipal)
             } catch (error) {
                // console.error('Error al obtener la dirección:', error);
-                fallBack(`Hubo un error al obtener la dirección. Por favor, inténtelo de nuevo.`);
+               console.log(numTecnicos, 'num tecnicos en catch -----')
+               if(numTecnicos.length > 0){
+                gotoFlow(flowPrincipal)
+               }
             }
     })
+ 
+function getReclamoDireccion(){
+    return reclamo
+}  
 
-export default flowDireccion
+export { flowDireccion, getReclamoDireccion}

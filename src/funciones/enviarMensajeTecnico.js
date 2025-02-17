@@ -1,13 +1,13 @@
 import estandarizar from "./accionesNumero.js"
 //envia mensaje a los tecnicos y a los usuarios, nroTecnicos es un array y nroUser un string
 const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
-
+    console.log('nroTecnicos en enviar mensajes: ', nroTecnicos)
     try {
         if (nroUser !== '') {
             fetchMensaje(nroUser, mensaje)
         } else {
-            nroTecnicos.map(num => {
-                num = estandarizar(num)
+            nroTecnicos.map(async (num) => {
+                num = await estandarizar(num)
                 fetchMensaje(num, `${mensaje}`)
                 console.log('Telefono: ', num, ' estandarizado')
             })

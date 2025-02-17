@@ -19,7 +19,6 @@ async function guardarOrdenes() {
             ordenes = [rows]
         }
 
-        console.log(ordenes, ' ordenes de mysql en guardarOrdenes ')
         return ordenes
     } catch (err) {
         console.error('error al obtener ordenes: ', err)

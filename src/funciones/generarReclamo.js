@@ -10,7 +10,7 @@ async function generarReclamo(numero, data) {
     console.log(data, 'aca el mensaje con la direccion en generarReclamo')
     const reclamo = {
             nrollamada: numero,
-            mensaje: data[0],
+            mensaje: data[0] || 'No se pudo tomar el mensaje',
             empresa: nomEmp,
             accion: '1',
             lugar: '0'

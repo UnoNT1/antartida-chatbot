@@ -19,7 +19,7 @@ function armarURL(data, numOrden) {
     const numEnd = resultado[0].lastIndexOf('*')
     const numUrl = resultado[0].slice(numStart, numEnd)
 
-    let url = `https://www.unont.com.ar/yavoy/formato.php?r=${numUrl}&n=${numOrden}&t=10`
+    let url = `https://unont.com.ar/yavoy/formato.php?r=${numUrl}&n=${numOrden}&t=10`
 
     return url
 }

@@ -9,7 +9,6 @@ async function consultaMySql(query, values) {
             resolve(results);
         });
     });
-
     return response
 }
 

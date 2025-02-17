@@ -1,6 +1,7 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
 import { getUrl } from '../Fetch/postIniciarOrden.js';
 import flowFin from './flowFin.js';
+import flowTipoProblema from './flowTipoProblema.js';
 
 const flowPrincipal = addKeyword(EVENTS.ACTION)
     .addAction(
@@ -15,7 +16,8 @@ const flowPrincipal = addKeyword(EVENTS.ACTION)
                         delay: 2000,
                     }
                 ])
-                return
+                //return gotoFlow(flowTipoProblema)   
+                return gotoFlow(flowFin)
             }
 
             await flowDynamic([
@@ -25,7 +27,7 @@ const flowPrincipal = addKeyword(EVENTS.ACTION)
                 }
             ])
             
-        gotoFlow(flowFin)    
+        return gotoFlow(flowFin)    
     }) 
 
 
