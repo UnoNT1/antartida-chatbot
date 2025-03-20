@@ -9,6 +9,7 @@ import { generarReclamo } from '../funciones/generarReclamo.js'
 import subirNombreEdificio from '../funciones/subirNombreEdificio.js'
 import nombreEmpresa from '../Utils/nombreEmpresa.js'
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js'
+import end from '../funciones/end.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dirPrompts = (nombreEmp) => path.resolve(__dirname, `../openai/prompt${nombreEmp}.txt`)
@@ -30,7 +31,7 @@ async function getPrompt(empresa) {
 const flowChatGPT = addKeyword(EVENTS.WELCOME)
     .addAction(
         null,
-        async (ctx, { flowDynamic }) => {
+        async (ctx, { flowDynamic, endFlow }) => {
             const nombreEmp = await nombreEmpresa()
             primerMensaje = ctx.body
             await flowDynamic([{ body: `Muchas gracias por comunicarse con Ascensores ${nombreEmp}.`, delay: 1000 }])
@@ -41,10 +42,11 @@ const flowChatGPT = addKeyword(EVENTS.WELCOME)
             const prompt = await getPrompt(nombreEmp);
             const convGPT = await mensajeChatGPT(mensaje, prompt, numero)
             await flowDynamic([{ body: convGPT }])
+            end(endFlow, numero)//finaliza la conversacion
         })
         .addAction(
             { capture: true},
-            async (ctx, { flowDynamic, gotoFlow, fallBack }) => {  
+            async (ctx, { flowDynamic, gotoFlow, fallBack, endFlow }) => {  
                 let numero = ctx.from
                 let mensaje = ctx.body.toLowerCase()
                 const nombreEmp = await nombreEmpresa()
@@ -75,6 +77,7 @@ const flowChatGPT = addKeyword(EVENTS.WELCOME)
                     await finalizarConversacion(numero);
                     return gotoFlow(flowDireccion)
                 }
+                end(endFlow, numero)//finaliza la conversacion
                 fallBack('')
         })
 

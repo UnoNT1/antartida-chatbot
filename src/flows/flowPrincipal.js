@@ -2,11 +2,12 @@ import { addKeyword, EVENTS } from '@builderbot/bot'
 import { getUrl } from '../Fetch/postIniciarOrden.js';
 import flowFin from './flowFin.js';
 import flowTipoProblema from './flowTipoProblema.js';
+import end from '../funciones/end.js';
 
 const flowPrincipal = addKeyword(EVENTS.ACTION)
     .addAction(
         null,
-        async (_, { flowDynamic, gotoFlow }) => {
+        async (ctx, { flowDynamic, gotoFlow, endFlow }) => {
             const url = await getUrl()
    
             if(url === null){  
@@ -26,7 +27,8 @@ const flowPrincipal = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            
+           
+        end(endFlow, ctx.from)//finaliza la conversacion 
         return gotoFlow(flowFin)    
     }) 
 

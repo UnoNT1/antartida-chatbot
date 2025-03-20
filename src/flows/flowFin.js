@@ -1,5 +1,4 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import { finalizarConversacion } from '../openai/historial.js'
 
 const flowFin = addKeyword(EVENTS.ACTION) 
     .addAction(
@@ -11,10 +10,7 @@ const flowFin = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-        setTimeout(async()=>{
-            await finalizarConversacion(ctx.from)
-            return endFlow()
-        }, 15000)    
+        end(endFlow, ctx.from)//finaliza la conversacion  
         fallBack('')    
     })
 

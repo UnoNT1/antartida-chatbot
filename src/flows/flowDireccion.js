@@ -5,22 +5,24 @@ import consultaMySql from "../Utils/consultaMySql.js";
 import { generarReclamo } from "../funciones/generarReclamo.js";
 import { getPrimerMsj } from "./flowChatGPT.js";
 import subirNombreEdificio from "../funciones/subirNombreEdificio.js";
+import end from "../funciones/end.js";
 
 let reclamo
 let numTecnicos
 //este flow deviene del la respuesta 'no' del usuario a la direccion buscada por la I.A.
 const flowDireccion = addKeyword(EVENTS.ACTION)
-    .addAction(null, async (_, { flowDynamic }) => {
+    .addAction(null, async (ctx, { flowDynamic, endFlow }) => {
         await flowDynamic([
             {
                 body: `Por favor, escriba solo la direccion o el nombre del edificio.`,
                 delay: 2000,
             }
         ])
+        end(endFlow, ctx.from)//finaliza la conversacion
     })
     .addAction(
         { capture: true },
-        async (ctx, { gotoFlow, fallBack }) => {
+        async (ctx, { gotoFlow, endFlow }) => {
             const mensajeDir = ctx.body.toUpperCase()
             let nombreEmp = await nombreEmpresa()
             let primerMensaje = await getPrimerMsj()
@@ -37,24 +39,23 @@ const flowDireccion = addKeyword(EVENTS.ACTION)
                     equ_as00: '0002-ASC1'
                     }
                 ]*/
-                console.log(direccion, 'aca la dir del edificio')
-                
-                
-                reclamo = [
-                    primerMensaje,
-                    direccion[0].dir_as00 || mensajeDir
+               
+               reclamo = [
+                   primerMensaje,
+                   direccion[0].dir_as00 || mensajeDir
                 ]
                 console.log(reclamo, 'reclamo en flow direccion')
                 numTecnicos = await generarReclamo(ctx.from, reclamo)
                 await enviarMensaje(numTecnicos, `Entro un reclamo. Motivo: "${reclamo[0]}". Desde este numero: "${numero}". En la dirección: "${reclamo[1]}"`, '')
-
+                
                 if(direccion[0].dir_as00){
                     await subirNombreEdificio(reclamo[1])
                 }
+                end(endFlow, ctx.from)//finaliza la conversacion                
                 gotoFlow(flowPrincipal)
             } catch (error) {
                // console.error('Error al obtener la dirección:', error);
-               console.log(numTecnicos, 'num tecnicos en catch -----')
+               console.log(numTecnicos, 'num tecnicos en catch de flowDireccion-----')
                if(numTecnicos.length > 0){
                 gotoFlow(flowPrincipal)
                }
