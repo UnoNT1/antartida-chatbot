@@ -1,5 +1,5 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import { mensajeChatGPT, finalizarConversacion, cargarContexto, guardarContexto } from '../openai/historial.js'
+import { mensajeChatGPT, finalizarConversacion } from '../openai/historial.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'

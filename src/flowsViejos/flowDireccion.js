@@ -1,5 +1,5 @@
 import { addKeyword, EVENTS } from "@builderbot/bot";
-import flowPrincipal from './flowPrincipal.js'
+import flowPrincipal from '../flows/flowPrincipal.js'
 import nombreEmpresa from "../Utils/nombreEmpresa.js";
 import consultaMySql from "../Utils/consultaMySql.js";
 import { generarReclamo } from "../funciones/generarReclamo.js";

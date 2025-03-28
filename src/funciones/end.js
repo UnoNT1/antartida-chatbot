@@ -2,7 +2,7 @@ import { finalizarConversacion } from '../openai/historial.js'
 
 let timeoutId;
 
-function end(endFlow) {
+function end(endFlow, numero) {
     if (timeoutId) {
         clearTimeout(timeoutId);
     }
