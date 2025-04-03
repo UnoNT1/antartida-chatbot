@@ -8,19 +8,20 @@ import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
 //import flowPrincipal from './flows/flowPrincipal.js'
 import flowConstante from './flows/flowConstante.js'
 //import flowTest from './flows/flowTest.js'
-//import { flowDireccion } from './flows/flowDireccion.js'
-//import flowFin from './flows/flowFin.js'
+import flowEquipo from './flows/flowEquipo.js'
+import flowFin from './flows/flowFin.js'
 //import { flowChatGPT } from './flows/flowChatGPT.js'
 //import flowTipoProblema from './flows/flowTipoProblema.js'
 
-import flowInicio from './flows/flowInicio.js'
+import { flowInicio } from './flows/flowInicio.js'
+import flowPreguntasFinales from './flows/flowPreguntasFinales.js'
 
 const PORT = process.env.PORT ?? 3010
 dotenv.config()
 
 const main = async () => {
-    const adapterFlow = createFlow([ flowInicio ])
-    //const adapterFlow = createFlow([ flowChatGPT , flowPrincipal, flowTest, flowDireccion, flowFin, flowTipoProblema ])
+    const adapterFlow = createFlow([ flowInicio, flowEquipo, flowFin, flowPreguntasFinales ])
+    //const adapterFlow = createFlow([ flowChatGPT , flowPrincipal, flowTest, flowTipoProblema ])
     const adapterProvider = createProvider(Provider)
     //const adapterProvider = createProvider(Provider, {usePairingCode: true, phoneNumber: process.env.PHONE_NUMBER})
     const adapterDB = new Database()
