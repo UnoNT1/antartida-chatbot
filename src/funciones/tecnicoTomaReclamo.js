@@ -1,7 +1,9 @@
 import enviarMensaje from './enviarMensajeTecnico.js';
 import consultaMySql from '../Utils/consultaMySql.js';
 import formatearFecha from './formatearFecha.js';
+import logger from '../Utils/historico.js';
 
+//UTILIZADO EN flowConstante.js
 let enviado = false
 async function tecnicoTomaReclamo(ordenes){
 
@@ -40,13 +42,12 @@ async function tecnicoTomaReclamo(ordenes){
                     console.error('El tecnico no ingreso su numero de telefono')
                     return
                 }
-                console.log(telTecnico, enviado)
                 if(enviado === false){
                     enviarMensaje([telTecnico[0].tel_ag00], mensaje, '')
                     enviado = true
                 }
             } catch (err) {
-                console.error(err, 'error al enviar ultimos services al tecnico')
+                logger.error(err, 'error al enviar ultimos services al tecnico')
             }
         }
     })

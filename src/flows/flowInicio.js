@@ -1,13 +1,17 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
-import { mensajeChatGPT, finalizarConversacion, cargarContexto, guardarContexto } from '../openai/historial.js'
+import { mensajeChatGPT, finalizarConversacion } from '../openai/historial.js'
 import nombreEmpresa from '../Utils/nombreEmpresa.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import end from '../funciones/end.js'
 import tomarDatosReclamo from '../funciones/tomarDatosReclamo.js'
+import { generarReclamo } from '../funciones/generarReclamo.js'
 import consultaMySql from '../Utils/consultaMySql.js'
 import flowEquipo from './flowEquipo.js'
+import subirNombreEdificio from '../funciones/subirNombreEdificio.js'
+import logger from "../Utils/historico.js";
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dirPrompts = (nombreEmp) => path.resolve(__dirname, `../openai/prompt${nombreEmp}2.txt`)
@@ -54,15 +58,11 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             await flowDynamic([{ body: convGPT }])
 
             //Genera el reclamo y toma los datos del reclamo
-            const motivo = convGPT.includes('Motivo del reclamo') //variables para comprobar si la I.A. confirma el reclamo
-            const direccion = convGPT.includes('Dirección') //variables para comprobar si la I.A. confirma el reclamo
-            const edificio = convGPT.includes('Edificio') || convGPT.includes('edificio') //variables para comprobar si la I.A. confirma el reclamo
-            const equipo = convGPT.includes('Equipo') //variables para comprobar si la I.A. confirma el reclamo
-
-            console.log('motivo', motivo)
-            console.log('direccion', direccion)
-            console.log('edificio', edificio)
-            console.log('equipo', equipo)
+            //variables para comprobar si la I.A. confirma el reclamo
+            const motivo = convGPT.includes('Motivo del reclamo') 
+            const direccion = convGPT.includes('Dirección') || convGPT.includes('Direccion')
+            const edificio = convGPT.includes('Edificio') || convGPT.includes('edificio') 
+            const equipo = convGPT.includes('Equipo')
             if (motivo && direccion && edificio && equipo) {
                 reclamo = tomarDatosReclamo(convGPT) 
                 /*{
@@ -71,20 +71,23 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     Edificio: 'EDIFICIO NARITA IV',
                     Equipo: 'Ascensor'
                 }*/
-
                 //generar reclamo aca
+                //await generarReclamo(numero, [reclamo['Mo'], reclamo['Di'], reclamo['Ed']])
                 //
                 //
-                //
+               const direc = reclamo.Di.toUpperCase().replace(/\.$/, '').trim(); //elimina el punto final y saca espacios
+               await finalizarConversacion(numero);
 
-               const direccion = reclamo.Dirección.toUpperCase().replace(/\.$/, '').trim(); //elimina el punto final y saca espacios
-                const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
-                try {
-                    equipos = await consultaMySql(query, [direccion]);
+               try {
+                    const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
+                    equipos = await consultaMySql(query, [direc]);
+                    await subirNombreEdificio(direc)
 
+                    console.log('equipo en flowInicio', equipo)
                     return gotoFlow(flowEquipo)
                 } catch (error) {
-                    console.error('Error en la consulta MySQL:', error);
+                    logger.error('Error en la consulta MySQL en flowInicio.js:', error);
+                    return gotoFlow(flowEquipo)
                 }
             }
             end(endFlow, numero)//finaliza la conversacion
@@ -94,14 +97,14 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
 
  
 function getEquipos(){
-    equipos = equipos = equipos.map(obj => obj['abr_as00']);
+    equipos = equipos.map(obj => obj['abr_as00']);
 
     return [
         {
             equiposDB: equipos, 
         },
         {
-            equipoR: reclamo.Equipo.toUpperCase().replace(/\.$/, '')
+            equipoR: reclamo.Eq.toUpperCase().replace(/\.$/, '')
         }    
     ]
 }     

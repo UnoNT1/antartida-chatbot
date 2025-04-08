@@ -5,13 +5,13 @@ import { createBot, createProvider, createFlow } from '@builderbot/bot'
 import { MemoryDB as Database } from '@builderbot/bot'
 import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
 
-//import flowPrincipal from './flows/flowPrincipal.js'
+//import flowPrincipal from './flows/flowPrincipal.js' VIEJOS
+//import { flowChatGPT } from './flows/flowChatGPT.js' VIEJOS
+//import flowTipoProblema from './flows/flowTipoProblema.js' VIEJOS
 import flowConstante from './flows/flowConstante.js'
-//import flowTest from './flows/flowTest.js'
+import flowTest from './flows/flowTest.js'
 import flowEquipo from './flows/flowEquipo.js'
 import flowFin from './flows/flowFin.js'
-//import { flowChatGPT } from './flows/flowChatGPT.js'
-//import flowTipoProblema from './flows/flowTipoProblema.js'
 
 import { flowInicio } from './flows/flowInicio.js'
 import flowPreguntasFinales from './flows/flowPreguntasFinales.js'
@@ -20,8 +20,8 @@ const PORT = process.env.PORT ?? 3010
 dotenv.config()
 
 const main = async () => {
-    const adapterFlow = createFlow([ flowInicio, flowEquipo, flowFin, flowPreguntasFinales ])
-    //const adapterFlow = createFlow([ flowChatGPT , flowPrincipal, flowTest, flowTipoProblema ])
+    const adapterFlow = createFlow([ flowInicio, flowEquipo, flowFin, flowPreguntasFinales, flowTest ])
+    //const adapterFlow = createFlow([ flowChatGPT , flowPrincipal, flowTipoProblema ])
     const adapterProvider = createProvider(Provider)
     //const adapterProvider = createProvider(Provider, {usePairingCode: true, phoneNumber: process.env.PHONE_NUMBER})
     const adapterDB = new Database()

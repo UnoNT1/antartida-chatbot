@@ -1,5 +1,5 @@
 import { finalizarConversacion } from '../openai/historial.js'
-
+//FINALIZA LA CONVERSACION DESPUES DE UN TIEMPÓ DE 10 MINUTOS SIN RESPUESTA
 let timeoutId;
 
 function end(endFlow, numero) {

@@ -2,6 +2,7 @@ import postRevisarOrden from '../Fetch/postRevisarOrden.js';
 import enviarMensaje from './enviarMensajeTecnico.js';
 import consultaMySql from '../Utils/consultaMySql.js';
 
+//USADA EN FLOW CONSTANTE, VA CONTROLANDO EL ESTADO DE LAS ORDENES Y ENVIANDO MENSAJES A LOS USUARIOS
 async function enviarMsjAUsuario(ordenes) {
     //recibe el numero de orden y comienza a ejecutar la funcion
     ordenes.map(async (orden) => {

@@ -2,6 +2,7 @@ import consultaMySql from '../Utils/consultaMySql.js'
 import { getNroOrden } from '../Fetch/postIniciarOrden.js'
 import nombreEmpresa from '../Utils/nombreEmpresa.js'   
 ///hace un update a la base de datos, columna donde se encuentra la orden generada, para cargar el nombre y la direccion del edificio
+//UTILIZADO EN flowInicio.js
 async function subirNombreEdificio(direccion){
     let nombreEmp = await nombreEmpresa()
     if(direccion){

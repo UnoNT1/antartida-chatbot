@@ -1,7 +1,8 @@
 import estandarizar from "./accionesNumero.js"
+import logger from "../Utils/historico.js";
+
 //envia mensaje a los tecnicos y a los usuarios, nroTecnicos es un array y nroUser un string
 const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
-    console.log('nroTecnicos en enviar mensajes: ', nroTecnicos)
     try {
         if (nroUser !== '') {
             fetchMensaje(nroUser, mensaje)
@@ -13,7 +14,7 @@ const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
             })
         }
     } catch (err) {
-        console.error('1º error al intentar enviar mensaje')
+        logger.error('1º error al intentar enviar mensaje')
     }
 }
 
@@ -36,11 +37,11 @@ async function fetchMensaje(numero, mensaje) {
                 console.log(`Celular: ${numero} - Mensaje: ${mensaje}`, data);
             })
             .catch((error) => {
-                console.error("4° Error  al intentar enviar mensaje: ", error);
+                logger.error("4° Error  al intentar enviar mensaje: ", error);
             });
 
     } catch (error) {
-        console.error(error)
+        logger.error('5° Error  al intentar enviar mensaje:  ',error)
     }
 }
 

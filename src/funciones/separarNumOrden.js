@@ -1,7 +1,7 @@
 //tratando de separa el numero de orden no terminada
 //Si se cambia el texto recibido del backend hay que modificar esta funcion
 //asi recibe la respuesta del backend = '{"status":"success","message":"Datos recibidos correctamente"}  response aca  [["37095*80070204*#03516674325#03515394961#0351-155214053#03516646898#03516646896#"]]'
-
+//UTILIZADA EN postIniciarOrden.js
 function separarNumOrden(data) {
     
     if(data.includes('"logstatus"') || data.includes('Se agrego el mensaje al reclamo')){

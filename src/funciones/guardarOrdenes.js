@@ -3,7 +3,7 @@ import nombreEmpresa from "../Utils/nombreEmpresa.js"
 import consultaMySql from "../Utils/consultaMySql.js"
 
 let ordenes = []
-
+//UTILIZADO EN flowConstante.js, DEVUELVE LAS ULTIMAS 15 ORDENES DE LA BASE DE DATOS
 async function guardarOrdenes() {
     let nombreEmp = await nombreEmpresa()
     try {

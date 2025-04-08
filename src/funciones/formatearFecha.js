@@ -1,4 +1,4 @@
-
+//utilizado en tecnicoTomaReclamo.js y enviarMsjAUsuario.js
 function formatearFecha(fecha) {
     const date = new Date(fecha);
     const dia = String(date.getDate()).padStart(2, '0');
