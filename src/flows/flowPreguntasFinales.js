@@ -9,8 +9,7 @@ let respuestas = []
 const flowPreguntasFinales = addKeyword(EVENTS.ACTION) 
     .addAction(
         {capture: false},
-        async (ctx, { flowDynamic, endFlow }) => {
-            console.log('Preguntas finalessssdadasdsa')
+        async (ctx, { flowDynamic }) => {
             await flowDynamic([
                 {
                     body: `Para finalizar, contesteme las siguientes preguntas necesarias para agilizar el actuar del tecnico: `,
@@ -50,7 +49,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             respuestas.push(ctx.body)
             await flowDynamic([
                 {
-                    body: `Se encuentra alguien en el edificio que pueda permitir el ingreso al tecnico?`,
+                    body: `Se encuentra alguien en el edificio que pueda permitir el ingreso al tecnico? Ten en cuenta que si hay un técnico en la zona y le permiten el ingreso, la atención al problema será más rápido`,
                     delay: 2000,
                 }
             ])
@@ -63,7 +62,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             respuestas.push(ctx.body)
             await flowDynamic([
                 {
-                    body: `Agregue mas detalles si asi lo desea, de lo contrario escriba "NADA"`,
+                    body: `Excelente ${respuestas[0]}, lo has hecho perfecto, puedes poner algún detalle que creas útil sobre el ascensor o para mejorar nuestra gestión`,
                     delay: 2000,
                 }
             ])

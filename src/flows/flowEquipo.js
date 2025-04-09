@@ -25,7 +25,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 if(equipos[0].equiposDB.includes(equipos[1].equipoR)){
                     await flowDynamic([
                         {
-                            body: `Su reclamo ha sido cargado con exito, el numero de orden es: ${nroOrden}, mientras espera la respuesta de un tecnico. Puede seguir el estado de su reclamo en el siguiente link: ${url}.`,
+                            body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*, mientras espera la respuesta de un tecnico. Puede seguir el estado de su reclamo en el siguiente link: 👉*${url}*.`,
                             delay: 2000,
                         }
                     ])
@@ -33,9 +33,14 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 }else{
                     await flowDynamic([
                         {
-                            body: `El equipo ${equipos[1].equipoR} no existe en nuestra base de datos, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: 0800 888 4990. El numero de orden generado es ${nroOrden}. Puede seguir el estado de su reclamo en el siguiente link: ${url}.`,
+                            body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*, mientras espera la respuesta de un tecnico. Puede seguir el estado de su reclamo en el siguiente link: 👉*${url}*.`,
                             delay: 2000,
                         }
+                        //igualo las opciones, peron el en else deberia tirar un mensaje como el comentado
+                        /*{
+                            body: `El equipo ${equipos[1].equipoR} no existe en nuestra base de datos, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: 0800 888 4990. El numero de orden generado es ${nroOrden}. Puede seguir el estado de su reclamo en el siguiente link: ${url}.`,
+                            delay: 2000,
+                        }*/
                     ])
                     return gotoFlow(flowPreguntasFinales)
                 }

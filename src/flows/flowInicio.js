@@ -66,10 +66,10 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             if (motivo && direccion && edificio && equipo) {
                 reclamo = tomarDatosReclamo(convGPT) 
                 /*{
-                    'Motivo del reclamo': 'Ascensor, Montavehículo, SAR con problemas',
-                    'Dirección': 'Jujuy 8',
-                    Edificio: 'EDIFICIO NARITA IV',
-                    Equipo: 'Ascensor'
+                    'Mo': 'Ascensor, Montavehículo, SAR con problemas',
+                    'Di': 'Jujuy 8',
+                    Ed: 'EDIFICIO NARITA IV',
+                    Eq: 'Ascensor'
                 }*/
                 //generar reclamo aca
                 //await generarReclamo(numero, [reclamo['Mo'], reclamo['Di'], reclamo['Ed']])
@@ -84,6 +84,17 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     await subirNombreEdificio(direc)
 
                     console.log('equipo en flowInicio', equipo)
+                    if(reclamo.Mo.includes('encerrado') || reclamo.Mo.includes('encerrada')){
+
+                        if(reclamo.Eq === 'Ascensor' || reclamo.Eq === 'MontaVehículo'){
+                            await flowDynamic([
+                                {
+                                    body: `✅ El ${reclamo.Eq.replace(/\.$/, '')} es un lugar seguro y con suficiente ventilación. 🚫 No intentes salir por tus propios medios ni tampoco deben intentar ayudarte desde afuera. 🙏 Aguarda por favor la llegada del técnico.`,
+                                    delay: 2000,
+                                }
+                            ])
+                        }
+                    }
                     return gotoFlow(flowEquipo)
                 } catch (error) {
                     logger.error('Error en la consulta MySQL en flowInicio.js:', error);
