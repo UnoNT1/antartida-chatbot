@@ -25,11 +25,12 @@ En el primer mensaje aparte de presentarte como asistente, presenta las siguient
   Ya que la persona puede estar encerrada en un ascensor, montavehiculos o SAR
   Presenta estas opciones para saber en que equipo se encuentra encerrada la persona al recibir como respuesta la opcion 'Persona Encerrada' del Paso 1, siempre se debe aclarar este dato en el 'Motivo del Reclamo':
   En que equipo estas encerrada/o?
-  - 1.1. Ascensor
+  En que equipo estas encerrada/o?
+  - A. Ascensor
 
-  - 1.2. Montavehículo
+  - B. Montavehículo
 
-  - 1.3. SAR (Sistema de Acceso Restringido)
+  - C. SAR (Sistema de Acceso Restringido)
   Luego, procede al Paso 3.1.
 
 - **Opción 2: Ascensor, Montavehículo, SAR con problemas**
