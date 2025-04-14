@@ -23,7 +23,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
         async (ctx, { flowDynamic, endFlow }) => {
             await flowDynamic([
                 {
-                    body: `Me dice su Apellido y Nombre?`,
+                    body: `Hay luz en el edificio?`,
                     delay: 2000,
                 }
             ])
@@ -36,7 +36,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             respuestas.push(ctx.body)
             await flowDynamic([
                 {
-                    body: `Hay luz en el edificio?`,
+                    body: `Me dice su Apellido y Nombre?`,
                     delay: 2000,
                 }
             ])
@@ -59,10 +59,14 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
     .addAction(
         {capture: true},
         async (ctx, { flowDynamic, endFlow }) => {
-            respuestas.push(ctx.body)
+            if(ctx.body.toUpperCase().includes('NO')){
+                respuestas.push('LLEVAR LLAVE MAESTRA')
+            }else{
+                respuestas.push(ctx.body)
+            }
             await flowDynamic([
                 {
-                    body: `Excelente ${respuestas[0]}, lo has hecho perfecto, puedes poner algún detalle que creas útil sobre el ascensor o para mejorar nuestra gestión`,
+                    body: `Excelente ${respuestas[1]}, puedes poner algún detalle que creas útil sobre el ascensor o para mejorar nuestra gestión`,
                     delay: 2000,
                 }
             ])
@@ -96,7 +100,8 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                         delay: 2000,
                     }
                 ])
-                //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[0]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[1]}, PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[3]}`, '')
+                console.log(`El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`)
+                //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
                 return gotoFlow(flowFin)
             } else if(respuesta.includes('NO')){
                 await flowDynamic([
@@ -122,9 +127,8 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            console.log('respuestas', respuestas)
             end(endFlow, ctx.from)//finaliza la conversacion 
-            //await enviarMensaje(numeroTecnicos, `El usuario ${respuestas[0]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[1]}, PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, MAS DETALLES: ${respuestas[3]}, MAS DETALLES: ${respuestas[4]} TELEFONO DE CONTACTO: ${respuestas[5]}`, '')
+            //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
             return gotoFlow(flowFin) 
         }
     )
