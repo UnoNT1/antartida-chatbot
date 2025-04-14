@@ -27,7 +27,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 if(equipos[0].equiposDB.includes(equipos[1].equipoR)){
                     await flowDynamic([
                         {
-                            body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*, mientras espera la respuesta de un tecnico. Puede seguir el estado de su reclamo en el siguiente link: 👉*${url}*.`,
+                            body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*, ingrese en el siguiente link: 👉*${url}*. Un tecnico se contactara con Usted.`,
                             delay: 2000,
                         }
                     ])

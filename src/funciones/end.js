@@ -10,7 +10,7 @@ function end(endFlow, numero) {
     timeoutId = setTimeout(async () => {
         console.log('Conversación finalizada');
         await finalizarConversacion(numero);
-        return endFlow();
+        return await endFlow();
     }, 600000);  // 10 minutos en milisegundos
 }
 
