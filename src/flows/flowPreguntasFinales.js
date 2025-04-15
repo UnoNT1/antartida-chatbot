@@ -3,8 +3,10 @@ import flowFin from './flowFin.js'
 import end from '../funciones/end.js'
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js'
 import { getNrosTecnicos } from '../funciones/generarReclamo.js' 
+import { getEquipos } from './flowInicio.js'
 
 let respuestas = []
+//Este flow guarda la info de las respuestas para enviar un mensaje al tecni al finalizar
 
 const flowPreguntasFinales = addKeyword(EVENTS.ACTION) 
     .addAction(
@@ -12,7 +14,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
         async (ctx, { flowDynamic }) => {
             await flowDynamic([
                 {
-                    body: `Para finalizar, contesteme las siguientes preguntas necesarias para agilizar el actuar del tecnico: `,
+                    body: `Para finalizar, por favor conteste las siguientes preguntas necesarias para agilizar el actuar del tecnico: `,
                     delay: 2000,
                 }
             ])
@@ -44,6 +46,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
         }
     )
     .addAction(
+        ////modificar para caso de persona encerrada en SAR //////
         {capture: true},
         async (ctx, { flowDynamic, endFlow }) => {
             respuestas.push(ctx.body)
@@ -59,14 +62,17 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
     .addAction(
         {capture: true},
         async (ctx, { flowDynamic, endFlow }) => {
+            const equipoR = await getEquipos()[1].equipoR
+            const mensajeATecnico = equipoR.includes('SAR') ? 'No hay alguien en el edificio que pueda otorgar el ingreso al tecnico' : 'LLEVAR LLAVE MAESTRA' ///cambia la info que se le va a mandar al tecnico dependiendo el equipo del reclamo
+
             if(ctx.body.toUpperCase().includes('NO')){
-                respuestas.push('LLEVAR LLAVE MAESTRA')
+                respuestas.push(mensajeATecnico)
             }else{
                 respuestas.push(ctx.body)
             }
             await flowDynamic([
                 {
-                    body: `Excelente ${respuestas[1]}, puedes poner algún detalle que creas útil sobre el ascensor o para mejorar nuestra gestión`,
+                    body: `Excelente ${respuestas[1]}, puedes poner algún detalle que creas útil sobre el equipo o para mejorar nuestra gestión`,
                     delay: 2000,
                 }
             ])

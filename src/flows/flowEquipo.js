@@ -15,6 +15,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
             const nroOrden = await getNroOrden()
             const url = await getUrl()
             const nomEmp = await nombreEmpresa()
+            const equipoR = equipos[1].equipoR.includes('SAR') ? 'SAR' : equipos[1].equipoR
 
             console.log('equipos en flow equipo', equipos)
             /* 
@@ -24,7 +25,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
             ]
             */
             try {
-                if(equipos[0].equiposDB.includes(equipos[1].equipoR)){
+                if(equipos[0].equiposDB.includes(equipoR)){///corregir caso de SAR/////////
                     await flowDynamic([
                         {
                             body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*, ingrese en el siguiente link: 👉*${url}*. Un tecnico se contactara con Usted.`,
@@ -33,13 +34,9 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                     ])
                     return gotoFlow(flowPreguntasFinales)
                 }else{
-                    const equiposDisponibles = equipos[0].equiposDB.join(', ')
+                    const equiposDisponibles = [...new Set(equipos[0].equiposDB)].join(', ');//esta variable concatena los diferentes equipos que se encuentrar activos por la empresa en determiado edificio
+
                     await flowDynamic([
-                        /*{
-                            body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*, mientras espera la respuesta de un tecnico. Puede seguir el estado de su reclamo en el siguiente link: 👉*${url}*.`,
-                            delay: 2000,
-                        }*/
-                        //igualo las opciones, peron el en else deberia tirar un mensaje como el comentado
                         {
                             body: `Nuestra empresa ${nomEmp} no trabaja con el equipo: '${equipos[1].equipoR}' en este edificio, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: 0800 888 4990. El numero de orden generado es ${nroOrden}. Los equipos que tenemos disponibles en este edificio son: ${equiposDisponibles}.`,
                             delay: 2000,

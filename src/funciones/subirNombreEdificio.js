@@ -11,7 +11,6 @@ async function subirNombreEdificio(direccion){
 
     try {
         let orden = await getNroOrden()
-        
         const queryDirFan = `SELECT tit_as00, dir_as00 FROM lpb_as00 WHERE emp_as00 = ? and dir_as00 = ?`
         const edificio = await consultaMySql(queryDirFan, [nombreEmp, direccion])
         

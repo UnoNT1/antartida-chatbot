@@ -83,10 +83,9 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     equipos = await consultaMySql(query, [direc]);
                     await subirNombreEdificio(direc)
 
-                    console.log('equipo en flowInicio', equipo)
                     if(reclamo.Mo.includes('encerrado') || reclamo.Mo.includes('encerrada')){
 
-                        if(reclamo.Eq === 'Ascensor' || reclamo.Eq === 'MontaVehículo'){
+                        if(reclamo.Eq.toUpperCase().includes('ASC') || reclamo.Eq.toUpperCase().includes('MONTA')){
                             await flowDynamic([
                                 {
                                     body: `✅ El ${reclamo.Eq.replace(/\.$/, '')} es un lugar seguro y con suficiente ventilación. 🚫 No intentes salir por tus propios medios ni tampoco deben intentar ayudarte desde afuera. 🙏 Aguarda por favor la llegada del técnico.`,
