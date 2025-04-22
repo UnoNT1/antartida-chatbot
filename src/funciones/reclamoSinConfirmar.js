@@ -5,6 +5,7 @@ import { guardarContexto, mensajeChatGPT } from '../openai/historial.js';
 import nombreEmpresa from '../Utils/nombreEmpresa.js';
 import getPrompt from '../Utils/getPrompt.js';
 import { generarReclamo } from './generarReclamo.js';
+import flowEquipo from '../flows/flowEquipo.js';
 
 //FINALIZA LA CONVERSACION DESPUES DE UN TIEMPÓ DE 10 MINUTOS SIN RESPUESTA
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -67,7 +68,7 @@ async function reclamoSinConfirmar(numero, gotoFlow){
             //generar reeclamo otra vez???
             generarReclamo(numero, respuesta)
             seConfirmo = true
-            gotoFlow()
+            gotoFlow(flowEquipo)
         }
     })
     return seConfirmo

@@ -26,6 +26,14 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
             */
             try {
                 if(equipos[0].equiposDB.includes(equipoR)){///corregir caso de SAR/////////
+
+                    nomEmp === 'Incast' ? 
+                    await flowDynamic([
+                        {
+                            body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*. Un tecnico se contactara con Usted.`,
+                            delay: 2000,
+                        }
+                    ]) :
                     await flowDynamic([
                         {
                             body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*, ingrese en el siguiente link: 👉*${url}*. Un tecnico se contactara con Usted.`,
