@@ -1,31 +1,13 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
 import { mensajeChatGPT, finalizarConversacion } from '../openai/historial.js'
 import nombreEmpresa from '../Utils/nombreEmpresa.js'
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
 import end from '../funciones/end.js'
-import tomarDatosReclamo from '../funciones/tomarDatosReclamo.js'
 import { generarReclamo } from '../funciones/generarReclamo.js'
 import consultaMySql from '../Utils/consultaMySql.js'
 import flowEquipo from './flowEquipo.js'
 import subirNombreEdificio from '../funciones/subirNombreEdificio.js'
 import logger from "../Utils/historico.js";
-
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dirPrompts = (nombreEmp) => path.resolve(__dirname, `../openai/prompt${nombreEmp}2.txt`)
-
-async function getPrompt(empresa) {
-    const dirPrompt = dirPrompts(empresa)
-    
-    return new Promise((resolve, reject) => {
-        fs.readFile(dirPrompt, 'utf-8', (err, prompt) => {
-            if (err) reject(err);
-            resolve(prompt);
-        });
-    });
-}
+import getPrompt from '../Utils/getPrompt.js'
 
 let reclamo = {}
 let equipos = []
@@ -33,7 +15,7 @@ let equipos = []
 const flowInicio = addKeyword(EVENTS.WELCOME)
     .addAction(
         null,
-        async (ctx, { flowDynamic, endFlow }) => {
+        async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
             const nombreEmp = await nombreEmpresa()
             await flowDynamic([{ body: `Muchas gracias por comunicarse con Ascensores ${nombreEmp}.`, delay: 1000 }])
             //
@@ -43,7 +25,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             const prompt = await getPrompt(nombreEmp);
             const convGPT = await mensajeChatGPT(mensaje, prompt, numero)
             await flowDynamic([{ body: convGPT }])
-            end(endFlow, numero)//finaliza la conversacion
+            end(gotoFlow, endFlow, numero)//finaliza la conversacion
     })
     .addAction(
         { capture: true },
@@ -64,19 +46,13 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             const edificio = convGPT.includes('Edificio') || convGPT.includes('edificio') 
             const equipo = convGPT.includes('Equipo')
             if (motivo && direccion && edificio && equipo) {
-                reclamo = tomarDatosReclamo(convGPT) 
-                /*{
-                    'Mo': 'Ascensor, Montavehículo, SAR con problemas',
-                    'Di': 'Jujuy 8',
-                    Ed: 'EDIFICIO NARITA IV',
-                    Eq: 'Ascensor'
-                }*/
                 //generar reclamo aca
-                //await generarReclamo(numero, [reclamo['Mo'], reclamo['Di'], reclamo['Ed']])
+                reclamo = await generarReclamo(numero, convGPT)
                 //
                 //
+                await finalizarConversacion(numero);
+                console.log(reclamo, 'recmlamoooo')
                const direc = reclamo.Di.toUpperCase().replace(/\.$/, '').trim(); //elimina el punto final y saca espacios
-               await finalizarConversacion(numero);
 
                try {
                     const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
@@ -100,7 +76,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     return gotoFlow(flowEquipo)
                 }
             }
-            end(endFlow, numero)//finaliza la conversacion
+            end(gotoFlow, endFlow, numero)//finaliza la conversacion
             fallBack('')
         }
     )
