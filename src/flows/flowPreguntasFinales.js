@@ -4,6 +4,8 @@ import end from '../funciones/end.js'
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js'
 import { getNrosTecnicos } from '../funciones/generarReclamo.js' 
 import { getEquipos } from './flowInicio.js'
+import { getNroOrden, getUrl } from '../Fetch/postIniciarOrden.js'
+import consultaMySql from '../Utils/consultaMySql.js'
 
 let respuestas = []
 //Este flow guarda la info de las respuestas para enviar un mensaje al tecni al finalizar
@@ -98,11 +100,18 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             const respuesta = ctx.body.toUpperCase()
             const numeroTecnicos = await getNrosTecnicos()
 
+            const url = await getUrl()
+            const nroOrden = await getNroOrden()
+            const nombre = respuestas[1].replace(/ /g, ', ')
+
+            const query = `UPDATE lpb_cl12 SET are_cl12 = ? WHERE reg_cl12 = ?`
+            await consultaMySql(query, [nombre, nroOrden])
+
             if(respuesta.includes('SI')){
                 respuestas.push(ctx.from)
                 await flowDynamic([
                     {
-                        body: `Gracias por su tiempo, a la brevedad un tecnico se comunicara con usted.`,
+                        body: `Gracias por su tiempo, a la brevedad un tecnico se comunicara con usted, en la siguiente Url podra hacer el seguimiento del reclamo: ${url}.`,
                         delay: 2000,
                     }
                 ])
@@ -124,12 +133,19 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
         {capture: true},
         async (ctx, { flowDynamic, gotoFlow, endFlow }) => {
             const numeroTecnicos = await getNrosTecnicos()
-
             respuestas.push(ctx.body)
+
+            const url = await getUrl()
+            const nombre = respuestas[1].replace(/ /g, ', ')
+            const nroOrden = await getNroOrden()
+
+            const query = `UPDATE lpb_cl12 SET are_cl12 = ?, tre_cl12 = ? WHERE reg_cl12 = ?`
+            console.log(nombre)
+            await consultaMySql(query, [nombre, respuestas[4], nroOrden])
 
             await flowDynamic([
                 {
-                    body: `Gracias por su tiempo, a la brevedad un tecnico se comunicara con usted.`,
+                    body: `Gracias por su tiempo, a la brevedad un tecnico se comunicara con usted, en la siguiente Url podra hacer el seguimiento del reclamo: ${url}.`,
                     delay: 2000,
                 }
             ])

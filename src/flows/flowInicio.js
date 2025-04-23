@@ -25,7 +25,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             const prompt = await getPrompt(nombreEmp);
             const convGPT = await mensajeChatGPT(mensaje, prompt, numero)
             await flowDynamic([{ body: convGPT }])
-            end(gotoFlow, endFlow, numero)//finaliza la conversacion
+            end(endFlow, numero, gotoFlow)//finaliza la conversacion
     })
     .addAction(
         { capture: true },
@@ -76,14 +76,14 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     return gotoFlow(flowEquipo)
                 }
             }
-            end(gotoFlow, endFlow, numero)//finaliza la conversacion
+            end(endFlow, numero, gotoFlow)//finaliza la conversacion
             fallBack('')
         }
     )
 
  
 function getEquipos(){
-    equipos = equipos.map(obj => obj['abr_as00']);
+    equipos = equipos.map(obj => obj['abr_as00'] === 'ASC' ? 'ASCENSOR' : 'ASCENSOR');
 
     return [
         {
