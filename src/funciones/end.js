@@ -1,3 +1,4 @@
+import flowEquipo from '../flows/flowEquipo.js';
 import { finalizarConversacion } from '../openai/historial.js'
 import reclamoSinConfirmar from './reclamoSinConfirmar.js';
 
@@ -10,6 +11,8 @@ function end(endFlow, numero, gotoFlow) {
         }
 
         let reclamo = reclamoSinConfirmar(numero, gotoFlow);
+        console.log(reclamo, 'en end flow true or false')
+        if (reclamo === true) return gotoFlow(flowEquipo)
         // Configura un nuevo timeout si el reclamo no fue confirmado
         timeoutId = reclamo !== true ? setTimeout(async () => {
             console.log('Conversación finalizada por inactividad.', reclamo, timeoutId);

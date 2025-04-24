@@ -48,7 +48,7 @@ async function reclamoSinConfirmar(numero, gotoFlow){
     conversacion.map(async conv => {
         conv.content = conv.content.toLowerCase()
 
-        if((conv.content.includes('confirmo') || conv.content.includes('generado')) && conv.content.includes('reclamo') && !conv.content.includes('motivo del reclamo')){
+        if(((conv.content.includes('confirmo') || conv.content.includes('generado')) && conv.content.includes('reclamo')) || (conv.content.includes('reclamo') && conv.content.includes('éxito') ) && !conv.content.includes('motivo del reclamo')){
             console.log('existe confirmar en mensaje num:', conv)
             
             const forzarConfirmacion = {

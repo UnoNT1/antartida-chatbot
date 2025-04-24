@@ -11,7 +11,7 @@ const flowFin = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-        end(endFlow, ctx.from)//finaliza la conversacion  
+        end(endFlow, ctx.from, '')//finaliza la conversacion  
         fallBack('')    
     })
 

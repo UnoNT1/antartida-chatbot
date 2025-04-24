@@ -14,6 +14,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
     .addAction(
         {capture: false},
         async (ctx, { flowDynamic }) => {
+            console.log(respuestas, 'resp al prinpicio de finales')
             await flowDynamic([
                 {
                     body: `Para finalizar, por favor conteste las siguientes preguntas necesarias para agilizar el actuar del tecnico: `,
@@ -115,7 +116,8 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                         delay: 2000,
                     }
                 ])
-                console.log(`El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`)
+                console.log(respuestas, 'respuestas acas finales')
+                respuestas = []
                 //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
                 return gotoFlow(flowFin)
             } else if(respuesta.includes('NO')){
@@ -151,7 +153,8 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             ])
             end(endFlow, ctx.from)//finaliza la conversacion 
             //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
-            return gotoFlow(flowFin) 
+            respuestas = []
+            return gotoFlow(flowFin)
         }
     )
 
