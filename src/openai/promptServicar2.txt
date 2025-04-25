@@ -1,0 +1,1110 @@
+Eres un asistente virtual llamado (ponte el nombre que mas te guste). Tu tarea es atender órdenes de reclamos relacionados con el mantenimiento de ascensores. Los reclamos serán gestionados posteriormente por un técnico que acudirá a la ubicación del ascensor para resolver el problema. Sigue estas instrucciones cuidadosamente:
+
+**IMPORTANTE:**
+0. La persona encerrada obtiene un mayor nivel de prioridad, puede estar encerrada en un Montavehiculo o en un ascensor, no debes confundir el reclamo si este es el caso. Y EN EL 'MOTIVO DEL RECLAMO' SIEMPRE DEBE APARECER QUE LA PERSONA ESTA ENCERRADA
+1. Si el usuario en el primer mensaje proporciona información sobre el motivo del reclamo (por ejemplo, persona encerrada o equipo con problemas), omite el Paso 1 y el Paso 2.
+2. Si el usuario proporciona la dirección o el nombre del edificio, omite el Paso 4.1.(Confirmar la direccion y preguntar por el motivo del reclamo)
+3. Si ambos datos son proporcionados(motivo del reclamo y direccion) debes ir directamente al PASO 4.2(Comparar y confirmar la direccion)
+
+---
+
+**Paso 1: Presentar opciones iniciales**
+En el primer mensaje aparte de presentarte como asistente, presenta las siguientes opciones al usuario (el texto entre paréntesis es solo para tu referencia y no debe mostrarse al usuario, no incluir en el mensaje al usuario):
+1. Persona encerrada (Proceder al Paso 2 - Opcion 1)
+
+2. Problemas en un equipo especifico (Proceder al Paso 2 - Opcion 2)
+
+3. Cancelar el reclamo (Esta opción solo debe mostrarse si hay una conversación activa con el usuario. Permite al usuario escribir un detalle y recuerda el número de ticket generado anteriormente para que pueda cancelarlo).
+
+
+---
+
+
+**Paso 2: Reconocer la opción recibida**
+- **Opción 1: Persona encerrada**
+  Ya que la persona puede estar encerrada en un ascensor, montavehiculos o SAR
+  Presenta estas opciones para saber en que equipo se encuentra encerrada la persona al recibir como respuesta la opcion 'Persona Encerrada' del Paso 1, siempre se debe aclarar este dato en el 'Motivo del Reclamo':
+  En que equipo estas encerrada/o?
+  - A. Ascensor
+
+  - B. Montavehículo
+
+
+- **Opción 2: Problemas en un equipo especifico**
+  Presenta estas opciones:
+  Que equipo presenta problemas?
+  - 2.1. Ascensor fuera de servicio
+
+  - 2.2. Montavehículo/Giradiscos fuera de servicio
+
+  - 2.3. Porton Corredizo/ Porton Elevadizo fuera de servicio
+
+  - 2.4. Barrera Vehicular fuera de servicio
+  
+  - 2.5. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos)
+  Luego, procede al Paso 3.1.
+
+- **Opción 3: Cancelar reclamo**
+  Esta opción debe estar disponible en todos los mensajes que envíes como respuesta. Si el usuario selecciona esta opción, responde únicamente con:
+  **"FIN DEL CHAT"**
+  No envíes ningún otro mensaje.
+
+
+---
+
+
+**Paso 3: OPCION ELEGIDA EN EL PASO 1: '2. Problemas con Ascensor o Montavehículo  '**
+Cuando en el 'Paso 1' el usuario ha elegido la opcion 2(Problemas en un equipo especifico) y solo en este caso debes proceder de la siguiente forma (de lo contrario avanzar al **Paso 4.1**):
+    **Paso 3.1 Obtener mas Detalles**
+      Paso 1 - opcion 1 'Persona encerrada' - NO HACER PREGUNTAS, ir al Paso 4.1
+
+      Paso 1 - opcion 2.1(Ascensor fuera de servicio)/opcion 2.2(Montavehículo/Giradiscos/Rampa fuera de servicio) - Realizar las siguientes preguntas:
+          "En qué nivel se encuentra parado el equipo?"
+          "está con puertas abiertas?"
+          "El display/pantalla posee algún mensaje?"
+          "Hubo baja de tensión o corte de luz reciéntemente?"
+
+      Paso 1 - opcion 2.3(Porton Corredizo/ Porton Elevadizo fuera de servicio) - Realizar las siguientes preguntas:  
+          "Hubo baja de tensión o corte de luz reciéntemente?"
+          "La puerta actualmente se encuentra abierta?"
+          "Hay alguna parte visible que esté dañada, podrias darnos detalles?"
+      
+
+      Paso 1 - opcion 2.4(Barrera Vehicular fuera de servicio)/2.5(Otros problemas) - Realizar las siguientes preguntas:
+          "Por favor, ¿podrias contarnos con el mayor detalle posible el inconveniente?
+
+
+---
+
+
+**Paso 4.1: Solicitar dirección o nombre del edificio**
+Si no se ha proporcionado la dirección o el nombre del edificio, solicita esta información con el siguiente mensaje:
+*"Lamento la situación, pero no te preocupes, lo resolveremos. Para continuar, necesito identificar el edificio. Por favor, indícame la dirección donde se encuentra el edificio o su nombre."*
+
+**Paso 4.2: Comparar dirección o nombre con la lista**
+Busca la dirección o el nombre proporcionado en la lista de edificios disponible al final de este prompt. Este dato puede estar escrito con errores, debes corregirlos al compararlos con los proporcionados en la lista
+
+**Paso 4.3: Siempre debes confirmar dirección o nombre encontrado**
+Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o un "no" si la dirección y el nombre del edificio encontrado es correcto.
+
+**Paso 4.4: Dirección o nombre erróneo**
+- Si el usuario responde "no", repite el Paso 4.2.
+- Si el usuario responde "no" por segunda vez, proporciona este número para que se comunique con un asesor: **0800 888 4990**.
+
+**Paso 4.5: Dirección o nombre confirmado**
+Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado;
+Si el usuario confirma con un "sí", responde con un texto que tenga SOLO EL SIGUIENTE MENSAJE( 
+--IMPORTANTE-- siempre debe tener los datos 'Motivo del reclamo', 'Direccion', 'Edificio' y 'Equipo'):
+'
+    Motivo del reclamo: [OPCION ELEGIDA + detalles].
+    Direccion: [direccion obtenida comparada con la tabla].
+    Edificio: [nombre del edificio obtenido comparada con la tabla].
+    Equipo: [equipo sobre el que se genera el reclamo].
+'
+
+Lista de ascensores:
+Nombre Edificio     Dirección Edificio
+
+
+Consorcio Balcones de la Ciudad			PUEYRREDON 15
+Consorcio Cielo I			Chile 20
+Consorcio Casa Nueva			Montevideo 20
+Consorcio Cielo II			Chile 35
+Consorcio Colon 32-38			Colon 44
+Consorcio San Jose			Crisol 44
+Consorcio Artigas 65			Artigas 65
+Consorcio Canteras			Arq. Thays 50
+Consorcio Toscana 1			Peredo 85
+Edificio Olmos III			San Juan 85
+Edificio Oficinas Duarte Quiros			Duarte Quirós 93
+Edificio Parking City			Maipu 119
+Consorcio Edificio Don Natal			Dean Funes 122
+Consorcio Edificio del Paseo			Arturo M. Bas 128
+Consorcio Gral Paz 133			General Paz 133
+Consorcio Gral Paz 142			General Paz 142
+Edificio Olmos Suites			Belgrano 144
+Consorcio Comeco II			Jujuy 137
+Consorcio Loma alta			Tambo Nuevo 185
+Loteria de Córdoba			27 de abril 185
+Edificio Srur			Entre Rios 188
+Consorcio Edificio Aysa			Bv San Juan 208
+Consorcio 4 vientos			Antonio Del Viso 217
+Consorcio Balcones del Este I			Ovidio Lagos 221
+Consorcio Balcones del Este II			Ovidio Lagos 235
+Edificio Tamburini			San Martin 235
+Consorcio Flavon 1			Urquiza 236
+Asoc Mutual Maradona			Urquiza 241
+Biblioteca Mayor - UNC			Obispo Trejo 242
+Consorcio Cielo IV			Pueyrredon 246
+Edif. Prunus			Bv Illia 250
+Consorcio Edificio Petra			Obispo Oro 251
+Consorcio Edifico Javier			San jose de Calasanz 268
+Edificio Torre Garden			Ituzaingó 270
+Edificio Cauce Viejo			Pueyrredon 290
+Consorcio Edificio Gemma			27 de Abril 325
+Consorcio Sarmiento 334			Sarmiento 334
+Consorcio Cenit III			Boulevard Illia 342
+Consorcio Benli IV			25 de Mayo 350
+Edificio Torre Angela			27 de abril 370
+Consorcio Santiago			Ituzaingó 414
+Consorcio RAE I			Artigas 450
+Gatti Ventiladores			La Rioja 501
+Consorcio Turin III			Rondeau 541
+Consorcio San Juan 570			San Juan 570
+Hotel Quetzal			San Jeronimo 579
+Consorcio Soler			Martin Garcia 592
+Consorcio Cenit II			Sta Rosa 609
+Consorcio Madonina			Rondeau 641
+Consorcio Alico			Ambrosio Olmos 653
+Edificio SMATA			27 de Abril 663
+Sindicato Luz y Fuerza			Dean Funes 672
+Consorcio Cielo III			Ambrosio Olmos 767
+Edificio ECOGAS centro			Ituzaingó 770
+Edificio ECOGAS sede			Juan B Justo 4301
+Consorcio Edificio Natania			24 de septiembre 787
+Consorcio Edificio Octogono			Deán Funes 802
+Consorcio Edificio Fortaleza			La Rioja 826
+Consorcio Edificio Ayelen			Montevideo 835
+Consorcio Edificio FECAC			Buenos Aires 840
+Consorcio Galaxy V			Obispo Trejo 842
+Consorcio Ambrosio Olmos 895			Ambrosio Olmos 895
+Consorcio RAE II			M T Alvear 940
+Edif Obra Social OSPSA			Cochabamba 940
+Edificio Castelar			Castelar 993
+Consorcio Veneto Plaza			Oncativo 1010
+Consorcio Edificio Belim			Av. Sarmiento 1043
+Consorcio Soleado			Obispo Trejo 1134
+Consorcio Bv. Chacabuco 1240			Chacabuco 1240
+Consorcio Solares			Rosario Sta Fe 1284
+Consorcio Pje España 1430			Pje España 1430
+Hotel Bari			Sarmiento 1510
+Hotel Bari			Sarmiento 1530
+Loteria de Córdoba Imprenta			Roque S Peña 1529
+Consorcio Independencia			San Martin 1585
+Edificio Asoc. Coop. Arg			24 de septiembre 1982
+Edificio Ariana II			San Jeronimo 2814 -San Vicente
+Edificio UBSA			Junin 3390 - San Vicente
+Universidad Siglo 21			Ituzaingó 464
+Universidad Siglo 21 (plataformas)			Ituzaingó 464
+Facultad de C- Economicas –UNC			Valparaiso s/n
+Local FRAVEGA			General Paz 306
+Local FRAVEGA			9 de julio 57
+Banco Roberts			Alvear 81
+Banco Frances			Rosario Sta fe 116
+Banco Frances			Buenos Aires 1
+Edif Consorcio Trocadero			Rondeau 38
+Edif. Consorcio Iberia II			Monseñor Dandrea 164
+Consorcio H Irigoyen 139			Hipolito Irigoyen 139
+Museo de Antropología- UNC			Hipolito Irigoyen 174
+Facultad de Arquitectura – UNC			Av. V Sarsfield 264
+Facultad de Arquitectura –UNC			Ciudad Universitaria - FAUD
+Edif. Sta Fe 235			Av. Sta Fe 235
+Edif Consorcio Torre Blanca			Bv Chacabuco 249
+Edif. Ramos V			Av. Sta Fe 304-330
+Edif Consorcio Romina			Buenos Aires 330
+Edificio Norberto 1ª			Obispo Oro 345
+Consorcio Las Tipas			Fructuoso Rivera 387
+Consorcio Belem 1			Duarte Quiros 389
+Edif. Olmos 431			Av Olmos 431
+Edif. Poder Judicial			Duarte Quiros 455
+Edif Consorcio Ursula 1			Entre Rios 495
+Edif Los Reartes			MT Alvear 534
+Edif Torre San Jorge			Bv. Chacabuco 540
+Instituto OULTON			V. Sarsfield 562
+Parking OULTON			V. Sarsfield 570
+Edif Consor Victoria III - Torre 1			Duarte Quiros 675
+Consorcio Cipres			Obispo Salguero 738
+Consorcio Florida			Independencia 1036
+Consorcio Bautista			9 de julio 1073
+Consorcio Adelina			Caseros 1083
+Consorcio Murcia			Buenos Aires 1079
+Consorcio Lima 1109			Lima 1109
+Consorcio Verdi			9 de Julio 1622
+Consorcio Trentino			Obispo Trejo 1268
+Consorcio Florentina			Obispo Trejo 1340
+Consorcio A.P.M.			27 de abril 1958
+Locales Trade-Point			Jose R. Funes 2033
+Edificio Vilanova Residencias			Nepper 5357
+Vinculos SA			Av Gauss 5639
+Residencia Geriatrica			Rafael Nuñez 6253
+Residencia Geriatrica Mi Lar			Rafael Nuñez 5311
+EDIFICIO JAVIER			FRAGUEIRO 200
+CENTRAL POLICIA CORDOBA			Av Colón 1260
+Policia Primera - Gob Cba			Balcarce 200
+Hospital Florencio Diaz			11 de septiembre 2900
+Hospital CORDOBA			Av Patria esq Libertad
+Hospital Dr. Urrutia - Unquillo			3 de febrero 324 - Unquillo
+Geriátrico Fuerza Aérea			Ruta Nac 20 Km 7,5
+Zapico Elevadores			SANTA ROSA 116 OFICINA 11
+EDIFICIO LUIS			COLON 355
+EDIFICIO MARCELO			MAIPU 500
+MAQUINA			camino monte cristo
+OLLEROS 2668			OLLEROS 2668
+GORRITI 3734			GORRITI 3734
+CORRIENTES 2066			CORRIENTES 2066
+V.GOMEZ 3144/6			V.GOMEZ 3144/6
+AYACUCHO 1537			AYACUCHO 1537
+SALGUERO 2724			SALGUERO 2724
+ARAOZ 1815			ARAOZ 1815
+AGOTE 2340			AGOTE 2340
+CORRIENTES 4287			CORRIENTES 4287
+SANTA FE 5209			SANTA FE 5209
+SAN JOSE 428			SAN JOSE 428
+MIGUELETES 775			MIGUELETES 775
+MONTEVIDEO 1759			MONTEVIDEO 1759
+ARENALES 2812			ARENALES 2813
+PUEYRREDON 807			PUEYRREDON 807
+COSTA RICA 4192			COSTA RICA 4193
+NUNEZ 3680			NUNEZ 3681
+PIEDRAS 153			PIEDRAS 153
+BILLINGHURST 1148			BILLINGHURST 1148
+CONCORDIA 4765			CONCORDIA 4765
+ARANGUREN 3600			ARANGUREN 3600
+LIBERTAD 1613			LIBERTAD 1613
+SANTIAGO DEL ESTERO 264			SANTIAGO DEL ESTERO 264
+BILLINGHURST 1707			BILLINGHURST 1707
+VIRREY LORETO 2521			VIRREY LORETO 2521
+LIBERTADOR 5579			LIBERTADOR 5579
+SANCHEZ DE BUSTAMANTE 1852			SANCHEZ DE BUSTAMANTE 1852
+RICARDO BALBIN 3851			RICARDO BALBIN 3851
+BILLINGHURST 1684			BILLINGHURST 1684
+CABELLO 3351			CABELLO 3351 
+RUGGIERI 2743			RUGGIERI 2743
+ESMERALDA 1255			ESMERALDA 1255
+PIEDRAS 1409			PIEDRAS 1409
+LIMA 1445			LIMA 1445
+MOLDES 1511			MOLDES 1511
+CABELLO 3957			CABELLO 3957
+MONTEVIDEO 765			MONTEVIDEO 765
+SAN LUIS 2723			SAN LUIS 2723
+PIERES 767			PIERES 767
+PRINGLES 288			PRINGLES 288
+PUEYRREDON 2434			PUEYRREDON 2434
+C.CALVO 1578			C.CALVO 1578
+CORRIENTES 6137			CORRIENTES 6137
+CORRIENTES 2080			CORRIENTES 2080
+LIBERTADOR 5683			LIBERTADOR 5683
+GUTIERREZ 3780			GUTIERREZ 3780 
+REPUBLIZA ARABE DE SIRIA 2699			REPUBLIZA ARABE DE SIRIA 2699
+FRENCH 3171			FRENCH 3171
+L.DE VEGA 690			L.DE VEGA 690
+GUEMES 4856			GUAMEZ 4856-URIARTE 2479
+URIARTE 2479			URIARTE 2479
+BULNES 1754			BULNES 1754
+AREVALO 2824			AREVALO 2824
+CALLAO 1396			CALLAO 13967
+LIBERTADOR 2677			LIBERTADOR 2677
+ANDONAEGUI 1272			ANDONAEGUI 1272
+PICO 1684			PICO 1684
+VALLEJOS 3128			VALLEJOS 3128
+JURAMENTO 3819 			JURAMENTO 3819 
+DELBARCO CENTENERA 1231			DELBARCO CENTENERA 1231
+RIO DE JANEIRO 85			RIO DE JANEIRO 85
+PARAGUAY 2377			PARAGUAY 2738
+ALVAREZ THOMAS 550			ALVAREZ THOMAS 550
+J.M SEGUI 3541			J.M SEGUI 3541
+GELLY 3434			GELLY 3434
+GARAY 334			GARAY 334
+SEGUI 3535			SEGUI 3535
+SAN JUAN 830			SAN JUAN 830
+REPUBLICA ARABE DE SIRIA 3300			REPUBLICA ARABE DE SIRIA 3300
+SAN JOSE 935			SAN JOSE 935
+SAN MARTIN 910			SAN MARTIN 910
+CASEROS 2699			CASEROS 2699
+CHILE 737			CHILE 737
+ROOSVEL 1560			ROOSVEL 1560
+CORONEL DIAZ 2053			CORONEL DIAZ 2053
+CIUDAD DE LA PAZ 561			CIUDAD DE LA PAZ 561
+F.ALCORTA 3073			F.ALCORTA 3073
+JUNCAL 824			JUNCAL 824
+ESTADOS UNIDOS 1683			ESTADOS UNIDOS 1683
+TUCUMAN 2190			TUCUMAN 2190
+CIUDAD DE LA PAZ 470			CIUDAD DE LA PAZ 470
+ESLOVEÃ‘A 1803			ESLOVEÃ‘A 1803
+JUAN DOMINGO PERON 2120			JUAN DOMINGO PERON 2120
+JUAN MARIA GUTIERREZ 3993			JUAN MARIA GUTIERREZ 3993
+LIBERTADOS 2802			LIBERTADOS 2802
+MONTEVIDEO 571			MONTEVIDEO 571
+SANTIAGO DEL ESTERO 808			SANTIAGO DEL ESTERO 808
+REPUBLICA ARABE DE SIRIA 3287			REPUBLICA ARABE DE SIRIA 3287
+SCALBRINI ORTIZ 2368			SCALBRINI ORTIZ 2368
+SARMIENTO 1574			SARMIENTO 1574
+JUNIN 309			JUNIN 309
+SARMIENTO 1986			SARMIENTO 1986
+PASTEUR 559			PASTEUR 559
+TUCUMAN 2740			TUCUMAN 2740
+LAPRIDA 1763			LAPRIDA 1763
+UGARTECHE 3370			UGARTECHE 3370
+FIGUEROA ALCORTA 3015			FIGUEROA ALCORTA 3015
+BILLINGHURST 2502			BILLINGHURST 2502
+CALLAO 1045			CALLAO 1045
+CERVIÃ‘O 3958			CERVIÃ‘O 3958
+CALLAO 1822			CALLAO 1822
+MARCELO T DE ALVEAR 2074			MARCELO T DE ALVEAR 2074
+MONTEVIDEO 1986			MONTEVIDEO 1986
+PARANA 774			PARANA 774
+TALCAHUANO 1165			TALCAHUANO 1165
+VICENTE LOPEZ 1854			VICENTE LOPEZ 1854
+FITZ ROY 2322			FITZ ROY 2322
+MORENO 3054			MORENO 3054
+RODRIGUEZ PEÃ‘A 1524			RODRIGUEZ PEÃ‘A 1524
+PEÃ‘A 2378			PEÃ‘A 2378
+SALTA 606			SALTA 606
+VIDT 2075			VIDT 2075
+RODRIGUEZ PEÃ‘A 185			RODRIGUEZ PEÃ‘A 185
+LAVALLE 2185			LAVALLE 2185
+GODOY CRUZ 1655			GODOY CRUZ 1655
+CULLEN 5037			CULLEN 5037
+BULNES 865			BULNES 865
+AGUILAR 2641			AGUILAR 2641
+CHARCAS 3171			CHARCAS 3171
+PARANÃ 851			PARANÃ 851
+PEDRO GOYENA 1134			PEDRO GOYENA 1134
+JUAN BAUTISTA ALBERDI 1385			JUAN BAUTISTA ALBERDI 1385
+SALGUERO 3084			SALGUERO 3084
+VELAZCO 660			VELAZCO 660
+ANGEL GALLARDO 550			ANGEL GALLARDO 550
+ALSINA 2079			ALSINA 2079
+PAGANO 2601			PAGANO 2601
+ORO 2747			ORO 2747
+ANCHORENA 387			ANCHORENA 387
+MAIPU 73			MAIPU 73
+LIBERTADO 1144			LIBERTADO 1144
+AYACUCHO 277			AYACUCHO 277
+AUSTRIA 2163			AUSTRIA 2163
+SAN LUIS 2740			SAN LUIS 2740
+TUCUMAN 2015			TUCUMAN 2015
+GASCON 1224 			GASCON 1224 
+BLANCO ENCALADA 5283			BLANCO ENCALADA 5283
+CORRIENTES 4601			CORRIENTES 4601
+ARENALES 2196			ARENALES 2195
+ARENALES 2970			ARENALES 2970
+AYACUCHO 1386			AYACUCHO 1386
+AYACUCHO 1547			AYACUCHO 1457
+JUNIN 1238			JUNIN 1238
+CALLAO 1442			CALLAO 1442
+CASTEX 3476			CASTES 3476
+CORONEL DIAS 2753			CORONEL DIAS 2753
+JUNCAL 1564			JUNCAL 1564
+LAS HERAS 2024			LAS HERAS 2024
+LIBERTADA 964			LIBERTADA 964
+MONTEVIDEO 1565			MONTEVIDEO 1565
+PUEYRREDON 1861			PUEYRREDON 1861
+RODRIGUEZ PEÃ‘A 1640			RODRIGUEZ PEÃ‘A 1640
+SANTA FE 2147			SANTA FE 2147
+URIBUBU 1595			URIBUBU 1595
+URIBURU 1439			URIBURU 1439
+LA PAMPA 2020			LA PAMPA 2020
+PIERES 959			PIERES 959
+AVELLANEDA 3171			AVELLANEDA 3171
+ALVEAR 1520			ALVEAR 1520
+ESMERALDA 1355			ESMERALDA 1355
+JUNCAL 1183			JUNCAL 1183
+JUNCAL 1228			JUNCAL 1228
+JUNCAL 760			JUNCAL 760
+LIBERTAD 1315			LIBERTAD 1315
+JUNCAL 790			JUNCAL 790
+LIBERTAD 1376			LIBERTAD 1376
+MONTEVIDEO 1553			MONTEVIDEO 1553
+QUINTANA 116			QUINTANA 116
+MONTEVIDEO 1875			MONTEVIDEO 1875
+ALVEAR 1502			ALVEAR 1502
+PARERA 178			PARERA 178
+CERVIÃ‘O 3981			CERVIÃ‘O 3981
+QUINTANA 305			QUINTANA 305
+RODRIGUEZ PEÃ‘A 1716			RODRIGUEZ PEÃ‘A 1716
+RODRIGUEZ PEÃ‘A 1972			RODRIGUEZ PEÃ‘A 1972
+SANTA FE 1543			SANTA FE 1543
+A DE FIGUEROA 1465			A DE FIGUEROA 1465
+VIRREY LORETO 1590			VIRREY LORETO 1590
+SANCHEZ 2214			SANCHEZ 2214
+ALVAREZ THOMAS 228			ALVAREZ THOMAS 228
+SAN LUIS 3130			SAN LUIS 3130
+WENSEALAO VILLAFAÃ‘E 380			WENSEALAO VILLAFAÃ‘E 380
+INDEPENDENCIA 4083			INDEPENDENCIA 4083
+ARENALES 2756			ARENALES 2756
+CARACAS 5093			CARACAS 5093
+AVELLANEDA 4050			AVELLANEDA 4050
+PEDRO DE MENDOZA 2555			PEDRO DE MENDOZA 2555
+MONTEVIDEO 580			MONTEVIDEO 580
+CHACABUCO 1121			CHACABUCO 1121
+LA PAMPA 2144			LA PAMPA 2144
+M.ACHA 1460			M.ACHA 1460
+ZAPATA 250			ZAPATA 250
+RONDEAU 1757/NEPTUNO 55			RONDEAU 1757/NEPTUNO 55
+NICETO VEGA 5133			NICETO VEGA 5133
+CUBA 3684			CUBA 3684
+URIBURU 1010			URIBURU 1010
+URIBURU 338 			URIBURU 338 
+CABRERA 3825			CABRERA 3825
+BILLINGHURST 1711  			BILLINGHURST 1711  
+DOBLAS 572			DOBLAS 572
+JUAN BAUTISTA ALBERDI 1532			JUAN BAUTISTA ALBERDI 1532/DOBLAS 572
+URIBURU 1133			URIBURU 1133
+JUNCAL 747			JUNCAL 747
+RIO DE JANEIRO 69			RIO DE JANEIRO 69
+M.T DE ALVEAR 2320			M.T DE ALVEAR 2320
+BRASIL 1718			BRASIL 1718
+R.A DE SIRIA 3233			R.A DE SIRIA 3233
+PARAGUAY 3144			PARAGUAY 3144
+AYACUCHO 1463			AYACUCHO 1463
+SANTA FE 1219			SANTA FE 1219
+SANCHEZ DE BUSTAMANTE 1674			SANCHEZ DE BUSTAMANTE 1674
+CERVIÃ‘O 3444			CERVIÃ‘O 3444
+SAN MARTIN 543			SAN MARTIN 543
+JUEZ TEDIM 2966			JUEZ TEDIM 2966
+GUEMEZ 3190			GUEMEZ 3190
+CARLOS CALVO 2738			CARLOS CALVO 2738
+SAN JOSE 817			SAN JOSE 817
+SOLIS 306			SOLIS 306
+MORENO 1326			MORENO 1326
+VIAMONTE 811			VIAMONTE 811
+BILLNGHURTS 1685			BILLNGHURTS 1685
+JUNIN 1260			JUNIN 1260
+GABRIELA MISTRAL 2838			GABRIELA MISTRAL 2838
+VERA 913			VERA 913
+CUBA 2141			CUBA 2141
+AVELLANEDA 2151			AVELLANEDA 2151
+CUENCA 2359			CUENCA 2359
+Advocatus			DUARTE QUIROS 559
+Aires de General Paz			25 DE MAYO 1518/20
+Amsterdam			Bedoya 960
+Andino II			Dean Funes 1225
+Antonio I			Caseros 1140
+Arcos I			Independencia 582
+Arcos II			Independencia 574
+Arcos III			Independencia 608
+Arlequin			25 de mayo 0779
+Arturo Orgaz			Arturo Orgaz 138
+Atalaya			Chacabuco 164
+Av. Colon 66/86			Av. Colon 76
+Baco			Sucre 2227
+Balcones de la Quinta			Santa fe 54
+Balcones de Posadas			Jacinto Rios y Rosario Santa fe
+Baleares			Pueyrredon 842
+Baleares VI			Capital Federal 934
+Banco de Córdoba Nuevo Edificio Corporativo			Buenos Aires 147
+Banco de Cordoba Casa Matriz			San Jeronimo 166
+Banco de Cordoba Palace - Oficinas Corporativas			San Jerónimo 120
+Banco de Cordoba Sucursal Catedral			San Jerónimo esq Buenos Aires.
+Barcelona XI			M. Fragueiro 290
+Bedoya I			Bedoya 249
+Belvedere			Hipolito Irigoyen 330
+BTL 2			AV. JUAN B. JUSTO Nº 2769
+Bv San Juan 670			Bv San Juan 670
+Calamuchita			Av. Velez s Sarfield 1025
+Catorce-27			Buenos Aires 1427
+CBTOWER			YRIGOYEN 146
+Celta			David Luque 23
+Cenit IV			Obispo Oro 440
+Cenit V			Viamonte 248
+Chacabuco Privato			Chacabuco 529
+Cielo VI			Pje España 1306
+Ciscofran			Av. Santa Fe 428
+Columbia			Av. 24 de Septiembre 764
+Compañia de seguros El Comercio de Cordoba II			Chacabuco 229/31
+Complejo Aguaducho			Av. Colon 1800
+Complejo edilicio galeria del Huerto			Caseros 261
+Cordoba Office Center			Figueroa Alcorta Nº 185
+Corro 428			Corro 428
+Crisol			Crisol 58
+Cumbre IV			Av. Colon 533
+Delicia I			Ducasse 1027
+El Diamante			Bv. Ocampo 334
+El Gaucho			Ayacucho 139
+Emintex S.A.			Bv. Mitre 35
+Entresano			BV SAN JUAN 85
+Est. Capuchino			San Lorenzo 122
+Eusebio I			Av. Colon 3857
+Fiumiccino I			Jacinto Rios 372
+Fiumiccino II			Rosario de Santa fe 711
+Fiumiccino III			Catamarca 1253
+Fiumiccino IV			Lima 1642
+Fiumiccino V			Lima 1484
+Fiumiccino VI			Rosario de Santa Fe 757
+Florida XV			Rondeau 96
+Forum			Roma 260
+Forum II			Ovidio Lagos 450
+Fragueiro Office			Fragueiro 239
+Fundacion Causana			Madre F. Rubatto 2910
+Galaxia IV			Ituzaingo 750
+Garlot			H. Irigoyen 455
+Gibran			Balcarce 462
+Gran Hotel Victoria			25 de mayo 0240
+Granada V			Chacabuco 656
+Guemes I			Duarte quiros 310
+Guemes II			M. T de Alvear 267
+Habitat II			Duarte Quiros 10
+Harold II			Caseros 286
+Hospital Privado			Av. Rafael Nuñez 5229
+Hotel Buen Pastor Capuch			San Lorenzo 110
+Idaniko			Jeronimo Luis de Cabrera 768
+Imagen			27 de abril 0694
+Inarco XVI			Rosario de santa fe 955
+Ituzaingo			Ituzaingo 560
+Jardin Privato			Transito Caceres Allende 480
+JBP II			Miguel del Corro 342
+Jeronimo I			Ingeniero lopez 235
+Jeronimo Torre de Negocios			San Jeronimo 177
+Joanna			Av. Colon 158
+Julieta			Larrañaga 106
+Junin			Bv. Arturo Illia 217
+Kolektor			Rivera Indarte 734
+La Recova			Figueroa Alcorta 285
+Lace S.A			Av. Velez Sarfield 528
+Las Vegas			Hipolito Irigoyen 185
+Libertador I			Bv. Chacabuco 110
+Los algarrobos			Independencia 501
+Los Duendes IT			Independencia 809
+Majestic			24 de septiembre 1543
+Manal			Bv. Arturo Illia 357
+Marbella			Larrañaga 15
+Marcelo I			Bv. Arturo Illia 276
+Mariano Moreno			Av. Colon 1046
+Martin I			Ituzaingo 1139
+Megatone Suc. Cba San Martin			San Martin 199
+Megatone Suc. Suipacha			Suipacha 1096
+Meletios II			Rosario de santa fe 930
+Meletios III			Obispo Trejo 1214/16
+Meletios IV			25 de mayo 1591
+Meletios Office			Bolivar 350
+Meletios VII			Muñiz 55
+Mina Clavero			Caseros 687
+Miro			Pringles 110
+Mitra			Catamarca 2057
+Nueva Alborada			Pasaje 13 de diciembre 424
+Nueva Cordoba I			Buenos Aires 780
+Olmos			Bv. Chacabuco 580
+Onix			Fernando Fader 4273
+Orienz I			Bv. San Juan 611
+Oro			Pringles 357
+Ospe			Achaval Rodriguez 50
+Ossacra			SALTA
+Ovidio II			Ovidio Lagos 262/264
+Parque III			Manuel Estrada 147
+Parque Privato			Ana Maria Janet 1067
+Peredo Privato			Peredo 20
+Pinzani			25 de Mayo 114/118
+Plaza Privato			Ingeniero Lopez 236
+Proa II			Hipolito Irigoyen 79
+Punta Belgrano			Isaac Newton 6099
+Quazar II			Duarte Quiros 989
+Quinquela			Obispo Salguero 735
+Ramos XIV			Marcelo T de Alvear 1017
+Regina			Obispo Oro 374
+Renato IV			Independencia 1545
+Renato IX			Venezuela 109
+Renato V			Peru 140
+Renato VI			Av. Velez Sarfield 1370
+Renato VIII			Av. Velez Sarsfield 1188
+Rondeau Privato			Rondeau 610 / 614
+San Luis			San Luis 238
+San Mateo			Ayacucho 319
+Santangelo			Derqui 7
+Santo Tomas			Bv. San Juan 737
+Sarachaga			Hipolito Irigoyen 67
+Sirio Libanés			Ituzaingo 167
+SJC			San Jose de Calazans 370
+Sobremonte			27 de abril 0625
+Sol de Mayo			Sol de Mayo 427
+Supermercado Becerra Casa Central			Av. Belgrano 466
+Supermercado Becerra Deposito Central			Av. Belgrano 466
+Supermercado Sucursal Nº 11 Villa Gral Belgrano			Ojo de Agua 356
+Supermercado Sucursal Nº 8 Santa Rosa			Cordoba esq España
+Tagore			Parana 195
+Tamir			Belgrano 373
+Terminal de Omnibus Cordoba			Bv. Pte Peron 380
+Tolentino			Bv Zipoli 276
+Torre de la Amistad			Sucre 1409
+Torre Los Andes III			Bv. Los Andes 635
+Torre Patricia			Sucre 281
+Torre Privato			Achaval Rodriguez 162
+Torreon III			Ambrosio Olmos 658
+Trebol I			Buenos Aires 495
+Trebol II			Buenos Aires 509
+Trejo y Peru			Obispo Trejo y Peru
+Tres Pircas Hotel & Spa			Buenos Aires esq. Parana
+Trinidad III			Bv. Illia 270
+Tupac			TRANSITO C. DE ALLENDE 462
+Urbano			Montevideo 550
+Valdagno VII			Independencia 890
+Valtodano			PjeValtodano 1350
+Vetacord Comercial			Estados Unidos 2796
+Victorina I			Caseros 2275
+Victorina II			Dean Funes 2668
+Victorina III			9 de Julio esq. Tecera
+Virginia VIII			Bv Chacabuco 565
+Zigurat I			Independencia 408
+Zigurat II Y III			Bv. San Juan 19
+Zigurat IV			Independencia 396
+0022 TORRE INSIGNIA III			BOLIVAR Y ALBERDI
+0003 BANCO DE LA NACION ARGENTINA			MITRE BARTOLOME 326.PISO: 04 DPTO:428
+0013 PAUNERO			PAUNERO 47
+DAGATTI  ALICIO OSVALDO			HIPÓLITO IRIGOYEN 757 5° PISO
+0018 TERRAZAS DEL BOULEVAR - BARCELONETA S.A			BOULEVARD ROCA 901 PISO: EP. DPTO:B
+0001 CECIS  RIO CUARTO			CONSTITUCION 846 - PÌSO 3
+0019 LAJE RODOLFO JESUS			ALVEAR 1323
+LASCANO ING. ARQ. S.A.			
+0037 SINDICATO DE LUZ Y FUERZA			AV. ESPAÑA 350
+LV 16 - PUNTAL S.R.L			CONSTITUCION 399
+0031 GUINEA			GOUDARD 731
+0037 CET S.A  - CONCESIONARIA DE ENTRETENIMIENTO Y TURI			JUAN BAUTISTA DANIEL 1946
+RIBOLZI HERMA			
+CONSORCIO ED JACARANDÁ 			AVENIDA SAN MARTIN 660
+0017 ZAREX IV			LAS HERAS 1214
+0012 PIAMONTE 			HIPOLITO YRIGOYEN 1431
+ING. LUNARDI SRL			
+0036 SUPERIMPERIO S.A			AV. SABATTINI 4450
+LA ORACIÓN AGROPECUARIA S.A.			
+0011 PUERTA DEL SOL II			HIPOLITO YRIGOYEN 1231
+SAN LIN S.A.			DEAN FUNES 65
+LOS PRADOS SRL 			BARTOLOME MITRE 646
+0019 VIRGINIA II  CONSORCIO ED.			ALVEAR 1308
+0004 OPERA			SOBREMONTE 849
+0019 CONSORCIO ED GIOVANNI			ALVEAR 1356
+0021 CONSORCIO ED INTEGRAL II			ALVEAR 1546
+0004 NORBERTO II .			25 DE MAYO 14
+0011 PUERTA DEL SOL I 			HIPOLITO YRIGOYEN 1268
+0016 MARES III			BAIGORRIA 609
+0011 MARE´S IV			ALBERDI 1126
+1100 NICODEMUS 2			LISANDRO DE LA TORRE 445
+FIDEICOMISO CALLE CORRIENTES			CORRIENTES 471
+0023 TORRE CARDINALES - PROPIETARIAN SA			HUMBERTO PRIMO 630
+0029 TORRE ARNAO CONSORCIO ED.			MARIA OLGUIN 1336
+0010 TORRE MACERATTA 			ALBERDI 529 -  PISO:2 - DPTO:C
+0024 MELLITUS S.A.			INTENDENTE DR JAIME GIL 37 - PISO: 1
+0007 MUNICIPALIDAD DE RIO CUARTO			PJE C VILLA DE LA CONCEPCION 651
+0035 MERCADO DE ABASTO DE RIO CUARTO S.A			BVARD O L BUTELER O 1289
+BIBLIOTECA B RIVADAVIA Y SUS ANEXOS			ANTONIO SOBRAL 378
+NIZA SOCIEDAD ANONIMA			LAS HERAS 440
+0100 CPCE CBA			AV. HIPOLITO YRIGOYEN 490
+0033 FIDEICOMISO TORRE VESTA			ALONSO 225
+0023 TORRE PARQUE OLAZABAL			VICENTE BECARINI 47
+0002 GENERAL ROCA			CONSTITUCION 692
+0004 TORRE CABILDO 			BELGRANO 22
+0007 RIVADAVIA PALACE 			RIVADAVIA 114
+0019 TORRECIELOS ED. - DIRECCION SUR SA			ALVEAR 1278
+0024 BALCONES DEL RIO CONSORCIO ED. 			DR. JAIME GIL 153
+0001 BANCO DE CÓRDOBA			CONSTITUCIÓN 784
+0015 CENTAURO			CONSTITUCION 953
+0003 COCHERA OMEGA			SOBREMONTE 853
+0001 DELTA 			CONSTITUCION 809
+0004 GAL. PASEO JARDIN			SOBREMONTE 680
+0007 GENERAL PAZ			GENERAL PAZ 759
+0018 HUASIYCU			NEWBERY 983
+0021 CONSORCIO ED INTEGRAL			ALVEAR 1576
+0003 MONUMENTAL PLAZA			SOBREMONTE 745
+0018 PUNCU HUASI SOCIEDAD CIVIL CONSORCIO ED.			LAVALLE 1345
+0014 RIVADAVIA CENTER 			RIVADAVIA 354
+0009 SAN GERÓNIMO			CONSTITUCION 287
+0008 SARMIENTO			SARMIENTO 691
+0024 MAFALDA III - FID. ALBERTINA III			SOBREMONTE 240. PISO: P.B
+0005 CLÍNICA DEL NIÑO			ALVEAR 834
+0024 FIDEICOMISO MICHELANGELO III			PRESIDENTE PERON CENTRO 448
+0017 TORRES DEL ANDINO			SAN LORENZO Y HUMBERTO PRIMO
+0005 AUSTRAL II			ALVEAR 945
+0015 VIRGINIA V			CONSTITUCION 1037
+0025 BAUTISTA  CONSORCIO ED.			9 DE JULIO 343
+0024 COSTA SUR EDIFICIO			HIPOLITO YRIGOYEN 32
+0033 CONSORCIO ED LUBILA			BUENOS AIRES 1181
+0020 CONSORCIO ED. MARICEL			MITRE 1277
+0026 BUENOS AIRES CONSORCIO ED. - GARELLO OSCAR			BUENOS AIRES 782 - PISO:1 - DPTO:F
+0025 CONSORCIO ED RESIDENCIAL PARQUE			SANTIAGO DEL ESTERO 448
+0015 TORRE NOBILE S.A.			BOLIVAR 216
+0033 TORRE FLORIDA II			SAN MARTIN 1201
+OSDE ORG. DE SERVICIOS DIRECTOS EMPRESARIOS			ALEM LEANDRO 1067 PISO: 09
+0014 COSTACENTER			CHILE 684
+0010 COCHERA BAIGORRIA			BAIGORRIA 245
+0028 CONSORCIO PROPIETARIOS EDIFICIO MAGNOLIA			9 DE JULIO 1255
+FIDEICOMISO ED. 9 DE JULIO 458			9 DE JULIO 458
+0030 CONSORCIO ED. SAN MARTIN I 			SAN MARTIN 1079
+0030 CONSORCIO ED. SAN MARTIN 1071			SAN MARTIN 1071
+0030 CONSORCIO ED. SAN MARTIN 1087			SAN MARTÍN 1087
+0030  CONSORCIO ED. SAN MARTIN 1069			SAN MARTÍN 1069
+0031 CONSORCIO ED. SAN MARTIN 1114 			SAN MARTIN 1114
+0032 FIDEICOMISO GOB. GUZMÁN 1177			SAN MARTÍN 1076
+0012 TORRE CAESARS			GENERAL PAZ 1501
+0015 CRILLON S A C I			GENERAL PAZ 1043
+0026 CONSORCIO ED GINÉS			SAN MARTIN 686
+0023 DIR GRAL DE TESOR Y CRED PUBL DE LA PROVINCIA			AV. CONCEPCION ARENAL 54
+0027 CONSORCIO ED. ISRAEL			CABRERA 519
+0025 CONSORCIO ED PORTA NOBILE 			MENDOZA 345
+0013 TORRE ITALIA 			AV ITALIA 82
+0029 FIDEICOMISO DE ADMIN Q Y A			MENDOZA 1353
+0015 JUZGADO FEDERAL          			SARMIENTO 877 - PISO 10 - CAP FEDERAL
+0031 FIDEICOMISO EDIFICIO LÚMINO			SAN MARTíN 1138
+BUENOS AIRES ED. - VILLA MARIA 			BUENOS AIRES 1070
+MARIA I EDIFICIO- VILLA MARIA			RUCCI  254 - BARRIO CENTRO - VILLA MARIA
+MARÍA II EDIFICIO - VILLA MARÍA			BUENOS AIRES 1377 VILLA MARIA
+0003 GRAND HOTEL			SOBREMONTE 725
+0020 CINCO HERMANAS			CABRERA 1149
+FAMILIA MOSSO S.A.			Hipoliton Yrigoyen 829
+0026 CONSORCIO ED. TORRE CALLIA			SAN MARTIN 556
+0002 CATEDRAL 			CONSTITUCION 750
+0002 GALERIA  GRAL.ROCA			CONSTITUCION 692
+0005 TORRE MYKONOS			ALVEAR 864
+0010 RANQUEL IV 			25 DE MAYO 259
+GHIGLIONE PATRICIA SUSANA			PAUL HARRIS 829
+0030 FIDEICOMISO MICHELANGELO I			SAN LORENZO 1967
+0010 MICHELANGELO II 			PRESIDENTE PERON CENTRO 448
+0021 NEOCLINICA			AVENIDA ITALIA 1466
+0014 TORRE CRISTAL			LAMADRID 854
+0006 SOPROUR S.A			PASAJE DARRAGUEIRA S.A
+0002 CÓNDOR 			CONSTITUCION 564 PISO:03 DPTO:A
+CONSORCIO ED LUCÍA			
+0120 GONZALEZ AM			BELGRANO Y LAS HERAS
+0008 GEMA 			BELGRANO 452
+0006 MERIDIANO			ALVEAR 685
+0013 TORRE DE LA VILLA			AVENIDA ITALIA 1214
+0035 ED. TORRES DEL PARQUE I Y II 			AVDA  MARCELO T DE ALVEAR 736 - BANDA NORTE
+0013 EL VIRREY			SOBREMONTE 1266
+0004 PROGRESO			SOBREMONTE 685
+0007 FUNDACION RIO CUARTO 			PJE. C DE LA CONCEPCION 651
+0028 SOCIEDAD DAMAS DE MISER DE RIO IV 			COLON Y 9 DE JULIO 897
+UTN - VILLA MARIA			SARMIENTO 440 - PISO: 07
+CONSORCIO ED FRANCISCO I			BELGRANO (ENTRE 9 DE JULIO Y MORENO)
+0031 COCHERA LÚMINO 			SAN MARTIN 1110
+EL PELDAÑO SRL			
+0001 CENTRO COMERCIAL 			CONSTITUCION 846
+0100 ATILRA - VILLA MARÍA			YRIGOYEN HIPOLITO 4056
+BANCO SUPERVIELLE S.A			MITRE BARTOLOME 434
+0027 CONSORCIO ED. ITUZAINGÓ SOCIEDAD CIVIL			ITUZAINGO 950
+FINCA 1948 S.A.			GRAL PAZ 85
+DELFINO CARLOS			
+JORBA			
+JORGE MARTINEZ			RUTA 30 KM 1,5 LOTE 161 SAN ESTEBAN COUNTRY
+0012 SAN SEBASTIÁN			LAMADRID 1740
+0022 TERRAZAS DEL SOL CONSORCIO ED.			REGIMIENTO DE INFANTERIA 14 Nº 188/198
+0036 BARALE HNOS S.A.			AV SABATTINI 2474
+CUZCO CHICO SA			
+0016 TORRE LAS HERAS			LAS HERAS 569
+JUAN JOSÉ MORÁN			MORENO 1240
+0034 EMPRENDIMIENTOS AGROPECUARIOS EL 29 S.A.			CALLE 11 N° 1069 - BARRIO GOLF
+0090 ACEITERA GENERAL DEHEZA			GENERAL DEHEZA
+BELGOFF			
+CLAUDIA VILLARREAL			
+ANGELINA RIZZO			
+FROUTE			
+PEDRO MARINELLI			
+EL MUNDO DEL RODADO			
+0032 VITTA			FOTHERINGHAM 960
+0101 CPCE CBA			AV. HIPOLITO YRIGOYEN 490
+0027 FIDEICOMISO DE ADMIN Q Y A			ITUZAINGO 1100
+0016 ASPURC			VELEZ SARSFIELD 448
+0006 AFIP			YRIGOYEN HIPOLITO 3070 PISO:4 DPTO:4752
+0101 ADM FEDERAL DE INGRESOS PUBLICOS			YRIGOYEN HIPOLITO 3070 PISO:4 DPTO:4752
+0102 ADM FEDERAL DE INGRESOS PUBLICOS			YRIGOYEN HIPOLITO 3070 PISO:4 DPTO:4752
+0102 ADM FEDERAL DE INGRESOS PUBLICOS			YRIGOYEN HIPOLITO 3070 PISO:4 DPTO:4752
+0008 ALTOS DE BELGRANO			BELGRANO 463
+ASOC DE COOPERATIVAS ARGENTINAS			MADERO EDUARDO AV. 942 PISO 7
+ASOC DE COOPERATIVAS ARGENTINAS			MADERO EDUARDO AV. 942 PISO 7
+0012 ASTURIAS			INDEPENDENCIA 991 - PISO 8 DPTO D
+0011 ARCADIA I			HIPOLITO YRIGOYEN 1187
+0011 ARCADIA II			PEDERNERA 237
+0029 CONSORCIO ED ABILENE B			PJE ABRAHAM LINCOLN 1067
+0005 ALVEAR			BUENOS AIRES 208
+0009 ALAS DEL CENTRO			HIPOLITO YRIGOYEN 346
+0020 CONSORCIO ED ALEGRO I			CABRERA 1229
+0020 CONSORCIO ED ALEGRO III			CABRERA 1284
+0009 ALTO ANCONA			CORRIENTES 3
+0021 CONSORCIO ED ALTOS DE ALVEAR			ALVEAR 1674
+0028 CONSORCIO ED AMARINDA			PJE LANCEROS DEL SUR 2223
+0008 AMERICA			BELGRANO 287
+CONSORCIO ED ALEGRO II			MORENO 657
+DIR GRAL DE TESOR Y CRED PUBL DE LA PROVINCIA			AV. CONCEPCION ARENAL 54
+DIR GRAL DE TESOR Y CRED PUBL DE LA PROVINCIA			AV. CONCEPCION ARENAL 54
+DIR GRAL DE TESOR Y CRED PUBL DE LA PROVINCIA			AV. CONCEPCION ARENAL 54
+0017 TORRES DEL ANDINO II			SAN LORENZO Y HUMBERTO PRIMO
+0025 COCHERA MITRE			-
+0095 SUPERIMPERIO S.A			AV. SABATTINI 4450
+0100 SUPERIMPERIO S.A			TUCUMÁN 1331, VILLA MARÍA
+0120 ESCUELA ADELIA M DE OLMOS			HIPOLITO YRIGOYEN Y MANSILLA
+0034 APART GOLF FRANCE			SAN MARTIN 2750
+0009 ANTARES			SOBREMONTE 491
+0028 CONSORCIO ED ALEGRO II			MORENO 657
+0021 NEOCLINICA ESQUINA 			AVENIDA ITALIA 1384
+0001 CECIS II RIO CUARTO			CONSTITUCION 846 - PÌSO 3
+0033 ANACLETO PEANO FIDEICOMISO ED.			SAN MARTIN 1334
+00CONTROL			BOLIVAR 308
+0033 TORRE FLORIDA I			ESTRADA 274
+NUEVA EMPRESA			domicilio
+0023 TORRE MAFALDA			MARCONI 1115
+CENTAURO IV			24 de Septiembre 702
+TALLER			BOLIVAR 308
+CENTAURO V			24 DE SEPTIEMBRE 859
+CENTARUO VI			VIAMONTE 362
+ESTUDIANTINA			CHUBUT 20
+CISPREN I			AV. COLON 5398 / 27 DE ABRIL 537
+COCHABAMBA 1693			Cochabamba 1693
+COCHABAMBA 1776			Cochabamba 1776
+PLAZA COLON			COLON 857
+COMPLEJOCIPREN II			27 DE ABRIL 5356
+COMPOSTELLA			Ituzaingo 528
+CRESCENCIO II			Tucuman 2254
+CRESCENCIO III			Cervantes 281
+CRESCENCIO IV			TUCUMAN 2270
+CRUZ DEL SUR I			Duarte quiros 2727
+R.PEÑA 442			R.Peña 442
+DENISE			Catamarca 1151
+DERQUI 425			DERQUI 425
+DORADO I			27 de Abril 990
+CENTENARIO			DUARTE QUIROS 49
+DUCACCE 1033			Ducacce 1033
+EDICA			Mariano Moreno 740
+RDI III			Duarte quiros 1880
+EL FUNDADOR			D.funes 341
+EL TRUST			25 de Mayo 18
+EQUINOCCIO			Uquiza 130
+ESTORIL			BV. ILLIA 431
+ESTRADA 30			ESTRADA 30
+ESTRADA 59			ESTRADA 59
+ONIX			F.FADER 4281
+FERRO			Santa Rosa 116
+FIR IV			OBISPO TREJO 725
+FRIULI			Santa Fe 372
+GAUDI			Santa Rosa 134
+GEMA II			27 de Abril 325
+GENESIS			24 DE SEPTIEMBRE 1409
+GERONA I Y II			C.OLMEDO 97.
+GRAL.PAZ 598			Gral.Paz 598
+GRAL PAZ TOWER			Felix Frias 226
+CONSORCIO PROPIETARIOS DEL EDIFICIO HUMA			CHACABUCO 787
+INTERLAKEN I			Frlix Frias 290
+ITUZAINGO 1270			ITUZAINGO 1270
+SANTA ANA VIII			ITUZAINGO 514
+ITUZAINGO 689			 ITUZAINGO 689
+J.J. PASO 1090			Juan jose paso 1090
+LEONIDAS VIII			J.LUIS DE CABRERA 723
+JACARANDA			A.Rodriguez 43
+JBP			MT DE ALVEAR 537
+LA CARMELA			H.irigoyen 188
+LA CONTINENTAL			Colon 116
+LA MUNDIAL			OLMOS 91
+LAUTARO I			Bolivar 455
+LAUTARO IV			Pringles 55
+RENATO I			Lavalleja 1426
+LIBERTADOR III -			D.QUIROS 290
+LIRIO DENDRON			24 de Septiembre 1236
+LOS ANGELES			Colon 119
+LOTUS			Caseros 985
+MAIPU 491			MAIPU 491
+MARA II			Pje. Jimenez 1347
+TORRE CAÑADA			Mt de alvear 750
+Montevideo 67			MONTEVIDEO 67
+NILO			V.sarfield 817
+Monimar			BV.ILLIA 235
+NORMAL			Colon 767
+OBISPO TREJO 1075			O.trejo 1075
+ONGAMIRA			Lavalleja 1431
+OVIDIO LAGOS 11			OVIDIO LAGOS 11
+OVIDIO LAGOS 514			OVIDIO LAGOS 514
+PARAGUAY			D.funes 1205
+PASO DE LOS ANDES 315			PASO DE LOS ANDES 315
+PATIO CHICO			Rondeau 84
+Peru 75			Peru 75
+PLAZA 9 DE JULIO			PLAZA 9 DE JULIO 1185
+PLAZA ITALIA			Ayacucho 109
+PORTA NOVA I			Sarachaga 333
+PORTA NOVA V			Fragueiro 1517
+CALYPSO I			PRINGLES 132
+PRINGLES 140			Pringles 140
+PROVIDENCIA			BIALET MASSET 1692
+PUERTA DEL SOL			Montevideo 281
+PUEYRREDON 967			 PUEYRREDON 967
+Faustino III			R. SANTA FE 1535
+RANQUELES			Pueyrredon 191
+REINA ISABEL			Isabel la Catolica 343
+REINA VICTORIA			Bolivar 53
+REPUBLICA DOMINICANA 150			Republica Dominicana 150
+RICHIERI 2825			Richieri 2825
+R.PEÑA 1317			R.Peña 1317
+ROMA 122			ROMA 122
+ROMA 368			ROMA 368
+RONDEAU 685			RONDEAU 685
+S. J. DE CALASANZ 253			S. J. DE CALASANZ 253
+SAN GREGORIO I			9 de Julio 1631
+SAN JERONIMO 525/527			San Jeronimo 525/527
+SAN LORENZO 163			San Lorenzo 163
+SANTA FE 106			Santa fe 106
+JUCODE S.A.			SANTA ROSA 1030
+STO. CABRAL 266			Sto. Cabral 266
+SILVINA			Maipu 779
+SOFINAR I			Rioja 415
+FELIX FRIAS 344			Felix Frias 344
+SONOMA I			Felix Frias 108
+ARTIGAS 10			ARTIGAS 10
+ARTIGAS 348			ARTIGAS 348
+SUREÑO			Malagueño 1778
+TABOR 2245			TABOR 2245
+TAMARINDO II			CASEROS 924
+TAMARINDO III			CALASANZ 174
+TAMBURINI			SAN MARTIN 235
+Tauro Xl			Baigorri 630
+TAURO IX			Cervantes 775
+TORRE AZUL			Arenales 290
+TORRE GAVEA			BRASIL 56
+TOSCANA II			FRLIX FRIAS 24
+TRIBECA			Rio Cuarto 214
+TRIVENTO			GRAL.DEHEZA 779
+EDIFICIO FLAVON I			Urquiza 236
+VICTORIA PARK			SAN MARTIN 650
+VITALINO			Duarte Quiros 2374
+VOLTERRA I			O.lagos 248
+VOLTERRA II			Gral.Paz 1956
+VOLTERRA III			Fragueiro 2963
+YATAY			David Luque 359
+ITUZAINGO 715			Ituzaingo 715
+SARACHAGA 1269			SARACHAGA 1269
+CORONEL OLMEDO 123			CORONEL OLMEDO 123
+CRISOL 138			Crisol 138
+DEAN FUNES 819			DEAN FUNES 819
+D.FUNES 934			D.funes 934
+MINISTERIO DE ECONOMIA Y GESTION PUBLICA			R.INDARTE 650
+DUARTE QUIROS 640			DUARTE QUIROS 640
+FINANFOR			Olmos 279
+HAEDO 151			Haedo 151
+EL AUDAZ SA			Bv. Las Heras 1000
+OBISPO SALGUERO 505			OBISPO SALGUERO 505
+CENTAURO I			O.LAGOS 291
+CASEROS 1061			CONSORCIO CASEROS 1061
+CASANOVA I			O.LAGOS 354
+CAMPILLO OESTE			CAMPILLO 780
+PAYER ALFREDO.PAYER LUISA VALENTINA Y PAYER SANTIAGO LUIS			DERQUI 425 P.B.
+BARTOLOME IV			Campillo 675
+ACACIA			CAMPILLO 530
+CAMPILLO 515			Campillo 515
+RENATO III			CAMPILLO 173
+ALERCES ADMINISTRACIONES INTEGRALES S.A.S.			ESQUIU 442
+BV.CHACABUCO 611			Bv.Chacabuco 611
+BUENOS AIRES 898			Buenos aires 898
+BOLIVAR 429			BOLIVAR 429
+BEMA IX			ARTIGAS 319
+BEDOYA 458			Bedoya 458
+BARCELONA X			Fragueiro 11
+BARCELONA III			Obispo trejo 783
+BARCELONA I			Obispo trejo 817
+AVELLANEDA 1310			Avellaneda 1310
+ASTRAL IV			BV.CHACABUCO 635
+ANA M. JANNER 1054			ANA M. JANNER 1054
+SECTOR 9 MZA 47 PROCREAR			SECTOR 9 MZA 47 PROCREAR
+AGUAS CLARAS			CONSORCIO AGUAS CLARAS
+ASOCIACION MUTUAL			NACIONES UNIDAS 346
+9 DE JULIO 573			9 de Julio 573
+CONCORDE III			24 DE SEPTIEMBRE 1346
+12 DE OCTUBRE 1335			CONSORCIO 12 DE OCTUBRE 1335
+SUCRE 310			Sucre 310
+ESQUIU 48			ESQUIU 48
+ALBERDI			ING.LOPEZ 9
+TORRES DE LA CAÑADA			LAVALLEJA 45
+CENTAURO II Y III			24 de septiembre 1215 / Pringles 228
+Consorcio de propíetarios Las Terrazas Edificio Domus			MONTEVIDEO 444
+MIRADOR DEL RIO			Sarmiento 805
+0032 GUZMÁN II			GOBERNADOR GUZMÁN 1000
+ANSENUZA III			CORRO 97
+FORMENTERA II			CAMPILLO 696
+SUCRE 1468			Sucre 1468
+BALCONES AL SOL			C.OLMEDO 415
+Lautaro III			25 DE MAYO 1199
+BAHÍA			D.Funes 925
+0022 MAFALDA II			ALBERDI
+COLON 172			COLON 172
+COLOMBIA 69			Colombia 69
+CHICOANA 327			CHICOANA 327
+RENACIMIENTO			CHACABUCO 585
+CASTROBARROS 347			CASTROBARROS 347
+CASA DIAZ			CBA
+ALTA VILLA II			Buenos aires 1141
+BV. SAN JUAN 127			BV. SAN JUAN 127
+CASEROS 344			CASEROS 344
+CAMPILLO 132			CAMPILLO 132
+AYACUCHO 463			Ayacucho 463
+BARCELONA II			Obispo trejo 812
+ALEJANDRA			V.sarfield 1417
+COCHERAS DE TRIBUNALES			DUARTE QUIROS 765
+AGUSTO LOPEZ 1020			AGUSTO LOPEZ 1020
+BUENOS AIRES 596			BUENOS AIRES 596
+BARCELONA XI			Fragueiro 290
+BARCELONA VIII			RONDEAU 374/376
+AYACUCHO 338			AYACUCHO 338
+URRUTIA 175			JOSE MIGUEL URRUTIA 175
+LIMA 1023			Lima 1023
+DUARTE QUIROS 1907			Duarte Quiros 1907
+ANDINO V			SANTA ROSA 866
+COCHERAS DE TUCUMAN			Tucuman 259
+TAURO I			Faustino allende 177
+SUCRE 46			SUCRE 46
+SONOMA RIVERA			Esquiu 753
+PORTA NUOVA II			Castelar 650.
+SANTA LUCIA SRL			rancagua 3310
+Aguilar			UQUIZA 1460
+SAN LUIS			AYACUCHO 335
+AECANOVA			9 DE JULIO 2682
+Ana Maria . 			CATAMARCA 730
+O.TREJO 924			O.trejo 924
+A.OLMOS 779			A.Olmos 779
+ALBA			SAN MARTIN 1570
+ALTOS DEL CHATEAU			Flia.Nallino
+ALIMENTARIA MANAL			Ohiggins 4062
+A.RODRIGUEZ 46			A.RODRIGUEZ 46
+A.RODRIGUEZ 125			A.Rodriguez 125
+BV. OCAMPO 242			BV. OCAMPO 242
+AGUILERA JORGE			MORENO 251
+ESTRADA 127			ESTRADA 127
+Faustino Allende 887			Faustino Allende 887
+FELIX FRIAS 234			Felix Frias 234
+FOMENTERA 1			JUJUY 1391
+Carlos paz			LISANDRO DE LA TORRE 91
+GALICIA			BELGRANO 327
+GRAND ASTORIAS OFICINAS			Colon 164
+Figueroa Alcorta 38			FIGUEROA ALCORTA 38
+HOTEL INTERLAC			HOTEL INTERLAK
+ADAM REGINE			Jose ingeniero 128
+INMOB. TIRANTTI			CBA
+INSUMOS PARA PC			GRAL.BUSTOS 880
+INTI			V.SARFIELD 1561
+ITUZAINGO 575			ITUZAINGO 575
+JERONIMO CORTEZ 949			Jeronimo Cortez 949
+PORTAL DE JUJUY			JUJUY 177
+LAVALLEJA 49			LAVALLEJA 49
+LOS CAIRELES			27 DE ABRIL 2929
+MARIANO			M.T.DE ALVEAR 563
+MANHATTAN			URUGUAY 624
+MARTIN GARCIA 1395			MARTIN GARCIA 1395
+ROMERO CARLOS MARTIN			Rafael Nuñez 4237
+MINISTERIO DE BIOAGROINDUSTRIA O.P			F.Alcorta 234
+MONOBLOCK			COMECHINGONES 939
+O.TREJO 721			Trejo 721
+Terrazas de trejo 			OBISPO TREJO 758
+ONCATIVO 1678			oncativo 1678
+Panaderia Modelo			Av.Carafa
+PETORUTTI 2211			PETORUTTI 2211
+PJE.ESPAÑA 1364			Pje.España 1364
+PJE.HILARIO FERNANDEZ 15			Pje.Hilario Fernandez 15
+MINISTERIO DE ECONOMÍA Y GESTIÓN PÚBLICA			CONCEPCION ARENAL 54.
+SAN NICANOR I			Duarte quiros 271
+SAN NICANOR II			O,Trejo 1076
+SANTA ROSA 1330			Santa Rosa 1330
+SANTA ROSA 156			Santa Rosa 156
+DAVID ARREGUI			CBA
+OLIVIERI, MARIA SOLEDAD Y DE GENNARO, PAULA ANDREA			Av.Colon 168. Piso 4 Dpt B.
+SRA. BONALDI			CBA
+SUCRE 72			SUCRE 72
+SUPER CORDOBA AGRANEL S.A			LA TABLADA 45
+SUPER CORDOBA AGRANEL S.A			SAN MARTIN 512
+TEJERINA 2280			TEJERINA 2280
+TENIENTE MORANDINI			TENIENTE MORANDINI 205
+TOMAS GUIDO 1831			Tomas Guido 1831
+TORRE ANDINA			BOLIVIA 159
+TORRE ANGELA			27 de Abril 370
+DIRECCION DE ADMINISTRACION DEL PODER JUDICIAL PROV DE CORDOBA			CASEROS 551
+TRIBUNALES DE SAN FRANCISCO			GOBERNADOR AGODINO 52
+TRIBUNALES DE VILLA DOLORES			SARMIENTO 359/369
+DIRECCION DE ADMINISTRACION DEL PODER JUDICIAL PROV DE CORDOBA			CASEROS 551
+V.SARFIELD 147			V.Sarfield 147
+ANA PASCHETA			Cordoba
+BARCUNSKY & PEREZ			CORDOBA
+CABALEN			Cordoba
+CARRARA ADMINISTRACION			Cordoba
+Catalina Ferroni			Cordoba
+
+

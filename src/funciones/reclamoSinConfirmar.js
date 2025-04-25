@@ -61,16 +61,16 @@ async function reclamoSinConfirmar(numero, gotoFlow){
             await guardarContexto(conversacion, numero)
             const respuesta = await mensajeChatGPT(forzarConfirmacion.content, prompt, numero);
             console.log('Respuesta de ChatGPT:', respuesta);
+            seConfirmo = true
 
             // Agregar la respuesta de ChatGPT al contexto
             conversacion.push({ role: 'system', content: respuesta });
            
-            //generar reeclamo otra vez???
+            //generar reeclamo desde este punto
             generarReclamo(numero, respuesta)
-            seConfirmo = true
-            gotoFlow(flowEquipo)
         }
     })
+    console.log(seConfirmo, 'se confirmo en en reclamoSinConfirmar')
     return seConfirmo
 }
 

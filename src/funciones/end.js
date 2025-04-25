@@ -3,14 +3,14 @@ import { finalizarConversacion } from '../openai/historial.js'
 import reclamoSinConfirmar from './reclamoSinConfirmar.js';
 
 let timeoutId
-function end(endFlow, numero, gotoFlow) {
+async function end(endFlow, numero, gotoFlow) {
     try {
         // Limpia el timeout anterior si existe
         if (timeoutId) {
             clearTimeout(timeoutId);
         }
 
-        let reclamo = reclamoSinConfirmar(numero, gotoFlow);
+        let reclamo = await reclamoSinConfirmar(numero, gotoFlow);
         console.log(reclamo, 'en end flow true or false')
         if (reclamo === true) return gotoFlow(flowEquipo)
         // Configura un nuevo timeout si el reclamo no fue confirmado

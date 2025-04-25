@@ -1,13 +1,19 @@
 //recibe como texto la respuesta del postAlBackend al enviar un mensaje y separa el num de la url
 
+import consultaMySql from "../Utils/consultaMySql.js";
+import nombreEmpresa from "../Utils/nombreEmpresa.js";
+
 //{"status":"success","message":"Datos: "} '[["37390*80070258*#03516674325#03515394961#0351-155214053#03516646898#03516646896#"]]'
 
-function armarURL(data, numOrden) {
-
+async function armarURL(data, numOrden) {
     if(data.includes('[{"logstatus"') || data.includes('[["1*Se agrego el mensaje al reclamo')){
         return null
     }
-
+    const nomEmp = await nombreEmpresa()
+    const query = 'SELECT idu_fe00 FROM lpb_fe00 where ufe_fe00 = ?'
+    const idEmp = await consultaMySql(query, [nomEmp])
+    console.log(nomEmp, idEmp)
+    
     const dataStart = data.indexOf('[');
     const dataEnd = data.lastIndexOf(']') + 1;
     const dataString = data.slice(dataStart, dataEnd);
@@ -19,7 +25,7 @@ function armarURL(data, numOrden) {
     const numEnd = resultado[0].lastIndexOf('*')
     const numUrl = resultado[0].slice(numStart, numEnd)
 
-    let url = `https://unont.com.ar/yavoy/formato.php?r=${numUrl}&n=${numOrden}&t=10`
+    let url = `https://unont.com.ar/yavoy/formato.php?r=${numUrl}&n=${numOrden}&t=10&u=${idEmp}`
 
     return url
 }
