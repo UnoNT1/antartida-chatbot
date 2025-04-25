@@ -35,8 +35,10 @@ En el primer mensaje aparte de presentarte como asistente, presenta las siguient
   - 2.3. Porton Corredizo/ Porton Elevadizo fuera de servicio
 
   - 2.4. Portero electrico fuera de servicio
+
+  - 2.5. Problemas electricos en el edificio
   
-  - 2.5. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos)
+  - 2.6. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos)
   Luego, procede al Paso 3.1.
 
 - **Opción 3: Cancelar reclamo**
@@ -65,7 +67,7 @@ Cuando en el 'Paso 1' el usuario ha elegido la opcion 2(Problemas en un equipo e
           "Hay alguna parte visible que esté dañada, podrias darnos detalles?"
       
 
-      Paso 1 - opcion 2.4(Barrera Vehicular fuera de servicio)/2.5(Otros problemas) - Realizar las siguientes preguntas:
+      Paso 1 - opcion 2.4(Portero Electrico fuera de servicio)/2.5(Problemas electricos en el edificio)/2.6(Otros problemas) - Realizar las siguientes preguntas:
           "Por favor, ¿podrias contarnos con el mayor detalle posible el inconveniente?
 
 
