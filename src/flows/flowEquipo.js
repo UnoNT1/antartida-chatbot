@@ -16,6 +16,15 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
             const url = await getUrl()
             const nomEmp = await nombreEmpresa()
             const equipoR = equipos[1].equipoR.includes('SAR') ? 'SAR' : equipos[1].equipoR
+            let numAtencionCl
+
+            if(nomEmp === 'Latorre'){
+                numAtencionCl = '3585603332'
+            }else if(nomEmp === 'Servicar'){
+                numAtencionCl = '3517363635'
+            }else if(nomEmp === 'Incast'){
+                numAtencionCl = '0800 888 4990'
+            }	
 
             console.log('equipos en flow equipo', equipos)
             /* 
@@ -38,7 +47,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
 
                     await flowDynamic([
                         {
-                            body: `Nuestra empresa ${nomEmp} no trabaja con el equipo: '${equipos[1].equipoR}' en este edificio, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: 0800 888 4990. El numero de orden generado es ${nroOrden}. Los equipos que tenemos disponibles en este edificio son: ${equiposDisponibles}.`,
+                            body: `Nuestra empresa ${nomEmp} no trabaja con el equipo: '${equipos[1].equipoR}' en este edificio, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: ${numAtencionCl}. El numero de orden generado es ${nroOrden}. Los equipos que tenemos disponibles en este edificio son: ${equiposDisponibles}.`,
                             delay: 2000,
                         }
                     ])
