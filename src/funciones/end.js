@@ -1,4 +1,6 @@
+import { getNroOrden } from '../Fetch/postIniciarOrden.js';
 import flowEquipo from '../flows/flowEquipo.js';
+import { setConfirmoFlow } from '../flows/flowInicio.js';
 import { finalizarConversacion } from '../openai/historial.js'
 import reclamoSinConfirmar from './reclamoSinConfirmar.js';
 
@@ -10,12 +12,16 @@ async function end(endFlow, numero, gotoFlow) {
             clearTimeout(timeoutId);
         }
 
-        let reclamo = await reclamoSinConfirmar(numero, gotoFlow);
-        console.log(reclamo, 'en end flow true or false')
-        if (reclamo === true) return gotoFlow(flowEquipo)
+        let reclamo = await reclamoSinConfirmar(numero);//aca se comprueba si el reclamo fue confirmado o no, si no fue confirmado se envia un mensaje a la IA para que lo confirme
+        let nroOrden = await getNroOrden()
+        if (nroOrden && gotoFlow !== '') return gotoFlow(flowEquipo)
+
         // Configura un nuevo timeout si el reclamo no fue confirmado
         timeoutId = reclamo !== true ? setTimeout(async () => {
             console.log('Conversación finalizada por inactividad.', reclamo, timeoutId);
+
+            setConfirmoFlow(false)//cambia el valor de la variable que maneja el comienzo de la conversacion
+
             await finalizarConversacion(numero);
             return await endFlow();
         }, 600000) : timeoutId; // 10 minutos en milisegundos

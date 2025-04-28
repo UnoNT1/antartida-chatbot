@@ -17,6 +17,9 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
     .addAction(
         null,
         async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
+            console.log(confirmoFlow, 'true or falseee ne inciio')
+            let numero = ctx.from
+            let mensaje = ctx.body.toLowerCase()
             if(confirmoFlow){
                 return
             } else {
@@ -24,23 +27,22 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                 await flowDynamic([{ body: `Muchas gracias por comunicarse con Ascensores ${nombreEmp}.`, delay: 1000 }])
             //
             console.log('primer action')
-                let numero = ctx.from
-                let mensaje = ctx.body.toLowerCase()
                 const prompt = await getPrompt(nombreEmp);
                 const convGPT = await mensajeChatGPT(mensaje, prompt, numero)
                 await flowDynamic([{ body: convGPT }])
-                end(endFlow, numero, gotoFlow)//finaliza la conversacion
             }   
+            end(endFlow, numero, gotoFlow)//finaliza la conversacion
     })
     .addAction(
         { capture: true },
         async (ctx, { flowDynamic, fallBack, gotoFlow, endFlow }) => {
+            let numero = ctx.from
+            let mensaje = ctx.body.toLowerCase()
+            const nombreEmp = await nombreEmpresa()
+            
             if(confirmoFlow){
                 return
             } else {
-                let numero = ctx.from
-                let mensaje = ctx.body.toLowerCase()
-                const nombreEmp = await nombreEmpresa()
                 //
             console.log('segundo action')
                 const prompt = await getPrompt(nombreEmp);
@@ -85,14 +87,18 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                         return gotoFlow(flowEquipo)
                     }
                 }
-                end(endFlow, numero, gotoFlow)//finaliza la conversacion
                 fallBack('')
             }
+            end(endFlow, numero, gotoFlow)//finaliza la conversacion
         }
     )
 
- 
-function getEquipos(){
+const setConfirmoFlow = (value) => {
+    confirmoFlow = value
+}
+
+    
+const getEquipos = () => {
     equipos = equipos.map(obj => obj['abr_as00'] === 'ASC' ? 'ASCENSOR' : 'ASCENSOR');
 
     return [
@@ -105,4 +111,4 @@ function getEquipos(){
     ]
 }     
 
-export { flowInicio, getEquipos };
+export { flowInicio, getEquipos, setConfirmoFlow };

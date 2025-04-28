@@ -22,7 +22,7 @@ const archivoContexto = (number) => path.resolve(__dirname, `../openai/contextoG
 ]*/
 //el motivo de la existencia de esta funcion es por que en algunas opotunidades la ia de GTP hace lo que quiere y no confirma el reclamo de la forma en que se le indica en el propmt
 
-async function reclamoSinConfirmar(numero, gotoFlow){
+async function reclamoSinConfirmar(numero){
     let seConfirmo = false;
     const nombreEmp = await nombreEmpresa()
     const prompt = await getPrompt(nombreEmp);

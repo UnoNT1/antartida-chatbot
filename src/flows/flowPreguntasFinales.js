@@ -3,7 +3,7 @@ import flowFin from './flowFin.js'
 import end from '../funciones/end.js'
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js'
 import { getNrosTecnicos } from '../funciones/generarReclamo.js' 
-import { getEquipos } from './flowInicio.js'
+import { getEquipos, setConfirmoFlow } from './flowInicio.js'
 import { getNroOrden, getUrl } from '../Fetch/postIniciarOrden.js'
 import consultaMySql from '../Utils/consultaMySql.js'
 import respuestaTemporal from '../funciones/respuestaTemporal.js'
@@ -33,7 +33,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            end(endFlow, ctx.from)//finaliza la conversacion 
+            end(endFlow, ctx.from, '')//finaliza la conversacion 
         }
     )
     .addAction(
@@ -48,7 +48,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            end(endFlow, ctx.from)//finaliza la conversacion 
+            end(endFlow, ctx.from, '')//finaliza la conversacion 
         }
     )
     .addAction(
@@ -64,7 +64,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            end(endFlow, ctx.from)//finaliza la conversacion 
+            end(endFlow, ctx.from, '')//finaliza la conversacion 
         }
     )
     .addAction(
@@ -88,7 +88,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            end(endFlow, ctx.from)//finaliza la conversacion 
+            end(endFlow, ctx.from, '')//finaliza la conversacion 
         }
     )
     .addAction(
@@ -103,7 +103,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            end(endFlow, ctx.from)//finaliza la conversacion 
+            end(endFlow, ctx.from, '')//finaliza la conversacion 
         }
     )
     .addAction(
@@ -129,7 +129,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                         delay: 2000,
                     }
                 ])
-                console.log(respuestas, 'aca el mensaje con la direccion en flowPreguntasFinales')
+                setConfirmoFlow(false)
                 //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
                 respuestas = []
                 return gotoFlow(flowFin)
@@ -141,7 +141,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     }
                 ])
             }
-            end(endFlow, ctx.from)//finaliza la conversacion 
+            end(endFlow, ctx.from, '')//finaliza la conversacion 
         }
     )
     .addAction(
@@ -157,7 +157,6 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             const nroOrden = await getNroOrden()
 
             const query = `UPDATE lpb_cl12 SET are_cl12 = ?, tre_cl12 = ? WHERE reg_cl12 = ?`
-            console.log(nombre)
             await consultaMySql(query, [nombre, respuestas[4], nroOrden])
 
             await flowDynamic([
@@ -166,7 +165,8 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     delay: 2000,
                 }
             ])
-            end(endFlow, ctx.from)//finaliza la conversacion 
+            setConfirmoFlow(false)
+            end(endFlow, ctx.from, '')//finaliza la conversacion 
             //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
             respuestas = []
             return gotoFlow(flowFin)

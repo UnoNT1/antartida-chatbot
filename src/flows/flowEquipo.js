@@ -48,7 +48,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 logger.log('error en flowEquipo', error)
             }
             
-            end(endFlow, ctx.from)//finaliza la conversacion
+            end(endFlow, ctx.from, gotoFlow)//finaliza la conversacion
     })
     
  
