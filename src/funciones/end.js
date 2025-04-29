@@ -1,4 +1,4 @@
-import { getNroOrden } from '../Fetch/postIniciarOrden.js';
+import { getNroOrden, setNroOrden } from '../Fetch/postIniciarOrden.js';
 import flowEquipo from '../flows/flowEquipo.js';
 import { setConfirmoFlow } from '../flows/flowInicio.js';
 import { finalizarConversacion } from '../openai/historial.js'
@@ -21,6 +21,7 @@ async function end(endFlow, numero, gotoFlow) {
             console.log('Conversación finalizada por inactividad.', reclamo, timeoutId);
 
             setConfirmoFlow(false)//cambia el valor de la variable que maneja el comienzo de la conversacion
+            setNroOrden(null)//setea el numero de orden en null para que no se repita el mismo numero de orden en la proxima conversacion
 
             await finalizarConversacion(numero);
             return await endFlow();

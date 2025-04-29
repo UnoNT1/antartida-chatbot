@@ -68,5 +68,8 @@ const getUrl = () => {
 const getNroOrden = () => {
     return numOrden
 }
+const setNroOrden = (nro) => {
+    numOrden = nro
+}
 
-export { postIniciarOrden, getUrl, getNroOrden };
+export { postIniciarOrden, getUrl, getNroOrden, setNroOrden };
