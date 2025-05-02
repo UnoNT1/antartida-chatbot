@@ -47,11 +47,11 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
 
                     await flowDynamic([
                         {
-                            body: `Nuestra empresa ${nomEmp} no trabaja con el equipo: '${equipos[1].equipoR}' en este edificio, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: ${numAtencionCl}. El numero de orden generado es ${nroOrden}. Los equipos que tenemos disponibles en este edificio son: ${equiposDisponibles}.`,
+                            body: `Nuestra empresa ${nomEmp} no trabaja con el equipo: '${equipos[1].equipoR}' en este edificio, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: ${numAtencionCl}. Los equipos que tenemos disponibles en este edificio son: ${equiposDisponibles}.`,
                             delay: 2000,
                         }
                     ])
-                    return gotoFlow(flowPreguntasFinales)
+                    //return gotoFlow(flowPreguntasFinales)
                 }
             } catch (error) {
                 logger.log('error en flowEquipo', error)

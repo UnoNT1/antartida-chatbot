@@ -5,9 +5,6 @@ import nombreEmpresa from '../Utils/nombreEmpresa.js'
 //UTILIZADO EN flowInicio.js
 async function subirNombreEdificio(direccion){
     let nombreEmp = await nombreEmpresa()
-    if(direccion){
-        direccion = direccion.toUpperCase()
-    }
 
     try {
         let orden = await getNroOrden()
@@ -18,8 +15,12 @@ async function subirNombreEdificio(direccion){
         const query = 'UPDATE lpb_cl12 SET dom_cl12 = ?, tit_cl12 = ? WHERE reg_cl12 = ?'
 
         await consultaMySql(query, [edificio[0].dir_as00, edificio[0].tit_as00, orden])
+
+        return true
     }catch(err){
         console.error('No se pudo obtener y/o cargar la direccion y el nombre del edificio', err)
+
+        return false
     }
 }
 
