@@ -69,9 +69,9 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                 try {
                     const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
                     equipos = await consultaMySql(query, [direc]);
+                    console.log(equipos, 'verificar equipooooo`````', direc)
                     let eqEnDByReclamo = await getEquipos()
                     //si el equipo no existe en el edificio no se genera la orden
-                    console.log(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR), 'verificar equipooooo`````')
                     
                     if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){
                         //console.log('el equipo no existe en el edificio`````')

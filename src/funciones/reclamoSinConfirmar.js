@@ -6,6 +6,7 @@ import nombreEmpresa from '../Utils/nombreEmpresa.js';
 import getPrompt from '../Utils/getPrompt.js';
 import { generarReclamo } from './generarReclamo.js';
 import flowEquipo from '../flows/flowEquipo.js';
+import tomarDatosReclamo from './tomarDatosReclamo.js';
 
 //FINALIZA LA CONVERSACION DESPUES DE UN TIEMPÓ DE 10 MINUTOS SIN RESPUESTA
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -66,13 +67,20 @@ async function reclamoSinConfirmar(numero){
             await guardarContexto(conversacion, numero)
             const respuesta = await mensajeChatGPT(forzarConfirmacion.content, prompt, numero);
             console.log('Respuesta de ChatGPT:', respuesta);
+            const dataReclamo = tomarDatosReclamo(respuesta) //obtiene los data:
+            /*{
+                'Mo': 'Ascensor, Montavehículo, SAR con problemas',
+                'Di': 'Jujuy 8',
+                Ed: 'EDIFICIO NARITA IV',
+                Eq: 'Ascensor'
+            }*/
             seConfirmo = true
 
             // Agregar la respuesta de ChatGPT al contexto
             conversacion.push({ role: 'system', content: respuesta });
            
             //generar reeclamo desde este punto
-            generarReclamo(numero, respuesta)
+            generarReclamo(numero, dataReclamo)
         }
     })
     console.log(seConfirmo, 'se confirmo en en reclamoSinConfirmar')

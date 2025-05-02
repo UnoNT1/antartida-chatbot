@@ -18,7 +18,7 @@ async function generarReclamo(numero, data) {
             }
                             
         respuestaOrden = await postIniciarOrden(reclamo)//devuelve un array con los numeros de los tecnicos
-        //await enviarMensaje(respuestaOrden, `Entro un reclamo. Motivo: "${data['Mo']}". Desde este numero: "${numero}". En la direccion: "${data['Di']}", del edificio:"${data['Ed']}"`, '')
+        await enviarMensaje(respuestaOrden, `Entro un reclamo. Motivo: "${data['Mo']}". Desde este numero: "${numero}". En la direccion: "${data['Di']}", del edificio:"${data['Ed']}"`, '')
         
         return true
     } catch (error) {
