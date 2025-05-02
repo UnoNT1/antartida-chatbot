@@ -72,8 +72,9 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     let eqEnDByReclamo = await getEquipos()
                     //si el equipo no existe en el edificio no se genera la orden
                     console.log(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR), 'verificar equipooooo`````')
+                    
                     if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){
-                        console.log('el equipo no existe en el edificio`````')
+                        //console.log('el equipo no existe en el edificio`````')
                         await finalizarConversacion(numero);
                         return gotoFlow(flowEquipo)
                     }
@@ -85,6 +86,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     //
                     await subirNombreEdificio(direc)
                     //
+                    confirmoFlow = true //cambia el valor de la variable que maneja el comienzo de la conversacion la cual se pone en valor false dentro del flowPreguntasFinales al finalizar las preguntas
                     if(dataReclamo.Mo.includes('encerrado') || dataReclamo.Mo.includes('encerrada')){
                         
                         if(dataReclamo.Eq.toUpperCase().includes('ASC') || dataReclamo.Eq.toUpperCase().includes('MONTA')){
@@ -103,6 +105,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                 }
             }
             end(endFlow, numero, gotoFlow)//finaliza la conversacion
+            fallBack('')
         }
     })
     

@@ -15,7 +15,6 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
     .addAction(
         {capture: false},
         async (ctx, { flowDynamic }) => {
-            console.log(respuestas, 'resp al prinpicio de finales')
             await flowDynamic([
                 {
                     body: `Para finalizar, por favor conteste las siguientes preguntas necesarias para agilizar el actuar del tecnico: `,
@@ -39,7 +38,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
     .addAction(
         {capture: true},
         async (ctx, { flowDynamic, endFlow }) => {
-            let mensaje = await respuestaTemporal(ctx.body)
+            let mensaje = await respuestaTemporal(ctx.body, ctx.from)
 
             respuestas.push(mensaje)
             await flowDynamic([
@@ -55,7 +54,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
         ////modificar para caso de persona encerrada en SAR //////
         {capture: true},
         async (ctx, { flowDynamic, endFlow }) => {
-            let mensaje = await respuestaTemporal(ctx.body)
+            let mensaje = await respuestaTemporal(ctx.body, ctx.from)
 
             respuestas.push(mensaje)
             await flowDynamic([
@@ -74,17 +73,17 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             const mensajeATecnico = equipoR.includes('SAR') ? 'No hay alguien en el edificio que pueda otorgar el ingreso al tecnico' : 'LLEVAR LLAVE MAESTRA' ///cambia la info que se le va a mandar al tecnico dependiendo el equipo del reclamo
 
             if(ctx.body.toUpperCase().includes('NO')){
-                let mensaje = await respuestaTemporal(ctx.body)
+                let mensaje = await respuestaTemporal(ctx.body, ctx.from)
     
-                respuestas.push(mensaje)
+                respuestas.push(mensajeATecnico)
             }else{
-                let mensaje = await respuestaTemporal(ctx.body)
+                let mensaje = await respuestaTemporal(ctx.body, ctx.from)
     
                 respuestas.push(mensaje)
             }
             await flowDynamic([
                 {
-                    body: `Excelente ${respuestas[1]}, puedes poner algún detalle que creas útil sobre el equipo o para mejorar nuestra gestión`,
+                    body: `Excelente ${respuestas[1]}, puedes poner algún detalle que creas útil sobre la situacion o para mejorar nuestra gestión`,
                     delay: 2000,
                 }
             ])
@@ -94,7 +93,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
     .addAction(
         {capture: true},
         async (ctx, { flowDynamic, endFlow }) => {
-            let mensaje = await respuestaTemporal(ctx.body)
+            let mensaje = await respuestaTemporal(ctx.body, ctx.from)
 
             respuestas.push(mensaje)
             await flowDynamic([
@@ -120,7 +119,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             await consultaMySql(query, [nombre, nroOrden])
 
             if(respuesta.includes('SI')){
-                let mensaje = await respuestaTemporal(ctx.body)
+                let mensaje = await respuestaTemporal(ctx.body, ctx.from)
     
                 respuestas.push(mensaje)
                 await flowDynamic([
@@ -148,7 +147,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
         {capture: true},
         async (ctx, { flowDynamic, gotoFlow, endFlow }) => {
             const numeroTecnicos = await getNrosTecnicos()
-            let mensaje = await respuestaTemporal(ctx.body)
+            let mensaje = await respuestaTemporal(ctx.body, ctx.from)
 
             respuestas.push(mensaje)
 
