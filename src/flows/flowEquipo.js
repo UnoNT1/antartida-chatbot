@@ -24,7 +24,12 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 numAtencionCl = '3517363635'
             }else if(nomEmp === 'Incast'){
                 numAtencionCl = '0800 888 4990'
-            }	
+            } else if(nomEmp === 'Antartida'){
+                numAtencionCl = '3516674325'
+            } 
+            else{
+                numAtencionCl = '0800 888 4990'
+            }
 
             console.log('equipos en flow equipo', equipos)
             /* 
