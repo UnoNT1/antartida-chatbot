@@ -16,7 +16,7 @@ import flowFin from './flows/flowFin.js'
 import { flowInicio } from './flows/flowInicio.js'
 import flowPreguntasFinales from './flows/flowPreguntasFinales.js'
 
-const PORT = process.env.PORT ?? 3005
+const PORT = process.env.PORT ?? 3025
 dotenv.config()
 
 const main = async () => {

@@ -58,7 +58,10 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             const equipo = convGPT.includes('Equipo')
             if (motivo && direccion && edificio && equipo) {
                 dataReclamo = tomarDatosReclamo(convGPT) //obtiene los data:
-                await generarReclamo(numero, dataReclamo)
+
+                if(nombreEmp !== 'Incast' || nombreEmp !== 'Demo'){
+                    await generarReclamo(numero, dataReclamo)
+                }	
                 /*{
                     'Mo': 'Ascensor, Montavehículo, SAR con problemas',
                     'Di': 'Jujuy 8',
@@ -71,7 +74,18 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
                     equipos = await consultaMySql(query, [direc]);                    
                     
-                    //generar reclamo aca
+                    //generar reclamo aca en empresa incast
+                    if(nombreEmp === 'Incast' || nombreEmp === 'Demo'){
+                        let eqEnDByReclamo = await getEquipos()
+                        //si el equipo no existe en el edificio no se genera la orden                        
+                        if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){
+                        //console.log('el equipo no existe en el edificio`````')
+                        await finalizarConversacion(numero);
+                        return gotoFlow(flowEquipo)
+                        }
+
+                        await generarReclamo(numero, dataReclamo)
+                    }    
                     //
                     await finalizarConversacion(numero);
                     //
