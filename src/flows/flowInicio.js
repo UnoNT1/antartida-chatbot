@@ -114,7 +114,7 @@ const getEquipos = () => {
             }else if(obj['abr_as00'].startsWith('S')){
                 return 'SAR'
             }else if(obj['abr_as00'].startsWith('PC') || obj['abr_as00'].startsWith('PE')){
-                return 'PUERTA CORREDIZA/ELEVADIZA'
+                return 'PORTON CORREDIZO/ELEVADIZO'
             }else{
                 return obj['abr_as00']  
             }
