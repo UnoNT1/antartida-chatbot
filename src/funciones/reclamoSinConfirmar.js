@@ -53,8 +53,11 @@ async function reclamoSinConfirmar(numero){
         let contiene2 = conv.content.includes('reclamo')
         let contiene3 = conv.content.includes('éxito')
         let contiene4 = conv.content.includes('motivo del reclamo')
+        let contiene5 = conv.content.includes('técnico')
+        let contiene6 = conv.content.includes('será')
+        let contiene7 = conv.content.includes('enviado')
 
-        if(((contiene1 && contiene2) || (contiene2 && contiene3)) && !contiene4){
+        if(((contiene1 && contiene2) || (contiene2 && contiene3)) || (contiene5 && contiene6 && contiene7) && !contiene4){
             console.log('existe confirmar en mensaje num:', conv)
             
             const forzarConfirmacion = {

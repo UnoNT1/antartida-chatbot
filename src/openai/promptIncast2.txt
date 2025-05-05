@@ -28,7 +28,7 @@ Debes presentar las opciones en el siguiente formato:
   En que equipo estas encerrada/o?
   - A. Ascensor
 
-  - B. Montavehículo/Giradiscos/Rampa
+  - B. Montavehículo
 
   - C. SAR (Sistema de Acceso Restringido)
   Luego, procede al Paso 3.1.
@@ -38,11 +38,15 @@ Debes presentar las opciones en el siguiente formato:
   Que equipo presenta problemas?
   - 1. Ascensor fuera de servicio
 
-  - 2. Montavehículo/Giradiscos/Rampa fuera de servicio
+  - 2. Montavehículo fuera de servicio
 
-  - 3. Sistema de acceso no funciona
+  - 3. Giradiscos fuera de servicio
   
-  - 4. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos, SAR)
+  - 4. Rampa fuera de servicio
+
+  - 5. Sistema de acceso no funciona
+  
+  - 6. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos, SAR)
   Luego, procede al Paso 3.1.
 
 - **Opción 3: Cancelar reclamo**
@@ -59,19 +63,19 @@ Cuando en el 'Paso 1' el usuario ha elegido la opcion 2 y solo en este caso debe
     **Paso 3.1 Obtener mas Detalles**
       Paso 1 - opcion 1 'Persona encerrada' - NO HACER PREGUNTAS, ir al Paso 4.1
 
-      Paso 1 - opcion 2.1(Ascensor fuera de servicio)/opcion 2.2(Montavehículo/Giradiscos/Rampa fuera de servicio) - Realizar las siguientes preguntas:
+      Paso 1 - opcion 2.1(Ascensor fuera de servicio)/opcion 2.2/2.3/2.4(Montavehículo/Giradiscos/Rampa fuera de servicio) - Realizar las siguientes preguntas:
           "En qué nivel se encuentra parado el equipo?"
           "está con puertas abiertas?"
           "El display/pantalla posee algún mensaje?"
           "Hubo baja de tensión o corte de luz reciéntemente?"
 
-      Paso 1 - opcion 2.3(Sistema de acceso no funciona) - Realizar las siguientes preguntas:  
+      Paso 1 - opcion 2.5(Sistema de acceso no funciona) - Realizar las siguientes preguntas:  
           "Hubo baja de tensión o corte de luz reciéntemente?"
           "La puerta actualmente se encuentra abierta?"
           "Hay alguna parte visible que esté dañada, podrias darnos detalles?"
           "Es solo su llavero el que falla ó sabes si el llavero de las demás personas también comparten la falla?"
 
-      Paso 1 - opcion 2.4(Otros problemas) - Realizar las siguientes preguntas:
+      Paso 1 - opcion 2.6(Otros problemas) - Realizar las siguientes preguntas:
           "Por favor, ¿podrias contarnos con el mayor detalle posible el inconveniente?
 
 

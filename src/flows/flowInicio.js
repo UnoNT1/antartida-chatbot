@@ -105,12 +105,15 @@ const setConfirmoFlow = (value) => {
 }
  
 const getEquipos = () => {
+    console.log(equipos)
     equipos[0].abr_as00 ?
         equipos = equipos.map(obj => {
             if(obj['abr_as00'].startsWith('A')){
                 return 'ASCENSOR'
             } else if(obj['abr_as00'].startsWith('M')){
-                return 'MONTAVEHICULO'
+                return 'MONTAVEHÍCULO'
+            }else if(obj['abr_as00'].startsWith('R')){
+                return 'RAMPA'
             }else if(obj['abr_as00'].startsWith('S')){
                 return 'SAR'
             }else if(obj['abr_as00'].startsWith('PC') || obj['abr_as00'].startsWith('PE')){
