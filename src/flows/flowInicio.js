@@ -58,6 +58,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             const equipo = convGPT.includes('Equipo')
             if (motivo && direccion && edificio && equipo) {
                 dataReclamo = tomarDatosReclamo(convGPT) //obtiene los data:
+                await generarReclamo(numero, dataReclamo)
                 /*{
                     'Mo': 'Ascensor, Montavehículo, SAR con problemas',
                     'Di': 'Jujuy 8',
@@ -68,19 +69,9 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                 
                 try {
                     const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
-                    equipos = await consultaMySql(query, [direc]);
-                    let eqEnDByReclamo = await getEquipos()
-                    //si el equipo no existe en el edificio no se genera la orden
-                    console.log(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR), 'verificar equipooooo`````')
-                    
-                    if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){
-                        //console.log('el equipo no existe en el edificio`````')
-                        await finalizarConversacion(numero);
-                        return gotoFlow(flowEquipo)
-                    }
+                    equipos = await consultaMySql(query, [direc]);                    
                     
                     //generar reclamo aca
-                    await generarReclamo(numero, dataReclamo)
                     //
                     await finalizarConversacion(numero);
                     //
@@ -116,12 +107,14 @@ const setConfirmoFlow = (value) => {
 const getEquipos = () => {
     equipos[0].abr_as00 ?
         equipos = equipos.map(obj => {
-            if(obj['abr_as00'] === 'ASC'){
+            if(obj['abr_as00'].startsWith('A')){
                 return 'ASCENSOR'
-            } else if(obj['abr_as00'] === 'MT'){
+            } else if(obj['abr_as00'].startsWith('M')){
                 return 'MONTAVEHICULO'
-            }else if(obj['abr_as00'] === 'SAR'){
+            }else if(obj['abr_as00'].startsWith('S')){
                 return 'SAR'
+            }else if(obj['abr_as00'].startsWith('PC') || obj['abr_as00'].startsWith('PE')){
+                return 'PUERTA CORREDIZA/ELEVADIZA'
             }else{
                 return obj['abr_as00']  
             }

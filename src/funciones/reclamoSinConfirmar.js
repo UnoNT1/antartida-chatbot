@@ -66,13 +66,21 @@ async function reclamoSinConfirmar(numero){
             await guardarContexto(conversacion, numero)
             const respuesta = await mensajeChatGPT(forzarConfirmacion.content, prompt, numero);
             console.log('Respuesta de ChatGPT:', respuesta);
-            seConfirmo = true
-
-            // Agregar la respuesta de ChatGPT al contexto
-            conversacion.push({ role: 'system', content: respuesta });
-           
-            //generar reeclamo desde este punto
-            generarReclamo(numero, respuesta)
+            const motivo = respuesta.includes('Motivo del reclamo') 
+            const direccion = respuesta.includes('Dirección') || respuesta.includes('Direccion')
+            const edificio = respuesta.includes('Edificio') || respuesta.includes('edificio') 
+            const equipo = respuesta.includes('Equipo')
+            if (motivo && direccion && edificio && equipo){
+                seConfirmo = true
+    
+                // Agregar la respuesta de ChatGPT al contexto
+                conversacion.push({ role: 'system', content: respuesta });
+               
+                //generar reeclamo desde este punto
+                generarReclamo(numero, respuesta)
+            } else {
+                reclamoSinConfirmar(numero)
+            }
         }
     })
     console.log(seConfirmo, 'se confirmo en en reclamoSinConfirmar')

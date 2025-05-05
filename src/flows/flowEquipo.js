@@ -11,10 +11,10 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
     .addAction(
         null,
         async (ctx, { flowDynamic, gotoFlow, endFlow }) => {
-            let equipos = await getEquipos()
             const nroOrden = await getNroOrden()
             const url = await getUrl()
             const nomEmp = await nombreEmpresa()
+            let equipos = await getEquipos(nomEmp)
             const equipoR = equipos[1].equipoR.includes('SAR') ? 'SAR' : equipos[1].equipoR
             let numAtencionCl
 
@@ -57,6 +57,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                         }
                     ])
                     //return gotoFlow(flowPreguntasFinales)
+                    return endFlow()
                 }
             } catch (error) {
                 logger.log('error en flowEquipo', error)

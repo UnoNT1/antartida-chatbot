@@ -37,7 +37,7 @@ En el primer mensaje aparte de presentarte como asistente, presenta las siguient
 
   - 2.2. Montavehículo/Giradiscos fuera de servicio
 
-  - 2.3. Porton Corredizo/ Porton Elevadizo fuera de servicio
+  - 2.3. Porton Corredizo/Elevadizo fuera de servicio
 
   - 2.4. Barrera Vehicular fuera de servicio
   
@@ -64,7 +64,7 @@ Cuando en el 'Paso 1' el usuario ha elegido la opcion 2(Problemas en un equipo e
           "El display/pantalla posee algún mensaje?"
           "Hubo baja de tensión o corte de luz reciéntemente?"
 
-      Paso 1 - opcion 2.3(Porton Corredizo/ Porton Elevadizo fuera de servicio) - Realizar las siguientes preguntas:  
+      Paso 1 - opcion 2.3(Porton Corredizo/Elevadizo fuera de servicio) - Realizar las siguientes preguntas:  
           "Hubo baja de tensión o corte de luz reciéntemente?"
           "La puerta actualmente se encuentra abierta?"
           "Hay alguna parte visible que esté dañada, podrias darnos detalles?"
