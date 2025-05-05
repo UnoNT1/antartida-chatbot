@@ -44,7 +44,7 @@ Debes presentar las opciones en el siguiente formato:
 
   - 4. Rampa fuera de servicio
 
-  - 5. Sistema de acceso no funciona
+  - 5. Sistema de acceso no funciona(SAR)
   
   - 6. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos, SAR)
   Luego, procede al Paso 3.1.
