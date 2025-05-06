@@ -16,6 +16,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
             const nomEmp = await nombreEmpresa()
             let equipos = await getEquipos(nomEmp)
             const equipoR = equipos[1].equipoR.includes('SAR') ? 'SAR' : equipos[1].equipoR
+            const equiposDB = equipos[0].equiposDB
             let numAtencionCl
 
             if(nomEmp === 'Latorre'){
@@ -26,8 +27,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 numAtencionCl = '0800 888 4990'
             } else if(nomEmp === 'Antartida'){
                 numAtencionCl = '3516674325'
-            } 
-            else{
+            } else{
                 numAtencionCl = '0800 888 4990'
             }
 
@@ -38,32 +38,43 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 { equipoR: 'MONTAVEHÍCULO' }
             ]
             */
-            try {
-                if(equipos[0].equiposDB.includes(equipoR)){///corregir caso de SAR/////////
-                    await flowDynamic([
-                        {
-                            body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*. Un tecnico se contactara con Usted.`,
-                            delay: 2000,
-                        }
-                    ])
-                    return gotoFlow(flowPreguntasFinales)
-                }else{
-                    const equiposDisponibles = [...new Set(equipos[0].equiposDB)].join(', ');//esta variable concatena los diferentes equipos que se encuentrar activos por la empresa en determiado edificio
+            if(equiposDB[0] === 'Direccion incorrecta'){
+                await flowDynamic([
+                    {
+                        body: `La dirección ingresada no es correcta, por favor verifique la misma y/o comuniquese a este numero: ${numAtencionCl}.`,
+                        delay: 2000,
+                    }
+                ])
+                .then(() => end(endFlow, ctx.from, gotoFlow))
+            }else{
 
-                    await flowDynamic([
-                        {
-                            body: `Nuestra empresa ${nomEmp} no trabaja con el equipo: '${equipos[1].equipoR}' en este edificio, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: ${numAtencionCl}. Los equipos que tenemos disponibles en este edificio son: ${equiposDisponibles}.`,
-                            delay: 2000,
-                        }
-                    ])
-                    //return gotoFlow(flowPreguntasFinales)
-                    return endFlow()
+                try {
+                    if(equiposDB.includes(equipoR)){///corregir caso de SAR/////////
+                        await flowDynamic([
+                            {
+                                body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*. Un tecnico se contactara con Usted.`,
+                                delay: 2000,
+                            }
+                        ])
+                        return gotoFlow(flowPreguntasFinales)
+                    }else{
+                        const equiposDisponibles = [...new Set(equipos[0].equiposDB)].join(', ');//esta variable concatena los diferentes equipos que se encuentrar activos por la empresa en determiado edificio
+    
+                        await flowDynamic([
+                            {
+                                body: `Nuestra empresa ${nomEmp} no trabaja con el equipo: '${equipos[1].equipoR}' en este edificio, debe comunicarse con la empresa correspondiente, en caso de mas ayuda comunicarse a nuestro servicio de atencion al cliente: ${numAtencionCl}. Los equipos que tenemos disponibles en este edificio son: ${equiposDisponibles}.`,
+                                delay: 2000,
+                            }
+                        ])
+                        //return gotoFlow(flowPreguntasFinales)
+                        return endFlow()
+                    }
+                } catch (error) {
+                    logger.log('error en flowEquipo', error)
                 }
-            } catch (error) {
-                logger.log('error en flowEquipo', error)
+                
             }
-            
-            end(endFlow, ctx.from, gotoFlow)//finaliza la conversacion
+            end(endFlow, ctx.from, gotoFlow)//finaliza la conversacion                
     })
     
  

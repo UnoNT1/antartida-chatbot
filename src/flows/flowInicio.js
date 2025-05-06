@@ -58,7 +58,11 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             const equipo = convGPT.includes('Equipo')
             if (motivo && direccion && edificio && equipo) {
                 dataReclamo = tomarDatosReclamo(convGPT) //obtiene los data:
-                await generarReclamo(numero, dataReclamo)
+
+                if(nombreEmp !== 'Demo'){
+                    console.log('se genera en el primero 111111111111', nombreEmp !== 'Demo', nombreEmp)
+                    await generarReclamo(numero, dataReclamo)
+                }	
                 /*{
                     'Mo': 'Ascensor, Montavehículo, SAR con problemas',
                     'Di': 'Jujuy 8',
@@ -71,7 +75,19 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
                     equipos = await consultaMySql(query, [direc]);                    
                     
-                    //generar reclamo aca
+                    //generar reclamo aca en empresa incast
+                    if(nombreEmp === 'Demo'){
+                        let eqEnDByReclamo = await getEquipos()
+                        //si el equipo no existe en el edificio no se genera la orden                        
+                        if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){
+                        //console.log('el equipo no existe en el edificio`````')
+                        await finalizarConversacion(numero);
+                        return gotoFlow(flowEquipo)
+                        }else{
+                            console.log('se genera en el segundo 2222222222222')
+                            await generarReclamo(numero, dataReclamo)
+                        }
+                    }    
                     //
                     await finalizarConversacion(numero);
                     //
@@ -92,6 +108,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     return gotoFlow(flowEquipo)
                 } catch (error) {
                     logger.error('Error en la consulta MySQL en flowInicio.js:', error);
+                    equipos = ['Direccion incorrecta'] // Reiniciar equipos si hay un error en la consulta
                     return gotoFlow(flowEquipo)
                 }
             }
