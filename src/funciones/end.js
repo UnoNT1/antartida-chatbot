@@ -11,10 +11,12 @@ async function end(endFlow, numero, gotoFlow) {
         if (timeoutId) {
             clearTimeout(timeoutId);
         }
-
-        let reclamo = await await reclamoSinConfirmar(numero);//aca se comprueba si el reclamo fue confirmado o no, si no fue confirmado se envia un mensaje a la IA para que lo confirme
+        let reclamo = await await reclamoSinConfirmar(numero, gotoFlow);//aca se comprueba si el reclamo fue confirmado o no, si no fue confirmado se envia un mensaje a la IA para que lo confirme
         let nroOrden = await getNroOrden()
-        if (nroOrden && gotoFlow !== '') return gotoFlow(flowEquipo)
+        if (nroOrden && gotoFlow !== '') {
+            console.log('en el flow end entra aca al confirma el reclamo desde reclamo sin confirmar')
+            return gotoFlow(flowEquipo)
+        }
 
             
         // Configura un nuevo timeout si el reclamo no fue confirmado

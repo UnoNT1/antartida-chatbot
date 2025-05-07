@@ -9,6 +9,8 @@ import subirNombreEdificio from '../funciones/subirNombreEdificio.js'
 import logger from "../Utils/historico.js";
 import getPrompt from '../Utils/getPrompt.js'
 import tomarDatosReclamo from '../funciones/tomarDatosReclamo.js'
+import clasificarEquipo from '../funciones/clasificarEquipo.js'
+import { error } from 'console'
 
 let dataReclamo = {}
 let equipos = []
@@ -20,6 +22,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
         async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
             let numero = ctx.from
             let mensaje = ctx.body.toLowerCase()
+            console.log(confirmoFlow, 'confirmo flow')
             if(confirmoFlow){
                 return
             }else {
@@ -60,7 +63,6 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                 dataReclamo = tomarDatosReclamo(convGPT) //obtiene los data:
 
                 if(nombreEmp !== 'Demo'){
-                    console.log('se genera en el primero 111111111111', nombreEmp !== 'Demo', nombreEmp)
                     await generarReclamo(numero, dataReclamo)
                 }	
                 /*{
@@ -73,14 +75,19 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                 
                 try {
                     const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
-                    equipos = await consultaMySql(query, [direc]);                    
+                    equipos = await consultaMySql(query, [direc]); 
+                    console.log(equipos.length)
+                    if(equipos.length === 0) throw error
+
+                    await setEquipos(equipos)                  
                     
                     //generar reclamo aca en empresa incast
                     if(nombreEmp === 'Demo'){
                         let eqEnDByReclamo = await getEquipos()
+                        const equipoR = eqEnDByReclamo[1].equipoR.includes('SAR') ? 'SAR' : eqEnDByReclamo[1].equipoR
                         //si el equipo no existe en el edificio no se genera la orden                        
-                        if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){
-                        //console.log('el equipo no existe en el edificio`````')
+                        if(!eqEnDByReclamo[0].equiposDB.includes(equipoR)){
+
                         await finalizarConversacion(numero);
                         return gotoFlow(flowEquipo)
                         }else{
@@ -107,6 +114,7 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
                     }
                     return gotoFlow(flowEquipo)
                 } catch (error) {
+                    await finalizarConversacion(numero);
                     logger.error('Error en la consulta MySQL en flowInicio.js:', error);
                     equipos = ['Direccion incorrecta'] // Reiniciar equipos si hay un error en la consulta
                     return gotoFlow(flowEquipo)
@@ -120,35 +128,29 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
 const setConfirmoFlow = (value) => {
     confirmoFlow = value
 }
- 
+const getConfirmoFlow =()=>{
+    return confirmoFlow
+}
+
+const setEquipos = (value) => {
+    if (!value || !Array.isArray(value) || !value.length) {
+        equipos = [];
+        return;
+    }
+    
+    equipos = value.map(clasificarEquipo);
+};
+
+const setEquiposReclamo = (value) =>{
+    dataReclamo = value
+}
+
 const getEquipos = () => {
-    console.log(equipos)
-    equipos[0].abr_as00 ?
-        equipos = equipos.map(obj => {
-            if(obj['abr_as00'].startsWith('A')){
-                return 'ASCENSOR'
-            } else if(obj['abr_as00'].startsWith('M')){
-                return 'MONTAVEHÍCULO'
-            }else if(obj['abr_as00'].startsWith('R')){
-                return 'RAMPA'
-            }else if(obj['abr_as00'].startsWith('S')){
-                return 'SAR'
-            }else if(obj['abr_as00'].startsWith('PC') || obj['abr_as00'].startsWith('PE')){
-                return 'PORTON CORREDIZO/ELEVADIZO'
-            }else{
-                return obj['abr_as00']  
-            }
-        }) :
-        equipos
-
     return [
-        {
-            equiposDB: equipos, 
-        },
-        {
-            equipoR: dataReclamo.Eq.toUpperCase().replace(/\.$/, '')
-        }    
-    ]
-}     
+        { equiposDB: equipos },
+        { equipoR: dataReclamo.Eq ? dataReclamo.Eq.toUpperCase().replace(/\.$/, '') : 'Sin Equipo' }
+    ];
+};
+   
 
-export { flowInicio, getEquipos, setConfirmoFlow };
+export { flowInicio, getEquipos, setConfirmoFlow, setEquipos, getConfirmoFlow, setEquiposReclamo };

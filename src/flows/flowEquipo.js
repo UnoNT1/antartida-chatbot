@@ -1,6 +1,6 @@
 import { addKeyword, EVENTS } from "@builderbot/bot";
 import end from "../funciones/end.js";
-import { getEquipos } from "./flowInicio.js";
+import { getEquipos, setConfirmoFlow } from "./flowInicio.js";
 import flowFin from "./flowFin.js";
 import { getNroOrden, getUrl } from '../Fetch/postIniciarOrden.js'
 import flowPreguntasFinales from "./flowPreguntasFinales.js";
@@ -31,7 +31,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 numAtencionCl = '0800 888 4990'
             }
 
-            console.log('equipos en flow equipo', equipos)
+            console.log('flow equipo', equiposDB[0])
             /* 
             [
                 { equiposDB: [ 'ASCENSOR', 'ASCENSOR', 'SAR' ] },
@@ -45,7 +45,8 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                         delay: 2000,
                     }
                 ])
-                .then(() => end(endFlow, ctx.from, gotoFlow))
+                setConfirmoFlow(true)
+                return end(endFlow, ctx.from, gotoFlow)
             }else{
 
                 try {
@@ -66,8 +67,8 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                                 delay: 2000,
                             }
                         ])
-                        //return gotoFlow(flowPreguntasFinales)
-                        return endFlow()
+                        setConfirmoFlow(true)
+                        return end(endFlow, ctx.from, gotoFlow)
                     }
                 } catch (error) {
                     logger.log('error en flowEquipo', error)
