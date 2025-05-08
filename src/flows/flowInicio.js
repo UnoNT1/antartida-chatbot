@@ -16,7 +16,7 @@ let dataReclamo = {}
 let equipos = []
 let confirmoFlow = false //esta variable sirve para que el flujo no empiece de cero en otra parte de la conversacion. Pasaba que al enviar dos mensajes seguidos en el flow de preguntasFinales, volvia a arrancar el flujo desde el inicio.
 
-const flowInicio = addKeyword(EVENTS.WELCOME)
+const flowInicio = addKeyword(EVENTS.ACTION)//(EVENTS.WELCOME)
     .addAction(
         null,
         async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
