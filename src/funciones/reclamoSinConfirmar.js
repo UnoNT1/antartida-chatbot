@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { guardarContexto, mensajeChatGPT } from '../openai/historial.js';
+import { guardarContexto, mensajeChatGPT, finalizarConversacion } from '../openai/historial.js';
 import nombreEmpresa from '../Utils/nombreEmpresa.js';
 import getPrompt from '../Utils/getPrompt.js';
 import { generarReclamo } from './generarReclamo.js';
@@ -62,11 +62,14 @@ async function reclamoSinConfirmar(numero, gotoFlow){
             let contiene7 = conv.content.includes('enviado')
 
             if(((contiene1 && contiene2) || (contiene2 && contiene3)) || (contiene5 && contiene6 && contiene7) && !contiene4){
-                console.log('existe confirmar en mensaje num:', conv)
+                console.log('reclamo sin confirmar', conv)
                 
                 const forzarConfirmacion = {
                     "role": "user",
-                    "content": "YA TE DI TODOS LOS DATOS, Confirmame la orden y al proximo mensaje contestamelo en el siguiente formato en este formato 'Motivo del reclamo: [OPCION ELEGIDA + detalles]. Direccion: [direccion obtenida comparada con la tabla]. Edificio: [nombre del edificio obtenido comparada con la tabla]. Equipo: [equipo sobre el que se genera el reclamo].'"
+                    "content": `te confirmo la direccion es la que te dije en el mensaje anterior, YA TE DI TODOS LOS DATOS y  Confirmame la orden y para eso al proximo mensaje contestamelo en el siguiente formato con la informacion que hayas podido recolectar 'Motivo del reclamo: [OPCION ELEGIDA + detalles].
+                     Direccion: [direccion obtenida comparada con la tabla]. 
+                     Edificio: [nombre del edificio obtenido comparada con la tabla].  
+                     Equipo: [equipo sobre el que se genera el reclamo].'`
                 }
                 //conversacion.push(forzarConfirmacion)
                 conversacion = [...conversacion, forzarConfirmacion]
@@ -85,39 +88,47 @@ async function reclamoSinConfirmar(numero, gotoFlow){
                 
                 if(Object.keys(dataReclamo).length === 0){
                     setEquipos(['Direccion incorrecta'])
-                    console.log('aca le doy calor direccion incorrecta en reclamosinconfirmar')
                     return gotoFlow(flowEquipo)
                 }
 
                 // Agregar la respuesta de ChatGPT al contexto
                 conversacion.push({ role: 'system', content: respuesta });
             
+                console.log(dataReclamo)
+                const direc = dataReclamo.Di.toUpperCase().replace(/\.$/, '').trim();
+                
+                const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
+                let equipos = await consultaMySql(query, [direc]); 
+                
+                setEquipos(equipos)
+                setEquiposReclamo(dataReclamo)
                 if(nombreEmp === 'Demo'){
-                    const direc = dataReclamo.Di.toUpperCase().replace(/\.$/, '').trim();
-
-                    const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
-                    let equipos = await consultaMySql(query, [direc]); 
-
-                    await setEquipos(equipos)
-                    await setEquiposReclamo(dataReclamo)
-                    let eqEnDByReclamo = await getEquipos()
+                    let eqEnDByReclamo = getEquipos()
                     //si el equipo no existe en el edificio no se genera la orden           
                     console.log(eqEnDByReclamo)             
                     if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){   
                         setNroOrden('00')
-                        return seConfirmo = true 
+                        await finalizarConversacion(numero)
+                        return gotoFlow(flowEquipo) 
                     }else{
-                        console.log('se genera en el segundo 2222222222222')
                         await generarReclamo(numero, dataReclamo)
-                        return seConfirmo = true 
+                        await finalizarConversacion(numero)
+                        return gotoFlow(flowEquipo)
                     }
                 }
                 //generar reeclamo desde este punto
+                seConfirmo = true
                 await generarReclamo(numero, dataReclamo)
+                await finalizarConversacion(numero)
+                return gotoFlow(flowEquipo)
             }
         })
         console.log(seConfirmo, 'se confirmo en en reclamoSinConfirmar')
-        return seConfirmo
+        /*if(seConfirmo){
+            return gotoFlow(flowEquipo)
+        }else {
+            return seConfirmo
+        }*/
     }else{
         return seConfirmo
     }

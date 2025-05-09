@@ -46,7 +46,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                     }
                 ])
                 setConfirmoFlow(true)
-                return end(endFlow, ctx.from, gotoFlow)
+                return end(endFlow, ctx.from, '')
             }else{
 
                 try {
@@ -68,7 +68,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                             }
                         ])
                         setConfirmoFlow(true)
-                        return end(endFlow, ctx.from, gotoFlow)
+                        return end(endFlow, ctx.from, '')
                     }
                 } catch (error) {
                     logger.log('error en flowEquipo', error)

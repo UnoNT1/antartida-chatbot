@@ -99,7 +99,7 @@ Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o 
 --IMPORTANTE-- Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado y solo con el contenido que se muestra a continuacion;
 Si el usuario confirma con un "sí", responde con un texto que tenga SOLO EL SIGUIENTE MENSAJE( 
 --IMPORTANTE-- siempre debe tener los datos 'Motivo del reclamo', 'Direccion', 'Edificio' y 'Equipo'):
-'confirmo el reclamo' y nada mas que eso
+'confirmo el reclamo' y nada mas que eso y SOLO CON ESTE MENSAJE.
 
 
 LISTA DE EDIFICIOS:

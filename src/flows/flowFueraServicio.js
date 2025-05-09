@@ -1,7 +1,7 @@
 import { addKeyword, EVENTS } from '@builderbot/bot'
 import nombreEmpresa from "../Utils/nombreEmpresa.js";
 
-const flowFueraServicio = addKeyword(EVENTS.WELCOME)
+const flowFueraServicio = addKeyword(EVENTS.ACTION)//(EVENTS.WELCOME)
     .addAction(
         null,
         async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
