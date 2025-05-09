@@ -11,10 +11,16 @@ import getPrompt from '../Utils/getPrompt.js'
 import tomarDatosReclamo from '../funciones/tomarDatosReclamo.js'
 import clasificarEquipo from '../funciones/clasificarEquipo.js'
 import { error } from 'console'
+import { setNroOrden } from '../Fetch/postIniciarOrden.js'
+import copiaConv from '../funciones/convReclamoSinConfirmar.js'
 
 let dataReclamo = {}
 let equipos = []
 let confirmoFlow = false //esta variable sirve para que el flujo no empiece de cero en otra parte de la conversacion. Pasaba que al enviar dos mensajes seguidos en el flow de preguntasFinales, volvia a arrancar el flujo desde el inicio.
+let verificar = {
+    conf : confirmoFlow,
+    num : ''
+}
 
 const flowInicio = addKeyword(EVENTS.WELCOME)
     .addAction(
@@ -22,8 +28,16 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
         async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
             let numero = ctx.from
             let mensaje = ctx.body.toLowerCase()
-            console.log(confirmoFlow, 'confirmo flow')
-            if(confirmoFlow){
+
+            if(verificar.num !== numero){
+                confirmoFlow = false
+                setNroOrden('')
+                copiaConv(numero)
+            }
+
+
+            if(verificar.conf){
+                console.log('entra en true confirmar flow 1111....................')
                 return
             }else {
                 const nombreEmp = await nombreEmpresa()
@@ -44,7 +58,9 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             let mensaje = ctx.body.toLowerCase()
             const nombreEmp = await nombreEmpresa()
             
-            if(confirmoFlow){
+            console.log(verificar, 'verificarrrr')
+            if(verificar.conf){
+                console.log('entra en true confirmar flow 2222....................')
                 return
             } else {
                 //
@@ -131,6 +147,9 @@ const setConfirmoFlow = (value) => {
 const getConfirmoFlow =()=>{
     return confirmoFlow
 }
+const setVerificar =(value)=>{
+    verificar.num = value
+}
 
 const setEquipos = (value) => {
     if (!value || !Array.isArray(value) || !value.length) {
@@ -153,4 +172,4 @@ const getEquipos = () => {
 };
    
 
-export { flowInicio, getEquipos, setConfirmoFlow, setEquipos, getConfirmoFlow, setEquiposReclamo };
+export { flowInicio, getEquipos, setConfirmoFlow, setEquipos, getConfirmoFlow, setEquiposReclamo, setVerificar };

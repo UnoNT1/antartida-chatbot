@@ -3,7 +3,7 @@ import flowFin from './flowFin.js'
 import end from '../funciones/end.js'
 import enviarMensaje from '../funciones/enviarMensajeTecnico.js'
 import { getNrosTecnicos } from '../funciones/generarReclamo.js' 
-import { getEquipos, setConfirmoFlow } from './flowInicio.js'
+import { getConfirmoFlow, getEquipos, setConfirmoFlow } from './flowInicio.js'
 import { getNroOrden, getUrl } from '../Fetch/postIniciarOrden.js'
 import consultaMySql from '../Utils/consultaMySql.js'
 import respuestaTemporal from '../funciones/respuestaTemporal.js'
@@ -129,7 +129,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     }
                 ])
                 setConfirmoFlow(false)
-                await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
+                //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
                 respuestas = []
                 return gotoFlow(flowFin)
             } else if(respuesta.includes('NO')){

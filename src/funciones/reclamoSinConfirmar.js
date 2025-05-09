@@ -1,19 +1,16 @@
-import fs from 'fs/promises';
-import { fileURLToPath } from 'url';
-import path from 'path';
 import { guardarContexto, mensajeChatGPT, finalizarConversacion } from '../openai/historial.js';
-import nombreEmpresa from '../Utils/nombreEmpresa.js';
 import getPrompt from '../Utils/getPrompt.js';
+import nombreEmpresa from '../Utils/nombreEmpresa.js';
 import { generarReclamo } from './generarReclamo.js';
 import flowEquipo from '../flows/flowEquipo.js';
 import tomarDatosReclamo from './tomarDatosReclamo.js';
 import consultaMySql from '../Utils/consultaMySql.js';
-import { setEquipos, getEquipos, setEquiposReclamo } from '../flows/flowInicio.js';
+import { setEquipos, getEquipos, setEquiposReclamo, setVerificar } from '../flows/flowInicio.js';
 import { setNroOrden } from '../Fetch/postIniciarOrden.js';
+import copiaConv from './convReclamoSinConfirmar.js';
 
 //se utiliza en la funcion end()
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const archivoContexto = (number) => path.resolve(__dirname, `../openai/contextoGPT${number}.json`);
+
 /*[
   {
     "role": "user",
@@ -31,21 +28,8 @@ async function reclamoSinConfirmar(numero, gotoFlow){
     if(!seConfirmo){
         const nombreEmp = await nombreEmpresa()
         const prompt = await getPrompt(nombreEmp);
-        const contexto = archivoContexto(numero);
-        let conversacion
-        // Intenta leer el archivo de contexto
-        try {
-            conversacion = await fs.readFile(contexto, 'utf8');
-            conversacion = JSON.parse(conversacion); // Parsea el contenido JSON
-
-        } catch (error) {
-            if (error.code === 'ENOENT') {
-                console.warn(`Archivo de contexto no encontrado: ${contexto}`);
-                conversacion = null; // Si no existe, establece conversacion como null
-            } else {
-                throw error; // Lanza otros errores
-            }
-        }
+        const conversacion = await copiaConv(numero)
+        setVerificar(numero)
         if (!conversacion) {
             return false; // Si no hay conversación, retorna false
         }

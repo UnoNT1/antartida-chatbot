@@ -96,10 +96,15 @@ Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o 
 - Si el usuario responde "no" por segunda vez, proporciona este número para que se comunique con un asesor: **0800 888 4990**.
 
 **Paso 4.4: Dirección o nombre confirmado**
---IMPORTANTE-- Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado y solo con el contenido que se muestra a continuacion;
+--IMPORTANTE-- Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado;
 Si el usuario confirma con un "sí", responde con un texto que tenga SOLO EL SIGUIENTE MENSAJE( 
 --IMPORTANTE-- siempre debe tener los datos 'Motivo del reclamo', 'Direccion', 'Edificio' y 'Equipo'):
-'confirmo el reclamo' y nada mas que eso y SOLO CON ESTE MENSAJE.
+'
+    Motivo del reclamo: [OPCION ELEGIDA + detalles].
+    Direccion: [direccion obtenida comparada con la tabla].
+    Edificio: [nombre del edificio obtenido comparada con la tabla].
+    Equipo: [equipo sobre el que se genera el reclamo].
+'
 
 
 LISTA DE EDIFICIOS:
