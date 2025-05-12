@@ -28,7 +28,7 @@ async function reclamoSinConfirmar(numero, gotoFlow){
     if(!seConfirmo){
         const nombreEmp = await nombreEmpresa()
         const prompt = await getPrompt(nombreEmp);
-        const conversacion = await copiaConv(numero)
+        let conversacion = await copiaConv(numero)
         setVerificar(numero)
         if (!conversacion) {
             return false; // Si no hay conversación, retorna false
@@ -86,7 +86,7 @@ async function reclamoSinConfirmar(numero, gotoFlow){
                 
                 setEquipos(equipos)
                 setEquiposReclamo(dataReclamo)
-                if(nombreEmp === 'Demo'){
+                if(nombreEmp === 'Incast'){
                     let eqEnDByReclamo = getEquipos()
                     //si el equipo no existe en el edificio no se genera la orden           
                     console.log(eqEnDByReclamo)             
@@ -108,11 +108,6 @@ async function reclamoSinConfirmar(numero, gotoFlow){
             }
         })
         console.log(seConfirmo, 'se confirmo en en reclamoSinConfirmar')
-        /*if(seConfirmo){
-            return gotoFlow(flowEquipo)
-        }else {
-            return seConfirmo
-        }*/
     }else{
         return seConfirmo
     }

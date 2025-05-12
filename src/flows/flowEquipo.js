@@ -38,7 +38,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 { equipoR: 'MONTAVEHÍCULO' }
             ]
             */
-            if(equiposDB[0] === 'Direccion incorrecta'){
+            if(equiposDB[0] === 'Direccion incorrecta' && nomEmp === 'Incast'){
                 await flowDynamic([
                     {
                         body: `La dirección ingresada no es correcta, por favor verifique la misma y/o comuniquese a este numero: ${numAtencionCl}.`,
@@ -50,7 +50,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
             }else{
 
                 try {
-                    if(equiposDB.includes(equipoR)){///corregir caso de SAR/////////
+                    if(equiposDB.includes(equipoR) || equiposDB[0] === 'Direccion incorrecta'){///corregir caso de SAR/////////
                         await flowDynamic([
                             {
                                 body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*. Un tecnico se contactara con Usted.`,
@@ -68,7 +68,12 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                             }
                         ])
                         setConfirmoFlow(true)
-                        return end(endFlow, ctx.from, '')
+
+                        if(nomEmp === 'Demo'){
+                            return end(endFlow, ctx.from, '')
+                        } else{
+                            return gotoFlow(flowPreguntasFinales)
+                        }
                     }
                 } catch (error) {
                     logger.log('error en flowEquipo', error)

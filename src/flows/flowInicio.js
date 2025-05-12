@@ -77,22 +77,22 @@ const flowInicio = addKeyword(EVENTS.WELCOME)
             const equipo = convGPT.includes('Equipo')
             if (motivo && direccion && edificio && equipo) {
                 dataReclamo = tomarDatosReclamo(convGPT) //obtiene los data:
-
-                if(nombreEmp !== 'Demo'){
-                    await generarReclamo(numero, dataReclamo)
-                }	
                 /*{
                     'Mo': 'Ascensor, Montavehículo, SAR con problemas',
                     'Di': 'Jujuy 8',
                     Ed: 'EDIFICIO NARITA IV',
                     Eq: 'Ascensor'
                 }*/
+
+                if(nombreEmp !== 'Demo'){
+                    await generarReclamo(numero, dataReclamo)
+                }	
                 const direc = dataReclamo.Di.toUpperCase().replace(/\.$/, '').trim(); //elimina el punto final y saca espacios
                 
                 try {
                     const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
                     equipos = await consultaMySql(query, [direc]); 
-                    console.log(equipos.length)
+                    console.log(equipos.length, 'cantidad de equipos')
                     if(equipos.length === 0) throw error
 
                     await setEquipos(equipos)                  

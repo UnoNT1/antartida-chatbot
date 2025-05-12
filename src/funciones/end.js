@@ -13,7 +13,6 @@ async function end(endFlow, numero, gotoFlow) {
         }
         let reclamo = await reclamoSinConfirmar(numero, gotoFlow);//aca se comprueba si el reclamo fue confirmado o no, si no fue confirmado se envia un mensaje a la IA para que lo confirme
         let nroOrden = await getNroOrden()
-        console.log(reclamo, nroOrden, ' reclamo sin confirmar en edn')
         if (nroOrden && gotoFlow !== '') {
             console.log('en el flow end entra aca al confirma el reclamo desde reclamo sin confirmar')
             return gotoFlow(flowEquipo)
