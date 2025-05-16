@@ -35,13 +35,13 @@ En el primer mensaje aparte de presentarte como asistente, presenta las siguient
   Que equipo presenta problemas?
   - A. Ascensor fuera de servicio
 
-  - M. Montavehículo/Giradiscos fuera de servicio
+  - B. Montavehículo/Giradiscos fuera de servicio
 
-  - P. Porton Corredizo/Elevadizo fuera de servicio
+  - C. Porton Corredizo/Elevadizo fuera de servicio
 
-  - B. Barrera Vehicular fuera de servicio
+  - D. Barrera Vehicular fuera de servicio
   
-  - O. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos)
+  - E. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos)
   Luego, procede al Paso 3.1.
 
 - **Opción 3: Cancelar reclamo**

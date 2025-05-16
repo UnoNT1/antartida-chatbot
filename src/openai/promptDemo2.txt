@@ -34,19 +34,19 @@ Debes presentar las opciones en el siguiente formato:
   Luego, procede al Paso 3.1.
 
 - **Opción 2: Ascensor, Montavehículo/Giradiscos/Rampa, SAR con problemas**
-  Presenta estas opciones:
+  Presenta estas opciones :
   Que equipo presenta problemas?
   - A. Ascensor fuera de servicio
 
-  - M. Montavehículo fuera de servicio
+  - B. Montavehículo fuera de servicio
 
-  - G. Giradiscos fuera de servicio
+  - C. Giradiscos fuera de servicio
 
-  - R. Rampa fuera de servicio
+  - D. Rampa fuera de servicio
 
-  - S. Sistema de acceso no funciona(SAR)
+  - E. Sistema de acceso no funciona(SAR)
   
-  - O. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos, SAR)
+  - F. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**al elegir esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos, SAR)
   Luego, procede al Paso 3.1.
 
 - **Opción 3: Cancelar reclamo**
