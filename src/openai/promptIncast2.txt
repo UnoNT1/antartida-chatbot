@@ -63,7 +63,7 @@ Cuando en el 'Paso 1' el usuario ha elegido la opcion 2 y solo en este caso debe
     **Paso 3.1 Obtener mas Detalles**
       Paso 1 - opcion 1 'Persona encerrada' - NO HACER PREGUNTAS, ir al Paso 4.1
 
-      Paso 1 - opcion 2.A(Ascensor fuera de servicio)/opcion 2.B/2.C/2.D(Montavehículo/Giradiscos/Rampa fuera de servicio) - Realizar las siguientes preguntas:
+      Paso 1 - opcion 2.A(Ascensor fuera de servicio)/opcion 2.B(Montavehículo fuera de servicio)/opcion 2.C(Giradiscos fuera de servicio)/opcion 2.D(Rampa fuera de servicio) - Realizar las siguientes preguntas:
           "En qué nivel se encuentra parado el equipo?"
           "está con puertas abiertas?"
           "El display/pantalla posee algún mensaje?"
