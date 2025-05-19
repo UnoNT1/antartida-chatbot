@@ -55,7 +55,6 @@ async function reclamoSinConfirmar(numero, gotoFlow){
                      Edificio: [nombre del edificio obtenido comparada con la tabla].  
                      Equipo: [equipo sobre el que se genera el reclamo].'`
                 }
-                //conversacion.push(forzarConfirmacion)
                 conversacion = [...conversacion, forzarConfirmacion]
                 
                 await guardarContexto(conversacion, numero)
