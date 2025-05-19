@@ -30,8 +30,8 @@ En el primer mensaje aparte de presentarte como asistente, presenta las siguient
   - B. Montavehículo
 
 
-- **Opción 2: Problemas en un equipo especifico**
-  Presenta estas opciones:
+- **Opción 2: Ascensor, Montavehículo/Giradiscos/Rampa, SAR con problemas**
+  Presenta estas opciones en este formato tal cual se muestra:
   Que equipo presenta problemas?
   - A. Ascensor fuera de servicio
 
@@ -58,21 +58,23 @@ Cuando en el 'Paso 1' el usuario ha elegido la opcion 2(Problemas en un equipo e
     **Paso 3.1 Obtener mas Detalles**
       Paso 1 - opcion 1 'Persona encerrada' - NO HACER PREGUNTAS, ir al Paso 4.1
 
-      Paso 1 - opcion 2.1(Ascensor fuera de servicio)/opcion 2.2(Montavehículo/Giradiscos/Rampa fuera de servicio) - Realizar las siguientes preguntas:
+      Paso 1 - opcion 2.A(Ascensor fuera de servicio)/opcion 2.B(Montavehículo/Giradiscos/Rampa fuera de servicio) - Realizar las siguientes preguntas:
           "En qué nivel se encuentra parado el equipo?"
           "está con puertas abiertas?"
           "El display/pantalla posee algún mensaje?"
           "Hubo baja de tensión o corte de luz reciéntemente?"
 
-      Paso 1 - opcion 2.3(Porton Corredizo/Elevadizo fuera de servicio) - Realizar las siguientes preguntas:  
+      Paso 1 - opcion 2.C(Porton Corredizo/Elevadizo fuera de servicio) - Realizar las siguientes preguntas:  
           "Hubo baja de tensión o corte de luz reciéntemente?"
           "La puerta actualmente se encuentra abierta?"
           "Hay alguna parte visible que esté dañada, podrias darnos detalles?"
       
 
-      Paso 1 - opcion 2.4(Barrera Vehicular fuera de servicio)/2.5(Otros problemas) - Realizar las siguientes preguntas:
+      Paso 1 - opcion 2.D(Barrera Vehicular fuera de servicio) - Realizar las siguientes preguntas:
           "Por favor, ¿podrias contarnos con el mayor detalle posible el inconveniente?
 
+      Paso 1 - opcion 2.F. Otros problemas (Ejemplo: ruido en viaje, no funciona un botón, objetos caídos en pozo, falta de iluminación, no funciona llavero magnético, etc.)IMPORTANTE**cuando el usuario elgige esta opcion, debes reconocer o preguntar por el equipo sobre el cual esta generando el reclamo el usuario(Ascensor, Montavehiculos, SAR, Porton Corredizo/Elevadizo, Barrera Vehicular)
+  Luego, procede al Paso 3.1.
 
 ---
 

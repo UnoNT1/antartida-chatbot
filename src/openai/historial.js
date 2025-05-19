@@ -50,7 +50,7 @@ async function mensajeChatGPT(body, prompt, number) {
                 ...contexto
             ],
             max_tokens: 200,
-            temperature: 0.1,
+            temperature: 0,
         });
 
         const respuestaGPT = completion.choices[0].message.content;
