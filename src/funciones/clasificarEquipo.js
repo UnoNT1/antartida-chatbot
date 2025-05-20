@@ -4,7 +4,7 @@ const clasificarEquipo = (obj) => {
     
     const abr = obj.abr_as00;
 
-    if (abr.startsWith('ASC')) return 'ASCENSOR';
+    if (abr.startsWith('A')) return 'ASCENSOR';
     if (abr.startsWith('M')) return 'MONTAVEHÍCULO';
     if (abr.startsWith('R')) return 'RAMPA';
     if (abr.startsWith('S') || abr.startsWith('C.I') || abr.startsWith('ingreso')) return 'SAR';

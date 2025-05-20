@@ -38,7 +38,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 { equipoR: 'MONTAVEHÍCULO' }
             ]
             */
-            if(equiposDB[0] === 'Direccion incorrecta' && nomEmp === 'Incast'){
+            if(equiposDB[0] === 'Direccion incorrecta' && nomEmp === 'Demo'){
                 await flowDynamic([
                     {
                         body: `La dirección ingresada no es correcta, por favor verifique la misma y/o comuniquese a este numero: ${numAtencionCl}.`,

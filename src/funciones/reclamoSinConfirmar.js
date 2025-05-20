@@ -27,7 +27,7 @@ let seConfirmo = false;
 async function reclamoSinConfirmar(numero, gotoFlow){
     if(!seConfirmo){
         const nombreEmp = await nombreEmpresa()
-        const prompt = await getPrompt(nombreEmp);
+        const prompt = await getPrompt(nombreEmp, '2');
         let conversacion = await copiaConv(numero)
         setVerificar(numero)
         if (!conversacion) {

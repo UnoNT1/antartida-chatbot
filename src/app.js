@@ -16,12 +16,13 @@ import flowFin from './flows/flowFin.js'
 import { flowInicio } from './flows/flowInicio.js'
 import flowPreguntasFinales from './flows/flowPreguntasFinales.js'
 import flowFueraServicio from './flows/flowFueraServicio.js'
+import { flowVerificarInicio } from './flows/flowVerificarInicio.js'
 
 const PORT = process.env.PORT ?? 3005
 dotenv.config()
 
 const main = async () => {
-    const adapterFlow = createFlow([ flowInicio, flowEquipo, flowFin, flowPreguntasFinales, flowTest, flowFueraServicio ])
+    const adapterFlow = createFlow([ flowInicio, flowEquipo, flowFin, flowPreguntasFinales, flowTest, flowFueraServicio, flowVerificarInicio ])
     //const adapterFlow = createFlow([ flowChatGPT , flowPrincipal, flowTipoProblema ])
     const adapterProvider = createProvider(Provider)
     //const adapterProvider = createProvider(Provider, {usePairingCode: true, phoneNumber: process.env.PHONE_NUMBER})
