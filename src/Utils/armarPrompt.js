@@ -26,6 +26,8 @@ let opcion = 0
 let prompt = ''
 let nombreEmp = ''
 let direcLista = ''
+let timeoutPrompt = null
+
 const get = async () => {
     nombreEmp = await nombreEmpresa()
     direcLista = dirListaEd(nombreEmp)
@@ -33,7 +35,27 @@ const get = async () => {
 }
 get()
 
+const limpiarPrompt = async () => {
+    prompt = await getPrompt(nombreEmp, '3')
+    vuelta = 0
+    opcion = 0
+    console.log('limpiar datos en armarPRompt', prompt)
+    // Si necesitas limpiar otros datos, hazlo aquí
+}
+
+// Llama a esta función cada vez que se use armarPrompt
+const reiniciarTimeoutPrompt = () => {
+    if (timeoutPrompt) clearTimeout(timeoutPrompt)
+    timeoutPrompt = setTimeout(limpiarPrompt, 5 * 60 * 1000) // 5 minutos
+}
+
 async function armarPrompt(respuesta) {
+    reiniciarTimeoutPrompt()
+
+    vuelta === 0 ? prompt += `
+    **Presenta la siguiente pregunta paraa obtener el equipo sobre el cual se genera el reclamo**
+    ` : prompt += ''
+
     respuesta = respuesta.toUpperCase()
     console.log('respuesta', respuesta)
     if(respuesta.includes('1') && vuelta === 0) {
@@ -69,30 +91,48 @@ async function armarPrompt(respuesta) {
     if(opcion === 2 && vuelta === 1) {
         vuelta = 2
         prompt += `
-        **Realizar las siguientes preguntas:**
+        **
+        IMPORTANTE - 'A' === 'ASCENSOR'
+                     'B' === 'MONTAVEHICULO' 
+                     'C' === 'GIRADISCO'
+                     'D' === 'RAMPA'
+                    'E' === 'SAR'
+                    'F' === 'OTROS PROBLEMAS'
+        Habiendo reconocido correctamente el Equipo elegido en el paso anterior y Realizar las siguientes preguntas:
+        (al comienzo del mensaje coloque el nombre del equipo elegido)**
         `
 
-        if(respuesta.includes('A') || respuesta.includes('B')) {
-            prompt += ` 
+        if(respuesta.includes('A') || respuesta.includes('B') || respuesta.includes('1') || respuesta.includes('2')) {
+            prompt += `
+            **Al aparecer estas preguntas significa que Se eligio el equipo Ascensor o Montavehículo** 
             En qué nivel se encuentra parado el equipo?
             Está con puertas abiertas?
             El display/pantalla posee algún mensaje?
             Hubo baja de tensión o corte de luz reciéntemente?`
             
             return prompt;
-        }else if(respuesta.includes('C') || respuesta.includes('D')) {
+        }else if(respuesta.includes('C') || respuesta.includes('D') || respuesta.includes('3') || respuesta.includes('4')) {
             prompt += ` 
+            **Al aparecer estas preguntas significa que Se eligio el equipo Rampa o Giradisco** 
             Está con puertas abiertas?
             El display/pantalla posee algún mensaje?
             Hubo baja de tensión o corte de luz reciéntemente?`
             
             return prompt;
-        }else if(respuesta.includes('E')) {
+        }else if(respuesta.includes('E') || respuesta.includes('5')) {
             prompt += ` 
+            **Al aparecer estas preguntas significa que Se eligio el equipo SAR** 
             Hubo baja de tensión o corte de luz reciéntemente?
             La puerta actualmente se encuentra abierta?
             Hay alguna parte visible que esté dañada, podrias darnos detalles?
             Es solo su llavero el que falla ó sabes si el llavero de las demás personas también comparten la falla?`
+            
+            return prompt;
+        }else{
+            prompt += ` 
+            **Al aparecer estas preguntas significa que Se eligio Otros problemas, debes preguntar por el equipo relacionado** 
+            Me indicas el Equipo relacionado a este problema?
+            Podrias darme mas detalles sobre el problema que estas teniendo?`
             
             return prompt;
         }
@@ -104,6 +144,7 @@ async function armarPrompt(respuesta) {
 
         prompt += listaEdificios    
         prompt += `
+        
         **Siguiente paso: Solicitar dirección o nombre del edificio**
             **Paso 1: Si no se ha proporcionado la dirección o el nombre del edificio, solicita esta información con el siguiente mensaje:
             *"Lamento la situación, pero no te preocupes, lo resolveremos. Para continuar, necesito identificar el edificio. Por favor, indícame la dirección donde se encuentra el edificio o su nombre."*
@@ -126,10 +167,12 @@ async function armarPrompt(respuesta) {
                 Direccion: [direccion obtenida comparada con la tabla].
                 Edificio: [nombre del edificio obtenido comparada con la tabla].
                 Equipo: [equipo sobre el que se genera el reclamo].
-            ' `
+            ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo en el mensaje.`
         return prompt;
     }
+    console.log('prompt', prompt)
     return prompt;
 }
+
 
 export default armarPrompt;

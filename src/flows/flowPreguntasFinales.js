@@ -121,7 +121,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             if(respuesta.includes('SI')){
                 let mensaje = await respuestaTemporal(ctx.body, ctx.from)
     
-                respuestas.push(mensaje)
+                respuestas.push(ctx.from)
                 await flowDynamic([
                     {
                         body: `Gracias por su tiempo, a la brevedad un tecnico se comunicara con usted, en la siguiente Url podra hacer el seguimiento del reclamo: ${url}.`,
@@ -129,7 +129,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
                     }
                 ])
                 setConfirmoFlow(false)
-                await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
+                //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
                 respuestas = []
                 return gotoFlow(flowFin)
             } else if(respuesta.includes('NO')){
@@ -166,7 +166,7 @@ const flowPreguntasFinales = addKeyword(EVENTS.ACTION)
             ])
             setConfirmoFlow(false)
             end(endFlow, ctx.from, '')//finaliza la conversacion 
-            await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
+            //await enviarMensaje(numeroTecnicos, `El cliente ${respuestas[1]} contesto las siguientes preguntas: LUZ EN EL EDIFICIO: ${respuestas[0]}, PERSONA PARA PERMITIR INGRESO AL TECNICO: ${respuestas[2]}, TELEFONO DE CONTACTO: ${respuestas[4]}, MAS DETALLES: ${respuestas[3]}`, '')
             respuestas = []
             return gotoFlow(flowFin)
         }
