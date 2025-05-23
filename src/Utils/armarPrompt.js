@@ -130,7 +130,7 @@ async function armarPrompt(respuesta) {
             return prompt;
         }else{
             prompt += ` 
-            **Al aparecer estas preguntas significa que Se eligio Otros problemas, debes preguntar por el equipo relacionado** 
+            **Al aparecer estas preguntas significa que Se eligio Otros problemas, debes preguntar por el equipo relacionado, si el usuario no otorga un equipo debes poner por defecto el equipo 'Ascensor'** 
             Me indicas el Equipo relacionado a este problema?
             Podrias darme mas detalles sobre el problema que estas teniendo?`
             
@@ -170,7 +170,6 @@ async function armarPrompt(respuesta) {
             ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo en el mensaje.`
         return prompt;
     }
-    console.log('prompt', prompt)
     return prompt;
 }
 

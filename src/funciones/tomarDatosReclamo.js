@@ -21,6 +21,8 @@ function tomarDatosReclamo(mensaje) {
             obj[clave[0]+clave[1]] = valor;
             return obj;
         }, {});
+
+        reclamoObjetos['Eq'].toLowerCase().includes('otros') ? reclamoObjetos['Eq'] = 'Ascensor' : reclamoObjetos['Eq']
     
         return reclamoObjetos;
     } catch (error) {
