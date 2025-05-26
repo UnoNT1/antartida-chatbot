@@ -13,7 +13,6 @@ async function armarURL(data, numOrden) {
     const query = 'SELECT idu_fe00 FROM lpb_fe00 where ufe_fe00 = ?'
     let idEmp = await consultaMySql(query, [nomEmp])
     idEmp = idEmp[0].idu_fe00.toString()
-    console.log(nomEmp, idEmp)
     
     const dataStart = data.indexOf('[');
     const dataEnd = data.lastIndexOf(']') + 1;

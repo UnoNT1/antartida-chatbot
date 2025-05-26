@@ -8,7 +8,6 @@ function separarNumOrden(data) {
         return null
     }
 
-    console.log(data, 'data en separarNumOrden')
     const dataStart = data.indexOf('[');
     const dataEnd = data.lastIndexOf(']') + 1;
     const dataString = data.slice(dataStart, dataEnd);

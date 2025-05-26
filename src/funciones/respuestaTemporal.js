@@ -11,7 +11,6 @@ async function respuestaTemporal(respuesta, userId) {
     const buffer = buffers.get(userId);
     buffers.set(userId, `${buffer} ${respuesta}`.trim());
 
-    console.log(respuesta, buffer, 'respuesta temporal');
 
     // Esperar un tiempo para recibir mensajes adicionales
     await new Promise((resolve) => setTimeout(resolve, 2000)); // Espera 2 segundos

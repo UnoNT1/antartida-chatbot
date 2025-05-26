@@ -1,7 +1,6 @@
 //recibe como texto la respuesta del postAlBackend al enviar un mensaje y separa los numeros de los tecnicos en un array
 //UTILIZADA EN postIniciarOrden.js
 function separarNumTecnicos(data) {
-    console.log(data)
 
     const jsonStart = data.indexOf('[');
     const jsonEnd = data.lastIndexOf(']') + 1;

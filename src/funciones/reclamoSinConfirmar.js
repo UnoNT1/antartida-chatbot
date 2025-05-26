@@ -46,7 +46,6 @@ async function reclamoSinConfirmar(numero, gotoFlow){
             let contiene7 = conv.content.includes('enviado')
 
             if(((contiene1 && contiene2) || (contiene2 && contiene3)) || (contiene5 && contiene6 && contiene7) && !contiene4){
-                console.log('reclamo sin confirmar', conv)
                 
                 const forzarConfirmacion = {
                     "role": "user",
@@ -60,7 +59,6 @@ async function reclamoSinConfirmar(numero, gotoFlow){
                 
                 await guardarContexto(conversacion, numero)
                 const respuesta = await mensajeChatGPT(forzarConfirmacion.content, prompt, numero);
-                console.log('Respuesta de ChatGPT:', respuesta);
                 const dataReclamo = tomarDatosReclamo(respuesta) //obtiene los data:
                 /*{
                     'Mo': 'Ascensor, Montavehículo, SAR con problemas',
@@ -78,7 +76,6 @@ async function reclamoSinConfirmar(numero, gotoFlow){
                 // Agregar la respuesta de ChatGPT al contexto
                 conversacion.push({ role: 'system', content: respuesta });
             
-                console.log(dataReclamo)
                 const direc = dataReclamo.Di.toUpperCase().replace(/\.$/, '').trim();
                 
                 const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
@@ -88,8 +85,7 @@ async function reclamoSinConfirmar(numero, gotoFlow){
                 setEquiposReclamo(dataReclamo)
                 if(nombreEmp === 'Incast'){
                     let eqEnDByReclamo = getEquipos()
-                    //si el equipo no existe en el edificio no se genera la orden           
-                    console.log(eqEnDByReclamo)             
+                    //si el equipo no existe en el edificio no se genera la orden        
                     if(!eqEnDByReclamo[0].equiposDB.includes(eqEnDByReclamo[1].equipoR)){   
                         setNroOrden('00')
                         await finalizarConversacion(numero)

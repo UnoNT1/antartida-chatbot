@@ -46,7 +46,12 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                     }
                 ])
                 setConfirmoFlow(true)
-                return end(endFlow, ctx.from, '')
+
+                if(nomEmp === 'Demo'){
+                    return end(endFlow, ctx.from, '')
+                } else{
+                    return gotoFlow(flowPreguntasFinales)
+                }
             }else{
 
                 try {

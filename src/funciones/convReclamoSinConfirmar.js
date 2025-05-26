@@ -8,13 +8,11 @@ const archivoContexto = (number) => path.resolve(__dirname, `../openai/contextoG
 
 async function copiaConv(numero){
     const contexto = archivoContexto(numero);
-    console.log('archivo de contexto', contexto)
     let conversacion = []
             // Intenta leer el archivo de contexto
             try {
                 conversacion = await fs.readFile(contexto, 'utf8');
                 
-                console.log(contexto.includes(numero), 'ver si incluye dssdadassddasadsadssasadsasda')
                 conversacion = JSON.parse(conversacion); // Parsea el contenido JSON
     
             } catch (error) {

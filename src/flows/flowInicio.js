@@ -15,6 +15,7 @@ import { setNroOrden } from '../Fetch/postIniciarOrden.js'
 import copiaConv from '../funciones/convReclamoSinConfirmar.js'
 import armarPrompt from '../Utils/armarPrompt.js'
 import { getContieneDatos } from './flowVerificarInicio.js'
+import flowFin from './flowFin.js'
 
 let dataReclamo = {}
 let equipos = []
@@ -30,7 +31,6 @@ const flowInicio = addKeyword(EVENTS.ACTION)
         async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
             let numero = ctx.from
             let mensaje = ctx.body.toLowerCase()
-
             //await finalizarConversacion('1');
             if(verificar.num !== numero){
                 confirmoFlow = false
@@ -39,8 +39,7 @@ const flowInicio = addKeyword(EVENTS.ACTION)
             }
 
             if(verificar.conf){
-                console.log('entra en true confirmar flow 1111....................')
-                return
+                return gotoFlow(flowFin)
             }else {
                 const nombreEmp = await nombreEmpresa()
                 await flowDynamic([{ body: `Muchas gracias por comunicarse con Ascensores ${nombreEmp}.`, delay: 1000 }])
@@ -62,9 +61,7 @@ const flowInicio = addKeyword(EVENTS.ACTION)
             const nombreEmp = await nombreEmpresa()
             let prompt = ''
             
-            console.log(verificar, 'verificarrrr')
             if(verificar.conf){
-                console.log('entra en true confirmar flow 2222....................')
                 return
             } else {
                 //
@@ -113,7 +110,6 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                             await finalizarConversacion(numero);
                             return gotoFlow(flowEquipo)
                             }else{
-                                console.log('se genera en el segundo 2222222222222')
                                 await generarReclamo(numero, dataReclamo)
                             }
                         }    
@@ -148,10 +144,10 @@ const flowInicio = addKeyword(EVENTS.ACTION)
     })
     
 const setConfirmoFlow = (value) => {
-    confirmoFlow = value
+    verificar.conf = value
 }
 const getConfirmoFlow =()=>{
-    return confirmoFlow
+    return verificar.conf
 }
 const setVerificar =(value)=>{
     verificar.num = value
