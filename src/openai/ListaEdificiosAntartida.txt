@@ -1,0 +1,175 @@
+Lista de ascensores:
+
+Nombre Edificio ----- Dirección Edificio
+
+Advocatus			DUARTE QUIROS 559
+Aires de General Paz			25 DE MAYO 1518/20
+Amsterdam			Bedoya 960
+Andino II			Dean Funes 1225
+Antonio I			Caseros 1140
+Arcos I			Independencia 582
+Arcos II			Independencia 574
+Arcos III			Independencia 608
+Arlequin			25 de mayo 0779
+Arturo Orgaz			Arturo Orgaz 138
+Atalaya			Chacabuco 164
+Av. Colon 66/86			Av. Colon 76
+Baco			Sucre 2227
+Balcones de la Quinta			Santa fe 54
+Balcones de Posadas			Jacinto Rios y Rosario Santa fe
+Baleares			Pueyrredon 842
+Baleares VI			Capital Federal 934
+			Buenos Aires 147
+Banco de Cordoba Casa Matriz			San Jeronimo 166
+Banco de Cordoba Palace - Oficinas Corporativas			
+Banco de Cordoba Sucursal Catedral			
+Barcelona XI			M. Fragueiro 290
+Bedoya I			Bedoya 249
+Belvedere			Hipolito Irigoyen 330
+BTL 2			
+Bv San Juan 670			Bv San Juan 670
+Calamuchita			Av. Velez s Sarfield 1025
+Catorce-27			Buenos Aires 1427
+CBTOWER			YRIGOYEN 146
+Celta			David Luque 23
+Cenit IV			Obispo Oro 440
+Cenit V			Viamonte 248
+Chacabuco Privato			Chacabuco 529
+Cielo VI			
+Ciscofran			Av. Santa Fe 428
+Columbia			Av. 24 de Septiembre 764
+			Chacabuco 229/31
+Complejo Aguaducho			Av. Colon 1800
+Complejo edilicio galeria del Huerto			Caseros 261
+Cordoba Office Center			
+Corro 428			Corro 428
+Crisol			Crisol 58
+Cumbre IV			Av. Colon 533
+Delicia I			Ducasse 1027
+El Diamante			Bv. Ocampo 334
+El Gaucho			Ayacucho 139
+Emintex S.A.			Bv. Mitre 35
+Entresano			BV SAN JUAN 85
+Est. Capuchino			San Lorenzo 122
+Eusebio I			Av. Colon 3857
+Fiumiccino I			Jacinto Rios 372
+Fiumiccino II			Rosario de Santa fe 711
+Fiumiccino III			Catamarca 1253
+Fiumiccino IV			Lima 1642
+Fiumiccino V			Lima 1484
+Fiumiccino VI			Rosario de Santa Fe 757
+Florida XV			Rondeau 96
+Forum			Roma 260
+Forum II			Ovidio Lagos 450
+Fragueiro Office			Fragueiro 239
+Fundacion Causana			Madre F. Rubatto 2910
+Galaxia IV			Ituzaingo 750
+Garlot			H. Irigoyen 455
+Gibran			Balcarce 462
+Gran Hotel Victoria			25 de mayo 0240
+Granada V			Chacabuco 656
+Guemes I			Duarte quiros 310
+Guemes II			M. T de Alvear 267
+Habitat II			Duarte Quiros 10
+Harold II			Caseros 286
+Hospital Privado			
+Hotel Buen Pastor Capuch			San Lorenzo 110
+Idaniko			Jeronimo Luis de Cabrera 768
+Imagen			27 de abril 0694
+Inarco XVI			Rosario de santa fe 955
+Ituzaingo			Ituzaingo 560
+Jardin Privato			Transito Caceres Allende 480
+JBP II			Miguel del Corro 342
+Jeronimo I			Ingeniero lopez 235
+Jeronimo Torre de Negocios			San Jeronimo 177
+Joanna			Av. Colon 158
+Julieta			
+Junin			Bv. Arturo Illia 217
+Kolektor			Rivera Indarte 734
+La Recova			Figueroa Alcorta 285
+Lace S.A			Av. Velez Sarfield 528
+Las Vegas			Hipolito Irigoyen 185
+Libertador I			Bv. Chacabuco 110
+Los algarrobos			Independencia 501
+Los Duendes IT			Independencia 809
+Majestic			24 de septiembre 1543
+Manal			Bv. Arturo Illia 357
+Marbella			
+Marcelo I			Bv. Arturo Illia 276
+Mariano Moreno			Av. Colon 1046
+Martin I			Ituzaingo 1139
+Megatone Suc. Cba San Martin			San Martin 199
+Megatone Suc. Suipacha			Suipacha 1096
+Meletios II			Rosario de santa fe 930
+Meletios III			Obispo Trejo 1214/16
+Meletios IV			25 de mayo 1591
+Meletios Office			Bolivar 350
+Meletios VII			
+Mina Clavero			Caseros 687
+Miro			Pringles 110
+Mitra			Catamarca 2057
+Nueva Alborada			Pasaje 13 de diciembre 424
+Nueva Cordoba I			Buenos Aires 780
+Olmos			Bv. Chacabuco 580
+Onix			Fernando Fader 4273
+Orienz I			Bv. San Juan 611
+Oro			Pringles 357
+Ospe			Achaval Rodriguez 50
+Ossacra			SALTA
+Ovidio II			Ovidio Lagos 262/264
+Parque III			Manuel Estrada 147
+Parque Privato			Ana Maria Janet 1067
+Peredo Privato			Peredo 20
+Pinzani			25 de Mayo 114/118
+Plaza Privato			Ingeniero Lopez 236
+Proa II			Hipolito Irigoyen 79
+Punta Belgrano			Isaac Newton 6099
+Quazar II			Duarte Quiros 989
+Quinquela			Obispo Salguero 735
+Ramos XIV			Marcelo T de Alvear 1017
+Regina			Obispo Oro 374
+Renato IV			Independencia 1545
+Renato IX			Venezuela 109
+Renato V			Peru 140
+Renato VI			Av. Velez Sarfield 1370
+Renato VIII			Av. Velez Sarsfield 1188
+Rondeau Privato			Rondeau 610 / 614
+San Luis			San Luis 238
+San Mateo			Ayacucho 319
+Santangelo			Derqui 7
+Santo Tomas			Bv. San Juan 737
+Sarachaga			Hipolito Irigoyen 67
+			Ituzaingo 167
+SJC			San Jose de Calazans 370
+Sobremonte			27 de abril 0625
+Sol de Mayo			Sol de Mayo 427
+Supermercado Becerra Casa Central			Av. Belgrano 466
+Supermercado Becerra Deposito Central			Av. Belgrano 466
+			Ojo de Agua 356
+			
+Tagore			Parana 195
+Tamir			Belgrano 373
+Terminal de Omnibus Cordoba			Bv. Pte Peron 380
+Tolentino			Bv Zipoli 276
+Torre de la Amistad			Sucre 1409
+Torre Los Andes III			Bv. Los Andes 635
+Torre Patricia			Sucre 281
+Torre Privato			Achaval Rodriguez 162
+Torreon III			Ambrosio Olmos 658
+Trebol I			Buenos Aires 495
+Trebol II			Buenos Aires 509
+Trejo y Peru			Obispo Trejo y Peru
+Tres Pircas Hotel & Spa			Buenos Aires esq. Parana
+Trinidad III			Bv. Illia 270
+Tupac			TRANSITO C. DE ALLENDE 462
+Urbano			Montevideo 550
+Valdagno VII			Independencia 890
+Valtodano			PjeValtodano 1350
+Vetacord Comercial			Estados Unidos 2796
+Victorina I			Caseros 2275
+Victorina II			Dean Funes 2668
+Victorina III			9 de Julio esq. Tecera
+Virginia VIII			Bv Chacabuco 565
+Zigurat I			Independencia 408
+Zigurat II Y III			Bv. San Juan 19
+Zigurat IV			Independencia 396

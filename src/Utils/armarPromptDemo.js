@@ -39,7 +39,6 @@ const limpiarPrompt = async () => {
     prompt = await getPrompt(nombreEmp, '3')
     vuelta = 0
     opcion = 0
-    console.log('limpiar datos en armarPRompt', prompt)
     // Si necesitas limpiar otros datos, hazlo aquí
 }
 

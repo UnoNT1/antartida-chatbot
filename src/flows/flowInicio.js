@@ -13,7 +13,7 @@ import clasificarEquipo from '../funciones/clasificarEquipo.js'
 import { error } from 'console'
 import { setNroOrden } from '../Fetch/postIniciarOrden.js'
 import copiaConv from '../funciones/convReclamoSinConfirmar.js'
-import armarPrompt from '../Utils/armarPrompt.js'
+import armarPrompt from '../Utils/armarPromptServicar.js' //IMPORTANTE: Cambiar dependiendo la empresa que se use. Si es Demo, usar armarPromptDemo.js, si es Incast usar armarPromptIncast.js
 import { getContieneDatos } from './flowVerificarInicio.js'
 import flowFin from './flowFin.js'
 
@@ -46,7 +46,7 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                 //
             console.log('primer action')
                 const contieneDatos = await getContieneDatos()
-                const prompt = contieneDatos === true ? await getPrompt(nombreEmp, '2'): await armarPrompt(mensaje);
+                const prompt = contieneDatos === true ? await getPrompt(nombreEmp, '2'): await armarPrompt(mensaje);//IMPORTANTE: Cambiar en la importacion de este script dependiendo la empresa que se use. Si es Demo, usar armarPromptDemo.js, si es Incast usar armarPromptIncast.js
                 const convGPT = await mensajeChatGPT(mensaje, prompt, numero)
                 await flowDynamic([{ body: convGPT }])
                 end(endFlow, numero, gotoFlow)//finaliza la conversacion
