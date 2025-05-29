@@ -106,9 +106,8 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                             const equipoR = eqEnDByReclamo[1].equipoR.includes('SAR') ? 'SAR' : eqEnDByReclamo[1].equipoR
                             //si el equipo no existe en el edificio no se genera la orden                        
                             if(!eqEnDByReclamo[0].equiposDB.includes(equipoR)){
-
-                            await finalizarConversacion(numero);
-                            return gotoFlow(flowEquipo)
+                                await finalizarConversacion(numero);
+                                return gotoFlow(flowEquipo)
                             }else{
                                 await generarReclamo(numero, dataReclamo)
                             }
@@ -138,7 +137,7 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                         return gotoFlow(flowEquipo)
                     }
                 }
-                //end(endFlow, numero, gotoFlow)//finaliza la conversacion
+                end(endFlow, numero, gotoFlow)//finaliza la conversacion
                 fallBack('')
         }
     })

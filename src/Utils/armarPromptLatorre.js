@@ -155,7 +155,7 @@ async function armarPrompt(respuesta) {
             Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o un "no" si la dirección y e
             
             **Paso 1.3: Dirección o nombre erróneo**
-            - Si el usuario responde "no", repite el Paso 4.2. con otra direccion que encuentres en la lista de edificios.
+            - Si el usuario responde "no", repite el Paso 1.2. con otra direccion que encuentres en la lista de edificios.
             - Si el usuario vuelve responder que no, carga en el parametro 'Direccion' y 'Edificio' la direccion proporcionada por el Usuario.
 
             **Paso 1.4: Dirección o nombre confirmado**
