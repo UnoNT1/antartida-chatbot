@@ -24,6 +24,8 @@ let verificar = {
     conf : confirmoFlow,
     num : ''
 }
+let enviado; // Variable para controlar el envío del mensaje de aviso de fin de la conversación a los 8 minutos
+
 
 const flowInicio = addKeyword(EVENTS.ACTION)
     .addAction(
@@ -31,6 +33,7 @@ const flowInicio = addKeyword(EVENTS.ACTION)
         async (ctx, { flowDynamic, endFlow, gotoFlow }) => {
             let numero = ctx.from
             let mensaje = ctx.body.toLowerCase()
+            setEnviado(false)
             //await finalizarConversacion('1');
             if(verificar.num !== numero){
                 confirmoFlow = false
@@ -88,7 +91,7 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                         Eq: 'Ascensor'
                     }*/
 
-                    if(nombreEmp !== 'Demo'){
+                    if(nombreEmp !== 'Incast'){
                         await generarReclamo(numero, dataReclamo)
                     }	
                     const direc = dataReclamo.Di.toUpperCase().replace(/\.$/, '').trim(); //elimina el punto final y saca espacios
@@ -101,7 +104,7 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                         await setEquipos(equipos)                  
                         
                         //generar reclamo aca en empresa incast
-                        if(nombreEmp === 'Demo'){
+                        if(nombreEmp === 'Incast'){
                             let eqEnDByReclamo = await getEquipos()
                             const equipoR = eqEnDByReclamo[1].equipoR.includes('SAR') ? 'SAR' : eqEnDByReclamo[1].equipoR
                             //si el equipo no existe en el edificio no se genera la orden                        
@@ -171,6 +174,12 @@ const getEquipos = () => {
         { equipoR: dataReclamo.Eq ? dataReclamo.Eq.toUpperCase().replace(/\.$/, '') : 'Sin Equipo' }
     ];
 };
-   
 
-export { flowInicio, getEquipos, setConfirmoFlow, setEquipos, getConfirmoFlow, setEquiposReclamo, setVerificar };
+const setEnviado = (value) => { //estos set y get se utilizan en la funcion avisarFin.js dentro de la funcion end()
+    enviado = value;
+}
+const getEnviado = () => {
+    return enviado;
+}
+
+export { flowInicio, getEquipos, setConfirmoFlow, setEquipos, getConfirmoFlow, setEquiposReclamo, setVerificar, setEnviado, getEnviado };

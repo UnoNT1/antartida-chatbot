@@ -152,7 +152,8 @@ async function armarPrompt(respuesta) {
             **Paso 1.2: Comparar dirección o nombre con la lista**
             Al obtener la direccion debes compararla con la lista direcciones y nombres de edificios proporcionada al final de este prompt. Este dato puede estar escrito con errores, debes corregirlos al compararlos con los proporcionados en la lista y contestar en el momento preguntando por la confirmacion de la direccion.
             Siempre debes confirmar dirección o nombre encontrado**
-            Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o un "no" si la dirección y e
+            Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o un "no" si la dirección y el nombre del edificio encontrado es correcto.
+            Si no Encuentras coincidencia carga en el parametro 'Direccion' y 'Edificio' la direccion proporcionada por el Usuario.
             
             **Paso 1.3: Dirección o nombre erróneo**
             - Si el usuario responde "no", repite el Paso 1.2. con otra direccion que encuentres en la lista de edificios.
