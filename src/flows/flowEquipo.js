@@ -38,7 +38,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 { equipoR: 'MONTAVEHÍCULO' }
             ]
             */
-            if(equiposDB[0] === 'Direccion incorrecta' && nomEmp === 'Demo'){
+            if(equiposDB[0] === 'Direccion incorrecta' && nomEmp === 'Demo'){//Solo para incast
                 await flowDynamic([
                     {
                         body: `La dirección ingresada no es correcta, por favor verifique la misma y/o comuniquese a este numero: ${numAtencionCl}.`,
@@ -47,7 +47,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 ])
                 setConfirmoFlow(true)
 
-                if(nomEmp === 'Demo'){
+                if(nomEmp === 'Demo'){//Solo para incast
                     return end(endFlow, ctx.from, '')
                 } else{
                     return gotoFlow(flowPreguntasFinales)
@@ -74,7 +74,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                         ])
                         setConfirmoFlow(true)
 
-                        if(nomEmp === 'Demo'){
+                        if(nomEmp === 'Demo'){//Solo para incast
                             return end(endFlow, ctx.from, '')
                         } else{
                             return gotoFlow(flowPreguntasFinales)

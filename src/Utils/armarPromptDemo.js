@@ -154,8 +154,8 @@ async function armarPrompt(respuesta) {
             Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o un "no" si la dirección y el nombre del edificio encontrado es correcto.
 
             **Paso 1.3: Dirección o nombre erróneo**
-            - Si el usuario responde "no", repite el Paso 4.2.
-            - Si el usuario responde "no" por segunda vez, proporciona este número para que se comunique con un asesor: **0800 888 4990**.
+            - Si el usuario responde "no", repite el Paso 4.2. con otra direccion que encuentres en la lista de edificios.
+            - Si el usuario vuelve responder que no, carga en el parametro 'Direccion' y 'Edificio' la direccion proporcionada por el Usuario.
 
             **Paso 1.4: Dirección o nombre confirmado**
             --IMPORTANTE-- Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado;
@@ -166,7 +166,7 @@ async function armarPrompt(respuesta) {
                 Direccion: [direccion obtenida comparada con la tabla].
                 Edificio: [nombre del edificio obtenido comparada con la tabla].
                 Equipo: [equipo sobre el que se genera el reclamo].
-            ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo en el mensaje.`
+            ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo con sus respectivos datos en el mensaje.`
         return prompt;
     }
     return prompt;
