@@ -7,7 +7,7 @@ import enviarMensaje from './enviarMensajeTecnico.js';
 import reclamoSinConfirmar from './reclamoSinConfirmar.js';
 
 let timeoutId
-async function end(endFlow, numero, gotoFlow) {
+async function end(endFlow, numero, gotoFlow, avisar = true) {
     try {
         // Limpia el timeout anterior si existe
         if (timeoutId) {
@@ -20,8 +20,7 @@ async function end(endFlow, numero, gotoFlow) {
         }
 
 //ENVIAR AVISO DE QUE LA CONVERSACION VA A FINALIZAR
-        avisarFin(numero)
-
+        avisarFin(numero, avisar)
         // Configura un nuevo timeout si el reclamo no fue confirmado
         timeoutId = reclamo !== true ? setTimeout(async () => {
 

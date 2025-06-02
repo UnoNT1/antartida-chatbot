@@ -17,7 +17,6 @@ async function copiaConv(numero){
     
             } catch (error) {
                 if (error.code === 'ENOENT') {
-                    console.warn(`Archivo de contexto no encontrado: ${contexto}`);
                     conversacion = null; // Si no existe, establece conversacion como null
                 } else {
                     throw error; // Lanza otros errores
