@@ -3,7 +3,7 @@ async function postRevisarOrden(numOrden, estado) {
     const objOrden = { 'nroOrden': numOrden, 'estado': estado }
 
     try {
-        const response = await fetch('https://unont.com.ar/yavoy/sistemas/dato5/android/devolverOrden_w.php', {
+        const response = await fetch('http://sd-1810521-h00001.ferozo.net/sistemas/dato5/android/devolverOrden_w.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

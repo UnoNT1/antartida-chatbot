@@ -24,7 +24,7 @@ async function enviarMsjAUsuario(ordenes) {
                 const valueNombreTecnico = [tecnico[0]]
                 const idTecnico = await consultaMySql(queryIdTecnico, valueNombreTecnico)
 
-                const url = `https://www.unont.com.ar/yavoy/verTecnico.php?id=${idTecnico[0].reg_ag00}`
+                const url = `http://sd-1810521-h00001.ferozo.net/verTecnico.php?id=${idTecnico[0].reg_ag00}`
 
                 enviarMensaje([], `Un Tecnico a tomado tu reclamo, su demora es de ${tecnicos[0].dem_cl12}. Aca podes ver la ficha del tecnico: ${url}`, orden.tre_cl12)
             }
