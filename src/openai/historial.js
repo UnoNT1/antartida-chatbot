@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 dotenv.config()
-const openAI = new OpenAI({ apiKey: process.env.API_KEY_ASCENSORES })
+const openAI = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const archivoContexto = (number) => path.resolve(__dirname, `./contextoGPT${number}.json`);
@@ -44,7 +44,7 @@ async function mensajeChatGPT(body, prompt, number) {
         contexto.push({ role: "user", content: body });
 
         const completion = await openAI.chat.completions.create({
-            model: "gpt-3.5-turbo",
+            model: "gpt-4.1-mini",
             messages: [
                 { role: "system", content: prompt },
                 ...contexto

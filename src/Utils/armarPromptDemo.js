@@ -48,7 +48,7 @@ const reiniciarTimeoutPrompt = () => {
     timeoutPrompt = setTimeout(limpiarPrompt, 5 * 60 * 1000) // 5 minutos
 }
 
-async function armarPrompt(respuesta) {
+async function armarPrompt(respuesta, numero) {
     reiniciarTimeoutPrompt()
 
     vuelta === 0 ? prompt += `
@@ -139,9 +139,9 @@ async function armarPrompt(respuesta) {
 
     if((opcion === 1 && vuelta === 1) || (opcion === 2 && vuelta === 2)) {
         vuelta === 1 ? vuelta = 2 : vuelta = 3
-        let listaEdificios = await fs.promises.readFile(direcLista, 'utf-8')
+        //let listaEdificios = await fs.promises.readFile(direcLista, 'utf-8')
 
-        prompt += listaEdificios    
+        //prompt += await elegirListaIncast(numero)       
         prompt += `
         
         **Siguiente paso: Solicitar dirección o nombre del edificio**

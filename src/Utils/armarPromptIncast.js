@@ -48,11 +48,11 @@ const reiniciarTimeoutPrompt = () => {
     timeoutPrompt = setTimeout(limpiarPrompt, 5 * 60 * 1000) // 5 minutos
 }
 
-async function armarPrompt(respuesta) {
+async function armarPrompt(respuesta, numero) {
     reiniciarTimeoutPrompt()
 
     vuelta === 0 ? prompt += `
-    **Presenta la siguiente pregunta paraa obtener el equipo sobre el cual se genera el reclamo**
+    **Presenta la siguiente pregunta para obtener el equipo sobre el cual se genera el reclamo**
     ` : prompt += ''
 
     respuesta = respuesta.toUpperCase()
@@ -144,7 +144,6 @@ async function armarPrompt(respuesta) {
 
         prompt += listaEdificios    
         prompt += `
-        
         **Siguiente paso: Solicitar dirección o nombre del edificio**
             **Paso 1: Si no se ha proporcionado la dirección o el nombre del edificio, solicita esta información con el siguiente mensaje:
             *"Lamento la situación, pero no te preocupes, lo resolveremos. Para continuar, necesito identificar el edificio. Por favor, indícame la dirección donde se encuentra el edificio o su nombre."*
@@ -158,7 +157,10 @@ async function armarPrompt(respuesta) {
             - Si el usuario responde "no", repite el Paso 1.2.
             - Si el usuario responde "no" por segunda vez, proporciona este número para que se comunique con un asesor: **0800 888 4990**.
 
+            
             **Paso 1.4: Dirección o nombre confirmado**
+            - Responder con un mensaje: 'Su direccion fue confirmada, aguarde un segundo y confirmare su reclamo', no avisar nada mas que eso
+            `/*
             --IMPORTANTE-- Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado;
             Si el usuario confirma con un "sí", responde con un texto que tenga SOLO EL SIGUIENTE MENSAJE( 
             --IMPORTANTE-- siempre debe tener los datos 'Motivo del reclamo', 'Direccion', 'Edificio' y 'Equipo'):
@@ -167,7 +169,9 @@ async function armarPrompt(respuesta) {
                 Direccion: [direccion obtenida comparada con la tabla].
                 Edificio: [nombre del edificio obtenido comparada con la tabla].
                 Equipo: [equipo sobre el que se genera el reclamo].
-            ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo con sus respectivos datos en el mensaje.`
+            ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo con sus respectivos datos en el mensaje.*/
+
+            //fs.promises.writeFile('promptTXT', prompt, 'utf-8')
         return prompt;
     }
     return prompt;
