@@ -9,12 +9,27 @@ async function generarReclamo(numero, data) {
     // carga el reclamo en la bd
     try {
         const nomEmp = await nombreEmpresa()
+        let lugar = '0'
+
+        if(nomEmp === 'Incast'){
+            const queryDirFan = `SELECT reg_as00 FROM lpb_as00 WHERE emp_as00 = ? and dir_as00 = ?`
+            const regEdificio = await consultaMySql(queryDirFan, [nomEmp, data['Ed']])
+
+            if(regEdificio.length > 0){
+                lugar = regEdificio[0].reg_as00 //obtiene el registro del edificio
+            }else{
+                lugar = '0' //si no encuentra el edificio, se deja en 0
+                logger.error('No se pudo encontrar el edificio en la base de datos para Incast')
+                return false
+            }
+        }
+
         const reclamo = {
                 nrollamada: numero,
                 mensaje: data['Mo'] || 'No se pudo tomar el mensaje',
                 empresa: nomEmp,
                 accion: '1',
-                lugar: '0'
+                lugar: lugar
             }
                             
         respuestaOrden = await postIniciarOrden(reclamo)//devuelve un array con los numeros de los tecnicos
