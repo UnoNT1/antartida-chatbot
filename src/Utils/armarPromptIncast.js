@@ -145,21 +145,24 @@ async function armarPrompt(respuesta, numero) {
         prompt += listaEdificios    
         prompt += `
         **Siguiente paso: Solicitar dirección o nombre del edificio**
-            **Paso 1: Si no se ha proporcionado la dirección o el nombre del edificio, solicita esta información con el siguiente mensaje:
-            *"Lamento la situación, pero no te preocupes, lo resolveremos. Para continuar, necesito identificar el edificio. Por favor, indícame la dirección donde se encuentra el edificio o su nombre."*
 
-            **Paso 1.2: Comparar dirección o nombre con la lista**
-            Al obtener la direccion debes compararla con la lista direcciones y nombres de edificios proporcionada al final de este prompt. Este dato puede estar escrito con errores, debes corregirlos al compararlos con los proporcionados en la lista y contestar en el momento preguntando por la confirmacion de la direccion y el nombre del edificio.
-            Siempre debes confirmar dirección y nombre encontrado**
-            Si encuentras una coincidencia, solicita al usuario que confirme con un "sí" o un "no" si la dirección y el nombre del edificio encontrado es correcto.
+        1. Si el usuario aún no proporcionó la dirección o el nombre del edificio, solicita:  
+        *"Lamento la situación, pero no te preocupes, lo resolveremos. Para continuar, necesito identificar el edificio. Por favor, indícame la dirección donde se encuentra el edificio o su nombre."*
 
-            **Paso 4.3: Dirección o nombre erróneo**
-            - Si el usuario responde "no", repite el Paso 1.2.
-            - Si el usuario responde "no" por segunda vez, proporciona este número para que se comunique con un asesor: **0800 888 4990**.
+        2. Cuando recibas la dirección o nombre, compáralo cuidadosamente con la lista de edificios y direcciones proporcionada al final de este prompt.  
+        - Busca coincidencias exactas de nombre y número de calle.  
+        - Corrige posibles errores ortográficos antes de comparar.  
+        - Si hay varias calles con el mismo nombre pero diferente número, asegúrate de diferenciar correctamente.
 
-            
-            **Paso 1.4: Dirección o nombre confirmado**
-            - Responder con un mensaje: 'Su direccion fue confirmada, aguarde un segundo y confirmare su reclamo', no avisar nada mas que eso
+        3. Si encuentras una coincidencia, pregunta al usuario:  
+        *"¿El edificio es '[NOMBRE]' y la dirección es '[DIRECCIÓN]'? Responde 'sí' o 'no'."*
+
+        4. Si el usuario responde "no", vuelve a solicitar la dirección y repite la comparación.  
+        - Si responde "no" por segunda vez, indícale que debe comunicarse con un asesor al **0800 888 4990**.
+
+        5. Si el usuario responde "sí", responde únicamente:  
+        *"Su dirección fue confirmada, aguarde un segundo y confirmaré su reclamo."*  
+        (No agregues información adicional.)
             `/*
             --IMPORTANTE-- Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado;
             Si el usuario confirma con un "sí", responde con un texto que tenga SOLO EL SIGUIENTE MENSAJE( 

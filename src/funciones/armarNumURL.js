@@ -9,10 +9,17 @@ async function armarURL(data, numOrden) {
     if(data.includes('[{"logstatus"') || data.includes('[["1*Se agrego el mensaje al reclamo')){
         return null
     }
-    const nomEmp = await nombreEmpresa()
-    const query = 'SELECT idu_fe00 FROM lpb_fe00 where ufe_fe00 = ?'
-    let idEmp = await consultaMySql(query, [nomEmp])
-    idEmp = idEmp[0].idu_fe00.toString()
+    let nomEmp = await nombreEmpresa()
+    let idEmp = ''
+    if(nomEmp === 'Incast'){
+        idEmp = '54'
+    }else{
+        const query = 'SELECT idu_fe00 FROM lpb_fe00 where ufe_fe00 = ?'
+        idEmp = await consultaMySql(query, [nomEmp])
+        console.log('idEmp------------', idEmp)
+        idEmp = idEmp[0].idu_fe00.toString()
+    }
+
     
     const dataStart = data.indexOf('[');
     const dataEnd = data.lastIndexOf(']') + 1;
@@ -25,7 +32,7 @@ async function armarURL(data, numOrden) {
     const numEnd = resultado[0].lastIndexOf('*')
     const numUrl = resultado[0].slice(numStart, numEnd)
 
-    let url = `https://www.unont.com.ar/yavoy/formato.php?r=${numUrl}&n=${numOrden}&t=10&u=${idEmp}`
+    let url = `http://sd-1810521-h00001.ferozo.net/formato.php?r=${numUrl}&n=${numOrden}&t=10&u=${idEmp}`
 
     return url
 }

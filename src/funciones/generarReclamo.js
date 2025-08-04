@@ -2,16 +2,16 @@ import { postIniciarOrden } from '../Fetch/postIniciarOrden.js'
 import enviarMensaje from './enviarMensajeTecnico.js'
 import nombreEmpresa from '../Utils/nombreEmpresa.js'
 import logger from '../Utils/historico.js'
+import consultaMySql from '../Utils/consultaMySql.js'
 
 let respuestaOrden
 //GENERA EL RECLAMO GUARDANDO LOS DATOS EN LA BD Y ENVIANDO UN MENSAJE A LOS TECNICOS UTILIZADO EN flowEquipo
-async function generarReclamo(numero, data) {
+async function generarReclamo(numero, data, lugar = '0') {
     // carga el reclamo en la bd
     try {
         const nomEmp = await nombreEmpresa()
-        let lugar = '0'
 
-        if(nomEmp === 'Incast'){
+        /*if(nomEmp === 'Incast'){
             const queryDirFan = `SELECT reg_as00 FROM lpb_as00 WHERE emp_as00 = ? and dir_as00 = ?`
             const regEdificio = await consultaMySql(queryDirFan, [nomEmp, data['Ed']])
 
@@ -20,9 +20,9 @@ async function generarReclamo(numero, data) {
             }else{
                 lugar = '0' //si no encuentra el edificio, se deja en 0
                 logger.error('No se pudo encontrar el edificio en la base de datos para Incast')
-                return false
+                //return false
             }
-        }
+        }*/
 
         const reclamo = {
                 nrollamada: numero,
@@ -37,9 +37,7 @@ async function generarReclamo(numero, data) {
         if(nomEmp === 'Servicar'){
             respuestaOrden = ['03516373741', '03517363635', '03513182079', '03516373511']
         }
-        if(nomEmp === 'Incast'){
-            respuestaOrden = ['03517551274']
-        }
+        
         await enviarMensaje(respuestaOrden, `Entro un reclamo. Motivo: "${data['Mo']}". Desde este numero: "${numero}". En la direccion: "${data['Di']}", del edificio:"${data['Ed']}"`, '')
         
         return true

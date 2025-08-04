@@ -21,7 +21,7 @@ const enviarMensaje = async (nroTecnicos, mensaje, nroUser) => {
 //hace una solicitud post al proovedor de builderBot que se encarga de enviar los mensajes
 async function fetchMensaje(numero, mensaje) {
     try {
-        await fetch("http://localhost:3020/v1/messages", {
+        await fetch("http://localhost:3035/v1/messages", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

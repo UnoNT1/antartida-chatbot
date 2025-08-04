@@ -34,7 +34,7 @@ async function postIniciarOrden(objeto) {
     let numTecnicos
     console.log(objeto, 'objeto en postIniciarOrden')
     try {
-        const response = await fetch('https://www.unont.com.ar/yavoy/sistemas/dato5/android/w_sms.php', {
+        const response = await fetch('http://sd-1810521-h00001.ferozo.net/sistemas/dato5/android/w_sms.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,6 +47,7 @@ async function postIniciarOrden(objeto) {
 
         /*esta es la respuesta que obtengo del backend   === response.text()
         {"status":"success","message":"Datos: "} [["37095*80070204*#03516674325#03515394961#0351-155214053#03516646898#03516646896#"]] */
+        //{"status":"success","message":"Datos :"}[["25239*3907133*#3513468308#3517551274#3517551269#3517551271#3512481987#"]]
         const text = await response.text();
 
         logger.log(text, 'respuesta orden creada en postIniciarOrden')

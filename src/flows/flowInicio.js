@@ -17,6 +17,7 @@ import armarPrompt from '../Utils/armarPromptIncast.js' //IMPORTANTE: Cambiar de
 import { getContieneDatos } from './flowVerificarInicio.js'
 import flowFin from './flowFin.js'
 import confirmarReclamo from '../funciones/confirmarReclamo.js'
+import postBuscarEdificio from '../Fetch/postBuscarEdificio.js'
 
 let dataReclamo = {}
 let equipos = []
@@ -98,20 +99,23 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                         Eq: 'Ascensor'
                     }*/
 
-                    if(nombreEmp !== 'Incast'){
-                        await generarReclamo(numero, dataReclamo)
-                    }	
                     const direc = dataReclamo.Di.toUpperCase().replace(/\.$/, '').trim(); //elimina el punto final y saca espacios
                     
                     try {
-                        const query = 'SELECT abr_as00, dir_as00, cta_as00, equ_as00, tit_as00, reg_as00 FROM lpb_as00 WHERE dir_as00 = ?'
-                        equipos = await consultaMySql(query, [direc]); 
-
-                        if(equipos.length === 0) throw error
-                        await setEquipos(equipos)                  
                         
+                        equipos = await postBuscarEdificio(direc)
+                        let equipo = equipos[0] ? equipos[0] : [{reg_as00: '0'}]//usado para obtener el lugar del edificio
+
+                        if(equipos.length === 0) throw Error(`No se encontraron equipos para la dirección: ${direc}`);
+                        await setEquipos(equipos)
+                        
+                    if(nombreEmp !== 'Incast'){
+                        await generarReclamo(numero, dataReclamo)
+                    }	
                         //generar reclamo aca en empresa incast
                         if(nombreEmp === 'Incast'){
+                            await generarReclamo(numero, dataReclamo, equipo.reg_as00)
+
                             let eqEnDByReclamo = await getEquipos()
                             const equipoR = eqEnDByReclamo[1].equipoR.includes('SAR') ? 'SAR' : eqEnDByReclamo[1].equipoR
                             //si el equipo no existe en el edificio no se genera la orden                        
