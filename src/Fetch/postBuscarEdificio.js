@@ -4,7 +4,7 @@ async function postBuscarEdificio(direccion){
     let dir = {
         dir: direccion
     }
-
+    console.log('---------direccion en postBuscarEdificio', dir)
     try{
         const response = await fetch('http://sd-1810521-h00001.ferozo.net/sistemas/dato5/android/buscarEdificio.php',{
             method: 'POST',

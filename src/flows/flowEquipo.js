@@ -58,7 +58,17 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                                 delay: 2000,
                             }
                         ])
-                        return gotoFlow(flowPreguntasFinales)
+                        if(nomEmp === "Antartida" || nomEmp === "Demo"){
+                            await flowDynamic([
+                                {
+                                    body: `Puede seguir el estado de su orden en el siguiente enlace: ${url}`,
+                                    delay: 2000,
+                                }
+                            ])
+                            return gotoFlow(flowFin)
+                        }else{
+                            return gotoFlow(flowPreguntasFinales)
+                        }
                     }else{
                         const equiposDisponibles = [...new Set(equipos[0].equiposDB)].join(', ');//esta variable concatena los diferentes equipos que se encuentrar activos por la empresa en determiado edificio
     
@@ -73,7 +83,17 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                         if(nomEmp === 'Incast'){//Solo para incast
                             return end(endFlow, ctx.from, '')
                         } else{
-                            return gotoFlow(flowPreguntasFinales)
+                            if(nomEmp === "Antartida" || nomEmp === "Demo"){
+                                await flowDynamic([
+                                    {
+                                        body: `Puede seguir el estado de su orden en el siguiente enlace: ${url}`,
+                                        delay: 2000,
+                                    }
+                                ])
+                                return gotoFlow(flowFin)
+                            }else{
+                                return gotoFlow(flowPreguntasFinales)
+                            }
                         }
                     }
                 } catch (error) {

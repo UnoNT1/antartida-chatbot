@@ -38,7 +38,7 @@ async function generarReclamo(numero, data, lugar = '0') {
             respuestaOrden = ['03516373741', '03517363635', '03513182079', '03516373511']
         }
         
-        await enviarMensaje(respuestaOrden, `Entro un reclamo. Motivo: "${data['Mo']}". Desde este numero: "${numero}". En la direccion: "${data['Di']}", del edificio:"${data['Ed']}"`, '')
+        //await enviarMensaje(respuestaOrden, `Entro un reclamo. Motivo: "${data['Mo']}". Desde este numero: "${numero}". En la direccion: "${data['Di']}", del edificio:"${data['Ed']}"`, '')
         
         return true
     } catch (error) {

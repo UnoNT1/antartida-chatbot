@@ -13,7 +13,7 @@ import clasificarEquipo from '../funciones/clasificarEquipo.js'
 import { error } from 'console'
 import { setNroOrden } from '../Fetch/postIniciarOrden.js'
 //import copiaConv from '../funciones/copiaConv.js'
-import armarPrompt from '../Utils/armarPromptIncast.js' //IMPORTANTE: Cambiar dependiendo la empresa que se use. Si es Demo, usar armarPromptDemo.js, si es Incast usar armarPromptIncast.js
+import armarPrompt from '../Utils/armarPromptDemo.js' //IMPORTANTE: Cambiar dependiendo la empresa que se use. Si es Demo, usar armarPromptDemo.js, si es Incast usar armarPromptIncast.js
 import { getContieneDatos } from './flowVerificarInicio.js'
 import flowFin from './flowFin.js'
 import confirmarReclamo from '../funciones/confirmarReclamo.js'
@@ -104,17 +104,18 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                     try {
                         
                         equipos = await postBuscarEdificio(direc)
+                        console.log('equipos----------', equipos)
                         let equipo = equipos[0] ? equipos[0] : [{reg_as00: '0'}]//usado para obtener el lugar del edificio
 
                         if(equipos.length === 0) throw Error(`No se encontraron equipos para la dirección: ${direc}`);
                         await setEquipos(equipos)
                         
-                    if(nombreEmp !== 'Incast'){
-                        await generarReclamo(numero, dataReclamo)
-                    }	
+                        if(nombreEmp !== 'Incast'){
+                            await generarReclamo(numero, dataReclamo)
+                        }	
                         //generar reclamo aca en empresa incast
                         if(nombreEmp === 'Incast'){
-                            await generarReclamo(numero, dataReclamo, equipo.reg_as00)
+                            //await generarReclamo(numero, dataReclamo, equipo.reg_as00)
 
                             let eqEnDByReclamo = await getEquipos()
                             const equipoR = eqEnDByReclamo[1].equipoR.includes('SAR') ? 'SAR' : eqEnDByReclamo[1].equipoR
@@ -123,7 +124,8 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                                 await finalizarConversacion(numero);
                                 return gotoFlow(flowEquipo)
                             }else{
-                                await generarReclamo(numero, dataReclamo)
+                                await generarReclamo(numero, dataReclamo, equipo.reg_as00)
+                                return gotoFlow(flowEquipo)
                             }
                         }    
                         //
@@ -192,6 +194,10 @@ const setEnviado = (value) => { //estos set y get se utilizan en la funcion avis
 }
 const getEnviado = () => {
     return enviado;
+}
+
+const getDataReclamo = () => {
+    return dataReclamo;
 }
 
 export { flowInicio, getEquipos, setConfirmoFlow, setEquipos, getConfirmoFlow, setEnviado, getEnviado };
