@@ -90,12 +90,12 @@ async function armarPrompt(respuesta) {
         **
         IMPORTANTE - 'A' === 'ASCENSOR'
                      'B' === 'MONTAVEHICULO' 
-                     'C' === 'OTROS PROBLEMAS'
-        Habiendo reconocido correctamente el Equipo elegido en el paso anterior y Realizar las siguientes preguntas:
-        (al comienzo del mensaje coloque el nombre del equipo elegido)**
-        `
+                     'C' === 'OTROS PROBLEMAS'`
+        //Habiendo reconocido correctamente el Equipo elegido en el paso anterior y Realizar las siguientes preguntas:
+        //(al comienzo del mensaje coloque el nombre del equipo elegido)**`
+        
 
-        if(respuesta.includes('A') || respuesta.includes('B') || respuesta.includes('1') || respuesta.includes('2')) {
+        /*if(respuesta.includes('A') || respuesta.includes('B') || respuesta.includes('1') || respuesta.includes('2')) {
             prompt += `
             **Al aparecer estas preguntas significa que Se eligio el equipo Ascensor o Montavehículo** 
             En qué nivel se encuentra parado el equipo?
@@ -111,7 +111,7 @@ async function armarPrompt(respuesta) {
             Podrias darme mas detalles sobre el problema que estas teniendo?`
             
             return prompt;
-        }
+        }*/
     }
 
     if((opcion === 1 && vuelta === 1) || (opcion === 2 && vuelta === 2)) {

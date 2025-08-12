@@ -13,7 +13,7 @@ import clasificarEquipo from '../funciones/clasificarEquipo.js'
 import { error } from 'console'
 import { setNroOrden } from '../Fetch/postIniciarOrden.js'
 //import copiaConv from '../funciones/copiaConv.js'
-import armarPrompt from '../Utils/armarPromptDemo.js' //IMPORTANTE: Cambiar dependiendo la empresa que se use. Si es Demo, usar armarPromptDemo.js, si es Incast usar armarPromptIncast.js
+import armarPrompt from '../Utils/armarPromptAntartida.js' //IMPORTANTE: Cambiar dependiendo la empresa que se use. Si es Demo, usar armarPromptDemo.js, si es Incast usar armarPromptIncast.js
 import { getContieneDatos } from './flowVerificarInicio.js'
 import flowFin from './flowFin.js'
 import confirmarReclamo from '../funciones/confirmarReclamo.js'

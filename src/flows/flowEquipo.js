@@ -38,6 +38,25 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 { equipoR: 'MONTAVEHÍCULO' }
             ]
             */
+            if(nomEmp === 'Antartida'){
+                
+                await flowDynamic([
+                    {
+                        body: `*Su reclamo ha sido cargado con exito*👌, el numero de orden es: 👉*${nroOrden}*. Un tecnico se contactara con Usted.`,
+                        delay: 2000,
+                    }
+                ])
+
+                await flowDynamic([
+                    {
+                        body: `Puede seguir el estado de su orden en el siguiente enlace: ${url}`,
+                        delay: 2000,
+                    }
+                ])
+                return gotoFlow(flowFin)
+            }
+
+
             if(equiposDB[0] === 'Direccion incorrecta' && nomEmp === 'Incast'){//Solo para incast
                 await flowDynamic([
                     {
@@ -49,7 +68,6 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                 
                 return end(endFlow, ctx.from, '')
             }else{
-
                 try {
                     if(equiposDB.includes(equipoR) || equiposDB[0] === 'Direccion incorrecta'){///corregir caso de SAR/////////
                         await flowDynamic([
@@ -58,17 +76,8 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                                 delay: 2000,
                             }
                         ])
-                        if(nomEmp === "Antartida" || nomEmp === "Demo"){
-                            await flowDynamic([
-                                {
-                                    body: `Puede seguir el estado de su orden en el siguiente enlace: ${url}`,
-                                    delay: 2000,
-                                }
-                            ])
-                            return gotoFlow(flowFin)
-                        }else{
-                            return gotoFlow(flowPreguntasFinales)
-                        }
+
+                        return gotoFlow(flowPreguntasFinales)
                     }else{
                         const equiposDisponibles = [...new Set(equipos[0].equiposDB)].join(', ');//esta variable concatena los diferentes equipos que se encuentrar activos por la empresa en determiado edificio
     
@@ -83,17 +92,7 @@ const flowEquipo = addKeyword(EVENTS.ACTION)
                         if(nomEmp === 'Incast'){//Solo para incast
                             return end(endFlow, ctx.from, '')
                         } else{
-                            if(nomEmp === "Antartida" || nomEmp === "Demo"){
-                                await flowDynamic([
-                                    {
-                                        body: `Puede seguir el estado de su orden en el siguiente enlace: ${url}`,
-                                        delay: 2000,
-                                    }
-                                ])
-                                return gotoFlow(flowFin)
-                            }else{
-                                return gotoFlow(flowPreguntasFinales)
-                            }
+                            return gotoFlow(flowPreguntasFinales)
                         }
                     }
                 } catch (error) {
