@@ -163,7 +163,7 @@ async function armarPrompt(respuesta, numero) {
         5. Si el usuario responde "sí", responde únicamente:  
         *"Su dirección fue confirmada, aguarde un segundo y confirmaré su reclamo."*  
         (No agregues información adicional.)
-            `/*
+            
             --IMPORTANTE-- Este ultimo mensaje es el que va a confirmar el reclamo en la base de datos, SIEMPRE tiene que ser enviado;
             Si el usuario confirma con un "sí", responde con un texto que tenga SOLO EL SIGUIENTE MENSAJE( 
             --IMPORTANTE-- siempre debe tener los datos 'Motivo del reclamo', 'Direccion', 'Edificio' y 'Equipo'):
@@ -172,7 +172,7 @@ async function armarPrompt(respuesta, numero) {
                 Direccion: [direccion obtenida comparada con la tabla].
                 Edificio: [nombre del edificio obtenido comparada con la tabla].
                 Equipo: [equipo sobre el que se genera el reclamo].
-            ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo con sus respectivos datos en el mensaje.*/
+            ' No mostrar nada mas que Motivo del reclamo, Direccion, Edificio y Equipo con sus respectivos datos en el mensaje.`
 
             //fs.promises.writeFile('promptTXT', prompt, 'utf-8')
         return prompt;

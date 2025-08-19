@@ -78,11 +78,12 @@ const flowInicio = addKeyword(EVENTS.ACTION)
                 const contieneDatos = await getContieneDatos()
                 const prompt = contieneDatos === true ? await getPrompt(nombreEmp, '2'): await armarPrompt(mensaje, numero);
                 //console.log(prompt)
-                const convGPT = await mensajeChatGPT(mensaje, prompt, numero)  
+                const respuesta = await mensajeChatGPT(mensaje, prompt, numero)  
                 await flowDynamic([{ body: convGPT }])
 
-                const respuesta = await confirmarReclamo(mensaje, convGPT) //llama a la funcion que confirma el reclamo, si no se confirma no se genera el reclamo
-
+                if(nombreEmp !== 'Incast'){
+                    respuesta = await confirmarReclamo(mensaje, convGPT) //llama a la funcion que confirma el reclamo, si no se confirma no se genera el reclamo
+                }
 
                 //Genera el reclamo y toma los datos del reclamo
                 //variables para comprobar si la I.A. confirma el reclamo
